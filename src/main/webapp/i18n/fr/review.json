@@ -1,0 +1,26 @@
+{
+    "project1App": {
+        "review" : {
+            "home": {
+                "title": "Reviews",
+                "createLabel": "Créer un nouveau Review",
+                "createOrEditLabel": "Créer ou éditer un Review",
+                "search": "Search for Review"
+            },
+            "created": "Un nouveau Review a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Review avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Review avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Review {{ id }} ?"
+            },
+            "detail": {
+                "title": "Review"
+            },
+            "text": "Text",
+            "time": "Time",
+            "space": "Space",
+            "user": "User"
+        }
+    }
+}
+

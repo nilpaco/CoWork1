@@ -1,0 +1,96 @@
+
+<div>
+    <h2><span translate="project1App.space.detail.title">Space</span> {{space.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="project1App.space.name">Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.description">Description</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.price">Price</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.price}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.personMax">PersonMax</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.personMax}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.streetAddress">StreetAddress</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.streetAddress}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.lat">Lat</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.lat}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.lng">Lng</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{space.lng}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.service">service</span>
+                </td>
+                <td>
+                    <span ng-repeat="service in space.services">
+                        <a class="form-control-static" ui-sref="service.detail({id: {{service.id}}})">{{service.name}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.space.user">user</span>
+                </td>
+                <td>
+                    {{space.user.email}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

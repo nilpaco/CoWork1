@@ -1,0 +1,24 @@
+{
+    "project1App": {
+        "image" : {
+            "home": {
+                "title": "Images",
+                "createLabel": "Créer un nouveau Image",
+                "createOrEditLabel": "Créer ou éditer un Image",
+                "search": "Search for Image"
+            },
+            "created": "Un nouveau Image a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Image avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Image avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Image {{ id }} ?"
+            },
+            "detail": {
+                "title": "Image"
+            },
+            "image": "Image",
+            "space": "Space"
+        }
+    }
+}
+

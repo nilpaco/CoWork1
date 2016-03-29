@@ -1,0 +1,23 @@
+{
+    "project1App": {
+        "service" : {
+            "home": {
+                "title": "Services",
+                "createLabel": "Create a new Service",
+                "createOrEditLabel": "Create or edit a Service",
+                "search": "Search for Service"
+            },
+            "created": "A new Service is created with identifier {{ param }}",
+            "updated": "A Service is updated with identifier {{ param }}",
+            "deleted": "A Service is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Service {{ id }}?"
+            },
+            "detail": {
+                "title": "Service"
+            },
+            "name": "Name",
+            "space": "Space"
+        }
+    }
+}

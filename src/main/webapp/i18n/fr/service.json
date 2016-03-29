@@ -1,0 +1,24 @@
+{
+    "project1App": {
+        "service" : {
+            "home": {
+                "title": "Services",
+                "createLabel": "Créer un nouveau Service",
+                "createOrEditLabel": "Créer ou éditer un Service",
+                "search": "Search for Service"
+            },
+            "created": "Un nouveau Service a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Service avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Service avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Service {{ id }} ?"
+            },
+            "detail": {
+                "title": "Service"
+            },
+            "name": "Name",
+            "space": "Space"
+        }
+    }
+}
+

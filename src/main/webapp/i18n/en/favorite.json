@@ -1,0 +1,24 @@
+{
+    "project1App": {
+        "favorite" : {
+            "home": {
+                "title": "Favorites",
+                "createLabel": "Create a new Favorite",
+                "createOrEditLabel": "Create or edit a Favorite",
+                "search": "Search for Favorite"
+            },
+            "created": "A new Favorite is created with identifier {{ param }}",
+            "updated": "A Favorite is updated with identifier {{ param }}",
+            "deleted": "A Favorite is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Favorite {{ id }}?"
+            },
+            "detail": {
+                "title": "Favorite"
+            },
+            "liked": "Liked",
+            "space": "Space",
+            "user": "User"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "project1App": {
+        "conversation" : {
+            "home": {
+                "title": "Conversations",
+                "createLabel": "Créer un nouveau Conversation",
+                "createOrEditLabel": "Créer ou éditer un Conversation",
+                "search": "Search for Conversation"
+            },
+            "created": "Un nouveau Conversation a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Conversation avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Conversation avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Conversation {{ id }} ?"
+            },
+            "detail": {
+                "title": "Conversation"
+            },
+            "name": "Name",
+            "message": "Message",
+            "space": "Space",
+            "user": "User"
+        }
+    }
+}
+

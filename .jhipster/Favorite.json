@@ -1,0 +1,29 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipName": "space",
+      "otherEntityName": "space",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipName": "user",
+      "otherEntityName": "user",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "email"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "liked",
+      "fieldType": "Boolean"
+    }
+  ],
+  "changelogDate": "20160329150244",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no"
+}

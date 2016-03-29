@@ -1,0 +1,18 @@
+
+<paper-header-panel mode="waterfall">
+    <paper-toolbar class="blank">
+        <paper-icon-button icon="icons:arrow-back" type="submit" onclick="window.history.back()">
+        </paper-icon-button>
+    </paper-toolbar>
+    <div class="chat-body">
+        <div class="chat-mess">
+            <div class="text-mess" ng-repeat="message in messages">{{message.text}}</div>
+        </div>
+    </div>
+
+</paper-header-panel>
+
+<div class="chat-footer">
+    <input placeholder="Introduce el texto" type="text" class="form-control borderless">
+</div>
+</div>

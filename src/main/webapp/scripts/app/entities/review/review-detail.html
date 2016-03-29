@@ -1,0 +1,54 @@
+
+<div>
+    <h2><span translate="project1App.review.detail.title">Review</span> {{review.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="project1App.review.text">Text</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{review.text}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.review.time">Time</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{review.time | date:'medium'}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.review.space">space</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="space.detail({id:review.space.id})">{{review.space.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="project1App.review.user">user</span>
+                </td>
+                <td>
+                    {{review.user.email}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

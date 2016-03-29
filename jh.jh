@@ -1,0 +1,71 @@
+entity Service {
+id Long,
+name String
+}
+entity Image {
+id Long,
+image ImageBlob
+}
+entity Message {
+id Long,
+text String,
+time LocalDate
+}
+entity Conversation {
+id Long
+name String,
+}
+entity Favorite {
+id Long,
+liked Boolean
+}
+entity Space {
+id Long,
+name String,
+description String,
+price Double,
+personMax Integer,
+streetAddress String,
+lat Double,
+lng Double
+}
+entity Review {
+id Long,
+text String,
+time ZonedDateTime
+}
+relationship ManyToMany {
+Space{service(name)} to Service{space}
+}
+relationship OneToMany {
+Space{image} to Image{space(name)}
+}
+relationship OneToMany {
+Space{favorite} to Favorite{space(name)}
+}
+relationship OneToMany {
+User{favorite} to Favorite{user(email)}
+}
+relationship OneToMany {
+User{space} to Space{user(email)}
+}
+relationship OneToMany {
+Space{review} to Review {space(name)}
+}
+relationship OneToMany {
+User{review} to Review {user(email)}
+}
+relationship OneToMany {
+Space{conversation} to Conversation{space(name)}
+}
+relationship OneToMany {
+User{conversation} to Conversation{user(email)}
+}
+relationship OneToMany {
+Conversation{message} to Message{conversation}
+}
+relationship OneToMany {
+User{message} to Message{user(email)}
+}
+
+paginate Service, Image, Conversation, Message, Favorite, Space with pagination

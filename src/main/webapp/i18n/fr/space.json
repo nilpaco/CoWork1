@@ -1,0 +1,35 @@
+{
+    "project1App": {
+        "space" : {
+            "home": {
+                "title": "Spaces",
+                "createLabel": "Créer un nouveau Space",
+                "createOrEditLabel": "Créer ou éditer un Space",
+                "search": "Search for Space"
+            },
+            "created": "Un nouveau Space a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Space avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Space avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Space {{ id }} ?"
+            },
+            "detail": {
+                "title": "Space"
+            },
+            "name": "Name",
+            "description": "Description",
+            "price": "Price",
+            "personMax": "PersonMax",
+            "streetAddress": "StreetAddress",
+            "lat": "Lat",
+            "lng": "Lng",
+            "service": "Service",
+            "image": "Image",
+            "favorite": "Favorite",
+            "review": "Review",
+            "conversation": "Conversation",
+            "user": "User"
+        }
+    }
+}
+

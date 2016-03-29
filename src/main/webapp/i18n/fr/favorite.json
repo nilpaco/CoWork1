@@ -1,0 +1,25 @@
+{
+    "project1App": {
+        "favorite" : {
+            "home": {
+                "title": "Favorites",
+                "createLabel": "Créer un nouveau Favorite",
+                "createOrEditLabel": "Créer ou éditer un Favorite",
+                "search": "Search for Favorite"
+            },
+            "created": "Un nouveau Favorite a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Favorite avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Favorite avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Favorite {{ id }} ?"
+            },
+            "detail": {
+                "title": "Favorite"
+            },
+            "liked": "Liked",
+            "space": "Space",
+            "user": "User"
+        }
+    }
+}
+
