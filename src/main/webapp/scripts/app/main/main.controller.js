@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster) {
+    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster, NgMap) {
         Principal.identity().then(function(account) {
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
@@ -70,6 +70,11 @@ angular.module('project1App')
             }
 
         }
+
+        var vm = this;
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        });
 
 
     });
