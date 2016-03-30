@@ -130,7 +130,7 @@
                 <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
             </div>
         </div>
-        <div class="col-lg-6" style="height: 100%;" id="col-right">
+        <div class="col-lg-6" style="height: 100%;" id="col-right" ng-init="showDetails==true">
             <ng-map
                 zoom-control="true"
                 zoom-control-options='{style:"small",position:"top_right"}'
@@ -146,14 +146,14 @@
                         position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
                         data="{{data[$index]}}"
                         on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                    <a ng-click="select(spaceDTO.space)">
+                    <a ng-click="onClickMarker(spaceDTO.space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
                         <div class="cm outside">
                             {{spaceDTO.space.price}}€
                         </div>
                     </a>
                 </custom-marker>
-                <info-window id="foo" on-mouseover="vm.mouseover()">
-                    <div ng-non-bindable="">
+                <info-window id="foo" on-mouseover="vm.mouseover()" >
+                    <div>
                         <img src="http://placehold.it/150x150"><br/>
                         <a ui-sref="space.detail({id:selectedSpace.id})">{{selectedSpace.name}}</a><br/>
                         {{selectedSpace.price}}€<br/>

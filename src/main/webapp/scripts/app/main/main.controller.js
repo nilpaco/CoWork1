@@ -79,7 +79,12 @@ angular.module('project1App')
         $scope.select = function (space) {
             $scope.selectedSpace = space;
         };
+        $scope.onClickMarker = function (space){
+            $scope.select(space);
+        };
+        $scope.showMarker = function (){
 
+        }
 
 
     });
