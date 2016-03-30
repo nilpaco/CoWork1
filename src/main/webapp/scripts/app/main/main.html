@@ -72,6 +72,41 @@
                 .padding{
                     padding: 15px;
                 }
+                .cm{
+                    color: #fff;
+                    padding: 2px 4px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    display: block;
+                    background-color: #E91E63;
+                    border-radius: 2px;
+                }
+                .cm:after{
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    bottom: -9px;
+                    left: 50%;
+                    margin-left: -9px;
+                    top: auto;
+                    border: 9px solid transparent;
+                    border-bottom: 0;
+                    border-top-color: #E91E63;
+                    bottom: -5px;
+                    margin-left: -5px;
+                    border-width: 5px;
+                }
+                .cm.outside{
+                    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+                    -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+                    box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+                }
+                .cm.outside:last-child{
+                    box-shadow: none;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                }
+
             </style>
             <div class="text-center">
                 <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
@@ -79,19 +114,14 @@
         </div>
         <div class="col-lg-6" style="height: 100%;" id="col-right">
             <ng-map zoom-to-include-markers="auto" style="height: 100%;">
-                <custom-marker ng-repeat="spaceDTO in spaces track by $index"
+                <custom-marker ng-repeat="spaceDTO in spaces"
                                id="custom-marker-{{$index}}"
                         position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
                         data="{{data[$index]}}"
                         on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                    <div class="marker">
-                        <iron-icon icon="maps:place" style="height: 28px; width: 28px; color: #E91E63;"></iron-icon>
+                    <div class="cm outside">
+                        {{spaceDTO.space.price}} €
                     </div>
-                    <!--
-                    <div class="cm">
-                        700€
-                    </div>
-                    -->
                 </custom-marker>
                 <info-window id="foo" on-mouseover="vm.mouseover()">
                     <div ng-non-bindable="">
