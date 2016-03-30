@@ -76,5 +76,10 @@ angular.module('project1App')
             vm.map = map;
         });
 
+        $scope.select = function (space) {
+            $scope.selectedSpace = space;
+        };
+
+
 
     });

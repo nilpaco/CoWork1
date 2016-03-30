@@ -11,6 +11,18 @@
                         ...
                     </div>
                 </div>
+                <div class="col-xs-8 no-padding-right">
+                    <form name="searchForm" class="form-inline">
+                        <div>
+                            <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
+                        <span>
+                            <button class="btn btn-info" ng-click="search()">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
@@ -25,7 +37,7 @@
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
                                 <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]" icon="favorite-border" style="float: right; top: -30px; right: 18px; background-color: white;"></paper-fab>
                             </a>
-                            <a ui-sref="space.detail({id:space.id})">
+                            <a ui-sref="space.detail({id:space.id})" class="decoration">
                                 <div class="caption">
                                     <h3>{{spaceDTO.space.name}}</h3>
                                     <p style="color: rgba(0,0,0,0.54)">{{space.description}}</p>
@@ -96,40 +108,62 @@
                     margin-left: -5px;
                     border-width: 5px;
                 }
-                .cm.outside{
+                .custom-marker{
                     -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
                     -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
                     box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+                    border-radius: 2px;
                 }
                 .cm.outside:last-child{
                     box-shadow: none;
                     -webkit-box-shadow: none;
                     -moz-box-shadow: none;
                 }
-
+                a.decoration, a.decoration:hover, a.ng-scope, a.ng-scope:hover{
+                    text-decoration: none;
+                }
+                .gm-style-iw > div{
+                    padding-left: 20px;
+                }
             </style>
             <div class="text-center">
                 <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
             </div>
         </div>
         <div class="col-lg-6" style="height: 100%;" id="col-right">
-            <ng-map zoom-to-include-markers="auto" style="height: 100%;">
+            <ng-map
+                zoom-control="true"
+                zoom-control-options='{style:"small",position:"top_right"}'
+                map-type-control="false"
+                overview-map-control="false"
+                pan-control="false"
+                rotate-control="false"
+                scale-control="false"
+                street-view-control="false"
+                zoom-to-include-markers="auto" style="height: 100%;">
                 <custom-marker ng-repeat="spaceDTO in spaces"
                                id="custom-marker-{{$index}}"
                         position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
                         data="{{data[$index]}}"
                         on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                    <div class="cm outside">
-                        {{spaceDTO.space.price}} €
-                    </div>
+                    <a ng-click="select(spaceDTO.space)">
+                        <div class="cm outside">
+                            {{spaceDTO.space.price}}€
+                        </div>
+                    </a>
                 </custom-marker>
                 <info-window id="foo" on-mouseover="vm.mouseover()">
                     <div ng-non-bindable="">
-                        <img src="http://placehold.it/350x150"><br/>
-                        {{spaceDTO.space.name}}<br/>
+                        <img src="http://placehold.it/150x150"><br/>
+                        <a ui-sref="space.detail({id:selectedSpace.id})">{{selectedSpace.name}}</a><br/>
+                        {{selectedSpace.price}}€<br/>
                     </div>
                 </info-window>
             </ng-map>
+            <!--
+                -Esconder PIN cuando abre el detail.
+                -Hover en un espacio cambie color del PIN.
+             -->
         </div>
     </div>
 </div>
