@@ -26,26 +26,26 @@ public class Space implements Serializable {
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @Column(name = "price")
     private Double price;
-    
+
     @Column(name = "person_max")
     private Integer personMax;
-    
+
     @Column(name = "street_address")
     private String streetAddress;
-    
+
     @Column(name = "lat")
     private Double lat;
-    
+
     @Column(name = "lng")
     private Double lng;
-    
-    @ManyToMany
+
+    @ManyToMany (fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "space_service",
                joinColumns = @JoinColumn(name="spaces_id", referencedColumnName="ID"),
@@ -87,7 +87,7 @@ public class Space implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -95,7 +95,7 @@ public class Space implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -103,7 +103,7 @@ public class Space implements Serializable {
     public Double getPrice() {
         return price;
     }
-    
+
     public void setPrice(Double price) {
         this.price = price;
     }
@@ -111,7 +111,7 @@ public class Space implements Serializable {
     public Integer getPersonMax() {
         return personMax;
     }
-    
+
     public void setPersonMax(Integer personMax) {
         this.personMax = personMax;
     }
@@ -119,7 +119,7 @@ public class Space implements Serializable {
     public String getStreetAddress() {
         return streetAddress;
     }
-    
+
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
     }
@@ -127,7 +127,7 @@ public class Space implements Serializable {
     public Double getLat() {
         return lat;
     }
-    
+
     public void setLat(Double lat) {
         this.lat = lat;
     }
@@ -135,7 +135,7 @@ public class Space implements Serializable {
     public Double getLng() {
         return lng;
     }
-    
+
     public void setLng(Double lng) {
         this.lng = lng;
     }

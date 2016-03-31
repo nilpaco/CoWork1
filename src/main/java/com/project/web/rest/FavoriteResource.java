@@ -100,7 +100,7 @@ public class FavoriteResource {
     public ResponseEntity<List<Favorite>> getAllFavorites(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Favorites");
-        Page<Favorite> page = favoriteRepository.findAll(pageable);
+        Page<Favorite> page = favoriteRepository.findByUserIsCurrentUserAndLiked(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/favorites");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

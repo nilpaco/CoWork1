@@ -20,7 +20,7 @@
         <link rel="import" href="elements.html">
         <!-- endbuild -->
     </head>
-    <body ng-app="project1App">
+    <body ng-app="project1App" ng-controller="LoginController">
     <!--[if lt IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -28,7 +28,10 @@
     <paper-drawer-panel force-narrow id="paperDrawerPanel">
         <paper-scroll-header-panel drawer mode="seamed">
             <paper-toolbar class="medium-tall">
-                <a href="#/">settingsAccount.email</a>
+                <div>
+                    <a href="#/settings">{{account.firstName}}</a>
+                    {{account.email}}
+                </div>
             </paper-toolbar>
             <paper-menu>
                 <a href="#/" class="paper-item-link">
@@ -272,6 +275,7 @@
     <script src="scripts/components/entities/message/message.search.service.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.min.js"></script>
     <script src="https://maps.google.com/maps/api/js?libraries=visualization,drawing,geometry,places"></script>
+    <script src="scripts/app/main/login.controller.js"></script>
     <!-- endbuild -->
 </body>
 </html>
