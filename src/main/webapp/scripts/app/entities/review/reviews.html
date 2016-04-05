@@ -6,7 +6,7 @@
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="review.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
 class="hidden-xs"                        translate="project1App.review.home.createLabel">Create new Review
                     </span>
                 </button>
@@ -40,7 +40,7 @@ class="hidden-xs"                        translate="project1App.review.home.crea
             </thead>
             <tbody>
                 <tr ng-repeat="review in reviews track by review.id">
-                    <td><a ui-sref="review.detail({id:review.id})">{{review.id}}</a></td>
+                    <td><a ui-sref="review.detail2({id:review.id})">{{review.id}}</a></td>
                     <td>{{review.text}}</td>
                     <td>{{review.time | date:'medium'}}</td>
                     <td>
@@ -53,7 +53,7 @@ class="hidden-xs"                        translate="project1App.review.home.crea
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="review.detail({id:review.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
@@ -65,7 +65,7 @@ class="hidden-xs"                        translate="project1App.review.home.crea
                             </button>
                             <button type="submit"
                                     ui-sref="review.delete({id:review.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>

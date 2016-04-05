@@ -89,7 +89,7 @@ class="hidden-xs"                        translate="project1App.favorite.home.cr
 
 <div class="container">
     <div class="row">
-        <h4>Tus espacios favoritos:
+        <h4>Tus espacios favoritos, {{account.firstName}}:
         Favoritos: {{filtered.length}}</h4>
         <div class="col-sm-6 col-md-4"  ng-repeat="favorite in  filtered = (favorites | filter:filterExpr)">
             <div class="thumbnail material">

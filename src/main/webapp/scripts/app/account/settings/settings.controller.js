@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate) {
+    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate, Review) {
         $scope.success = null;
         $scope.error = null;
         Principal.identity().then(function(account) {
@@ -39,4 +39,25 @@ angular.module('project1App')
                 login: account.login
             }
         }
+
+        $scope.reviews = [];
+        $scope.loadAll = function() {
+            Review.query(function(result) {
+                $scope.reviews = result;
+            });
+        };
+        $scope.loadAll();
+
+        $scope.reviewsBySpace = [];
+        $scope.loadAllBySpace = function() {
+            Review.reviewBySpace(function(result) {
+                $scope.reviewsBySpace = result;
+            });
+        };
+        $scope.loadAllBySpace();
+
+        $scope.onClickMarker = function (review){
+            $scope.selectedReview = review;
+        };
+
     });

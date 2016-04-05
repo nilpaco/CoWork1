@@ -14,4 +14,8 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
     @Query("select review from Review review where review.user.login = ?#{principal.username}")
     List<Review> findByUserIsCurrentUser();
 
+    @Query("select review from Review review where review.space.user.login = ?#{principal.username}")
+    List<Review> findByUserIsCurrentUserAndSpace();
+
+
 }

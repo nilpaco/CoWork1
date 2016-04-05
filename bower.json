@@ -37,7 +37,9 @@
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
     "polymer": "Polymer/polymer#^1.4.0",
     "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.7",
-    "AngularJS-Toaster": "angularjs-toaster#^1.2.0"
+    "AngularJS-Toaster": "angularjs-toaster#^1.2.0",
+    "paper-tabs": "PolymerElements/paper-tabs#^1.4.1",
+    "iron-pages": "PolymerElements/iron-pages#^1.0.7"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",

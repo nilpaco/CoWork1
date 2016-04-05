@@ -1,4 +1,4 @@
-<div>
+<!--<div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h2 translate="settings.title" translate-values="{username: '{{settingsAccount.login}}'}">User settings for [<b>{{settingsAccount.login}}</b>]</h2>
@@ -88,4 +88,167 @@
         </div>
     </div>
 
+</div>-->
+
+<style>
+    .material{
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        border:none;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 2px;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    .profile-img{
+        width: 100%;
+        height: 100%;
+    }
+    paper-tabs{
+        background-color: rgb(0, 188, 212);
+        color: rgb(233, 30, 99);
+    }
+    .paper-tab-0 paper-ripple.paper-tab{
+        color: white;
+    }
+    .paper-tabs-0 #selectionBar.paper-tabs{
+        background-color: rgb(233, 30, 99);
+    }
+    .paper-tab-0:not(.iron-selected) > .tab-content.paper-tab{
+        opacity: 0.54;
+    }
+    .titlereview{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .reviews{
+        padding: 10px;
+    }
+    .reviews a{
+        text-decoration: none;
+    }
+    .reviews:hover{
+        background-color: #e4e4e4;
+    }
+    img.reviewimg{
+        float: left;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    span.name{
+        vertical-align:top;
+        color: rgba(0,0,0,0.87);
+        font-weight: bold;
+    }
+    span.time{
+        vertical-align:top;
+        color: rgba(0,0,0,0.54);
+        float: right;
+    }
+    span.text{
+        vertical-align:top;
+        color: rgba(0,0,0,0.87);
+    }
+
+</style>
+
+<div class="container">
+    <div class="col-md-12">
+        <div class="material">
+            <div class="col-md-3">
+                <img class="profile-img" src="http://placehold.it/250x250">
+            </div>
+            <div class="col-md-5">
+                <div>
+                    <h3 style="color: rgba(0,0,0,0.87);">{{account.firstName}}
+                    {{account.lastName}}</h3>
+                </div>
+                <h4 style="color: rgba(0,0,0,0.54);">{{account.login}}</h4>
+            </div>
+            <div class="col-md-4">
+                <iron-icon icon="icons:mail" item-icon></iron-icon>{{account.email}}<br/>
+                <iron-icon icon="icons:language" item-icon></iron-icon>{{account.langKey}}
+            </div>
+        </div>
+    </div>
+        <div class="col-md-8">
+            <div class="material">
+                Grapic here
+                <img height="400" width="100%" src="http://placehold.it/250x250">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="material" style="padding: 0px;">
+                <paper-tabs selected="0">
+                    <paper-tab ng-click="active = 1">Tus reviews</paper-tab>
+                    <paper-tab ng-click="active = 2">Reviews de otros</paper-tab>
+                </paper-tabs>
+
+                <iron-pages selected="0">
+                    <div>
+                        <div class="reviews" ng-repeat="review in reviews">
+                            <a data-toggle="modal" data-target="#myModal" href="#/settings" ng-click="onClickMarker(review)">
+                                <div style="height: 55px;">
+                                    <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                                    <div style="height:100%; padding-top: 3px;">
+                                        <h5 class="titlereview">
+                                            <span class="name">{{review.space.name}}</span>
+                                            <span class="time">{{review.time}}</span><br/>
+                                        </h5>
+                                        <span class="text">{{review.text}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="reviews" ng-repeat="reviewBySpace in reviewsBySpace">
+                            <a ui-sref="review.detail({id:reviewBySpace.id})">
+                                <div style="height: 55px;">
+                                    <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                                    <div style="height:100%; padding-top: 3px;">
+                                        <h5 class="titlereview">
+                                            <span class="name">{{reviewBySpace.space.name}}</span>
+                                            <span class="time">{{reviewBySpace.time}}</span><br/>
+                                        </h5>
+                                        <span class="text">{{reviewBySpace.text}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </iron-pages>
+
+                <script>
+                    var pages = document.querySelector('iron-pages');
+                    var tabs = document.querySelector('paper-tabs');
+
+                    tabs.addEventListener('iron-select', function() {
+                        pages.selected = tabs.selected;
+                    });
+                </script>
+
+
+            </div>
+        </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                {{selectedReview.text}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

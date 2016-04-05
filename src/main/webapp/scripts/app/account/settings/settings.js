@@ -22,5 +22,5 @@ angular.module('project1App')
                         return $translate.refresh();
                     }]
                 }
-            });
+            })
     });

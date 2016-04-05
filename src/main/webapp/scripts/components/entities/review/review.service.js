@@ -12,6 +12,11 @@ angular.module('project1App')
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'reviewBySpace': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/reviewsbyspace'
+            }
         });
     });

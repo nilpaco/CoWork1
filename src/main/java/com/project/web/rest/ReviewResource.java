@@ -31,13 +31,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ReviewResource {
 
     private final Logger log = LoggerFactory.getLogger(ReviewResource.class);
-        
+
     @Inject
     private ReviewRepository reviewRepository;
-    
+
     @Inject
     private ReviewSearchRepository reviewSearchRepository;
-    
+
     /**
      * POST  /reviews -> Create a new review.
      */
@@ -85,8 +85,21 @@ public class ReviewResource {
     @Timed
     public List<Review> getAllReviews() {
         log.debug("REST request to get all Reviews");
-        return reviewRepository.findAll();
+        return reviewRepository.findByUserIsCurrentUser();
             }
+
+    /**
+     * GET  /reviews -> get all the reviews.
+     */
+    @RequestMapping(value = "/reviewsbyspace",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Review> getAllReviewsBySpace() {
+        log.debug("REST request to get all Reviews");
+        return reviewRepository.findByUserIsCurrentUserAndSpace();
+    }
+
 
     /**
      * GET  /reviews/:id -> get the "id" review.
