@@ -96,7 +96,7 @@
         border:none;
         overflow: hidden;
         background-color: white;
-        border-radius: 2px;
+        border-radius: 3px;
         margin-top: 20px;
         padding: 20px;
     }
@@ -148,6 +148,9 @@
     span.text{
         vertical-align:top;
         color: rgba(0,0,0,0.87);
+    }
+    .modal-header{
+        height: 300px;
     }
 
 </style>
@@ -203,7 +206,7 @@
                     </div>
                     <div>
                         <div class="reviews" ng-repeat="reviewBySpace in reviewsBySpace">
-                            <a ui-sref="review.detail({id:reviewBySpace.id})">
+                            <a data-toggle="modal" data-target="#myModal" href="#/settings" ng-click="onClickMarker(reviewBySpace)">
                                 <div style="height: 55px;">
                                     <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
                                     <div style="height:100%; padding-top: 3px;">
@@ -236,16 +239,14 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <div class="modal-header" style="background-image: url(http://placehold.it/250x250)">
+                <h4 class="modal-title" id="myModalLabel">{{selectedReview.space.name}}</h4>
             </div>
             <div class="modal-body">
                 {{selectedReview.text}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <paper-button raised data-dismiss="modal">Close</paper-button>
             </div>
         </div>
     </div>
