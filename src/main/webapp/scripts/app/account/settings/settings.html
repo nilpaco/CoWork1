@@ -149,10 +149,6 @@
         vertical-align:top;
         color: rgba(0,0,0,0.87);
     }
-    .modal-header{
-        height: 300px;
-    }
-
 </style>
 
 <div class="container">
@@ -198,7 +194,7 @@
                                             <span class="name">{{review.space.name}}</span>
                                             <span class="time">{{review.time}}</span><br/>
                                         </h5>
-                                        <span class="text">{{review.text}}</span>
+                                        <span class="text">{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -214,7 +210,7 @@
                                             <span class="name">{{reviewBySpace.space.name}}</span>
                                             <span class="time">{{reviewBySpace.time}}</span><br/>
                                         </h5>
-                                        <span class="text">{{reviewBySpace.text}}</span>
+                                        <span class="text">{{reviewBySpace.text | limitTo: 35}}{{reviewBySpace.text.length > 35 ? '...' : ''}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -239,17 +235,46 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background-image: url(http://placehold.it/250x250)">
-                <h4 class="modal-title" id="myModalLabel">{{selectedReview.space.name}}</h4>
+            <div class="modal-header">
+                    <img src="http://placehold.it/250x250" alt="img" height="80">
+                        <h4 class="modal-title" id="myModalLabel">
+                            {{selectedReview.user.firstName}}
+                        </h4>
+                        <h5>{{selectedReview.time}}</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-header">
+                <h5>Texto:</h5>
                 {{selectedReview.text}}
             </div>
+            <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
+                <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                    <h3>{{selectedReview.space.name}}</h3>
+                    <h4>{{selectedReview.space.price}}€</h4>
+
+                </div>
+            </a>
             <div class="modal-footer">
                 <paper-button raised data-dismiss="modal">Close</paper-button>
             </div>
         </div>
     </div>
 </div>
+<style>
+    .modal-header img{
+        border-radius: 50%;
+        float: left;
+        margin-right: 12px;
+    }
+    .modal-header h4{
+        padding-top: 12px;
+    }
+    .rspace{
+        height: 200px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+</style>
 
 
