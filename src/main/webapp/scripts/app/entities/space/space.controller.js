@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SpaceController', function ($scope, $state, Space, SpaceSearch, ParseLinks) {
+    .controller('SpaceController', function ($scope, $state, Space, SpaceSearch, ParseLinks, NgMap) {
 
         $scope.spaces = [];
         $scope.predicate = 'id';
@@ -48,5 +48,10 @@ angular.module('project1App')
                 id: null
             };
         };
+        var vm = this;
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+        });
+
 
     });

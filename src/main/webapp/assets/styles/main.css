@@ -238,3 +238,7 @@ ul#strengthBar {
     border-radius: 3px !important;
     overflow: hidden;
 }
+
+.subtitle{
+    font-weight: 300;
+}

@@ -1,96 +1,243 @@
+    <paper-toolbar class="tall" id="main" style="background-image: url(http://placehold.it/550x550)">
+        <paper-icon-button icon="arrow-back"></paper-icon-button>
+        <div class="bottom title">{{space.price}}€</div>
+        <paper-fab icon="favorite" class="bottom" id="paper-fab"></paper-fab>
+    </paper-toolbar>
+   <div class="container material">
+        <paper-material elevation="1" class="over-content">
+            <div class="profile-img horizontal layout center pad">
+                <img src="http://placehold.it/50x50">
+                <h2>{{space.name}}</h2>
+                <h4 class="subtitle">{{space.user.firstName}}</h4>
+            </div>
+            <div class="horizontal around-justified layout wrap pad">
+                <div class="horizontal layout center">
+                    <iron-icon icon="social:people" class="big"></iron-icon>
+                    <span>4</span>
+                </div>
+                <div class="horizontal layout center">
+                    <iron-icon icon="icons:event" class="big"></iron-icon>
+                    <span>Sep to Dec, 2016</span>
+                </div>
+                <div class="horizontal layout center">
+                    <iron-icon icon="icons:credit-card" class="big"></iron-icon>
+                    <span>700</span>
+                </div>
+                <div class="horizontal layout center">
+                    <iron-icon icon="icons:query-builder" class="big"></iron-icon>
+                    <span>7:00 to 18:00</span>
+                </div>
+            </div>
+            <div class="spacer"></div>
+            <div class="col-lg-6">
+                <h2 class="paper-font-title">Descripción</h2>
+                <div class="descripcion">
+                    <p ng-text-truncate="space.description"
+                       ng-tt-chars-threshold="100"></p>
 
+                </div>
+
+            </div>
+            <paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>
+            <iron-collapse id="collapse">
+                <div class="col-lg-6">
+                    <h2 class="paper-font-title">Servicios</h2>
+                    <div class="icon-content horizontal layout wrap center" style="width: 100%">
+                        <div><iron-icon icon="notification:wifi"></iron-icon><span>Wifi</span></div>
+                        <div><iron-icon icon="maps:directions-subway"></iron-icon><span>Metro</span></div>
+                        <div><iron-icon icon="maps:local-printshop"></iron-icon><span>Impresora</span></div>
+                        <div><iron-icon icon="icons:event-seat"></iron-icon><span>Sala reuniones</span></div>
+                        <div><iron-icon icon="icons:lock"></iron-icon><span>Alarma</span></div>
+                        <div><iron-icon icon="maps:restaurant-menu"></iron-icon><span>Comedor</span></div>
+                        <div><iron-icon icon="maps:local-parking"></iron-icon><span>Parking</span></div>
+                        <div><iron-icon icon="hardware:toys"></iron-icon><span>Aire acondicionado</span></div>
+                    </div>
+                </div>
+            </iron-collapse>
+            <div>
+                <h2 class="paper-font-title pad">Fotos</h2>
+                <div id="image-row">
+                    Images
+                </div>
+            </div>
+            <div class="map">
+                <h2>Mapa</h2>
+                <ng-map
+                    zoom="16"
+                    style="height: 300px;"
+                    zoom-control="true"
+                    zoom-control-options='{style:"small",position:"top_right"}'
+                    map-type-control="false"
+                    overview-map-control="false"
+                    pan-control="false"
+                    rotate-control="false"
+                    scale-control="false"
+                    street-view-control="false"
+                    center="[{{space.lat}},{{space.lng}}]"
+                    style="height: 100%;">
+                    <custom-marker id="custom-marker-{{$index}}"
+                                   position="[{{space.lat}},{{space.lng}}]"
+                                   data="{{data[$index]}}"
+                                   on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
+                        <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
+                            <div class="cm outside">
+                                {{space.price}}€
+                            </div>
+                        </a>
+                    </custom-marker>
+                </ng-map>
+            </div>
+            <div class="spacer"></div>
+            <div class="booking pad">
+                <div class="horizontal justified layout">
+                    <div style="width: 45%"><paper-input label="Nombre"></paper-input></div>
+                    <div style="width: 45%"><paper-input typle="email" label="Email"></paper-input></div>
+                </div>
+                <paper-input label="Escribe el mensaje..."></paper-input>
+                <paper-button class="book-button" raised>Send</paper-button>
+            </div>
+        </paper-material>
+    </div>
+
+    <style>
+        .cm{
+            color: #fff;
+            padding: 2px 4px;
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            background-color: #E91E63;
+            border-radius: 2px;
+        }
+        .cm:after{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            margin-left: -9px;
+            top: auto;
+            border: 9px solid transparent;
+            border-bottom: 0;
+            border-top-color: #E91E63;
+            bottom: -5px;
+            margin-left: -5px;
+            border-width: 5px;
+        }
+        .custom-marker{
+            -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            border-radius: 2px;
+        }
+        .cm.outside:last-child{
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+        }
+
+    </style>
+
+<!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
+    <h3>{{space.name}}</h3> <h3>{{space.price}}€</h3>
+</div>
 <div>
-    <h2><span translate="project1App.space.detail.title">Space</span> {{space.id}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span translate="project1App.space.name">Name</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.name}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.description">Description</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.description}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.price">Price</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.price}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.personMax">PersonMax</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.personMax}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.streetAddress">StreetAddress</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.streetAddress}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.lat">Lat</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.lat}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.lng">Lng</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{space.lng}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.service">service</span>
-                </td>
-                <td>
+    <div class="container">
+        <h5>Description:</h5>
+        {{space.description}}
+        <span translate="project1App.space.personMax">PersonMax</span>
+        <span class="form-control-static">{{space.personMax}}</span>
+        <span translate="project1App.space.streetAddress">StreetAddress</span>
+        <span class="form-control-static">{{space.streetAddress}}</span>
+        <span translate="project1App.space.lat">Lat</span>
+        <span class="form-control-static">{{space.lat}}</span>
+        <span translate="project1App.space.lng">Lng</span>
+        <span class="form-control-static">{{space.lng}}</span>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <span translate="project1App.space.service">service</span>
+            </td>
+            <td>
                     <span ng-repeat="service in space.services">
                         <a class="form-control-static" ui-sref="service.detail({id: {{service.id}}})">{{service.name}}</a>{{$last ? '' : ', '}}
                     </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="project1App.space.user">user</span>
-                </td>
-                <td>
-                    {{space.user.email}}
-                </td>
-            </tr>
-            </tbody>
-        </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span translate="project1App.space.user">user</span>
+            </td>
+            <td>
+                {{space.user.email}}
+            </td>
+        </tr>
+        <ng-map
+            zoom="16"
+            style="height: 300px;"
+            zoom-control="true"
+            zoom-control-options='{style:"small",position:"top_right"}'
+            map-type-control="false"
+            overview-map-control="false"
+            pan-control="false"
+            rotate-control="false"
+            scale-control="false"
+            street-view-control="false"
+            center="[{{space.lat}},{{space.lng}}]"
+            style="height: 100%;">
+            <custom-marker id="custom-marker-{{$index}}"
+                           position="[{{space.lat}},{{space.lng}}]"
+                           data="{{data[$index]}}"
+                           on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
+                <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
+                    <div class="cm outside">
+                        {{space.price}}€
+                    </div>
+                </a>
+            </custom-marker>
+        </ng-map>
+
     </div>
 
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
+    <style>
+        .cm{
+            color: #fff;
+            padding: 2px 4px;
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            background-color: #E91E63;
+            border-radius: 2px;
+        }
+        .cm:after{
+            content: "";
+            display: inline-block;
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            margin-left: -9px;
+            top: auto;
+            border: 9px solid transparent;
+            border-bottom: 0;
+            border-top-color: #E91E63;
+            bottom: -5px;
+            margin-left: -5px;
+            border-width: 5px;
+        }
+        .custom-marker{
+            -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+            border-radius: 2px;
+        }
+        .cm.outside:last-child{
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+        }
+
+    </style>
+
 </div>
+-->

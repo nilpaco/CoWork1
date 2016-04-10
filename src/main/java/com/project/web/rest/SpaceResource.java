@@ -3,9 +3,12 @@ package com.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.project.domain.Favorite;
 import com.project.domain.Space;
+import com.project.domain.User;
 import com.project.repository.FavoriteRepository;
 import com.project.repository.SpaceRepository;
+import com.project.repository.UserRepository;
 import com.project.repository.search.SpaceSearchRepository;
+import com.project.security.SecurityUtils;
 import com.project.web.rest.dto.SpaceDTO;
 import com.project.web.rest.util.HeaderUtil;
 import com.project.web.rest.util.PaginationUtil;
@@ -48,6 +51,10 @@ public class SpaceResource {
 
     @Inject
     private FavoriteRepository favoriteRepository;
+
+    @Inject
+    private UserRepository userRepository;
+
     /**
      * POST  /spaces -> Create a new space.
      */
@@ -60,6 +67,8 @@ public class SpaceResource {
         if (space.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("space", "idexists", "A new space cannot already have an ID")).body(null);
         }
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        space.setUser(user);
         Space result = spaceRepository.save(space);
         spaceSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/spaces/" + result.getId()))
@@ -96,7 +105,7 @@ public class SpaceResource {
     public ResponseEntity<List<Space>> getAllSpaces(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Spaces");
-        Page<Space> page = spaceRepository.findAll(pageable);
+        Page<Space> page = spaceRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spaces");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

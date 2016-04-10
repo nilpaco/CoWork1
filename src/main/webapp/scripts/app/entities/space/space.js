@@ -34,7 +34,7 @@ angular.module('project1App')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/space/space-detail.html',
-                        controller: 'SpaceDetailController'
+                        controller: 'SpaceDetailController as vm'
                     }
                 },
                 resolve: {
