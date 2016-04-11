@@ -39,6 +39,7 @@ angular.module('project1App')
         $scope.clear = function () {
             $scope.service = {
                 name: null,
+                icon: null,
                 id: null
             };
         };

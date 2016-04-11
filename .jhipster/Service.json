@@ -14,7 +14,12 @@
       "fieldId": 1,
       "fieldName": "name",
       "fieldType": "String"
-    }
+    },
+      {
+          "fieldId": 2,
+          "fieldName": "icon",
+          "fieldType": "String"
+      }
   ],
   "changelogDate": "20160329150240",
   "dto": "no",

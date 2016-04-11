@@ -159,4 +159,21 @@ public class ConversationResource {
         return new ResponseEntity<>(conversation.getMessages(), HttpStatus.OK);
     }
 
+    /**
+     * GET  /conversations/:id -> get the "id" conversation.
+     */
+    @RequestMapping(value = "space/{id}/conversations",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Conversation> getConversationBySpace(@PathVariable Long id) {
+        log.debug("REST request to get Conversation : {}", id);
+        Conversation conversation = conversationRepository.findByUserIsCurrentUserAndSpace(id);
+        return Optional.ofNullable(conversation)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }

@@ -191,8 +191,8 @@
                                     <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
                                     <div style="height:100%; padding-top: 3px;">
                                         <h5 class="titlereview">
-                                            <span class="name">{{review.space.name}}</span>
-                                            <span class="time">{{review.time}}</span><br/>
+                                            <span class="name">{{review.space.name | limitTo: 15}}{{review.text.length > 15 ? '...' : ''}}</span>
+                                            <span class="time">{{review.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
                                         </h5>
                                         <span class="text">{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</span>
                                     </div>
@@ -207,8 +207,8 @@
                                     <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
                                     <div style="height:100%; padding-top: 3px;">
                                         <h5 class="titlereview">
-                                            <span class="name">{{reviewBySpace.space.name}}</span>
-                                            <span class="time">{{reviewBySpace.time}}</span><br/>
+                                            <span class="name">{{reviewBySpace.space.name | limitTo: 15}}{{reviewBySpace.text.length > 15 ? '...' : ''}}</span>
+                                            <span class="time">{{reviewBySpace.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
                                         </h5>
                                         <span class="text">{{reviewBySpace.text | limitTo: 35}}{{reviewBySpace.text.length > 35 ? '...' : ''}}</span>
                                     </div>

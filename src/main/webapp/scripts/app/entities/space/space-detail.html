@@ -1,10 +1,10 @@
-    <paper-toolbar class="tall" id="main" style="background-image: url(http://placehold.it/550x550)">
-        <paper-icon-button icon="arrow-back"></paper-icon-button>
+    <paper-toolbar class="tall" id="main" style="background-image: url(http://placehold.it/550x550); height: 350px;">
+        <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
         <div class="bottom title">{{space.price}}€</div>
         <paper-fab icon="favorite" class="bottom" id="paper-fab"></paper-fab>
     </paper-toolbar>
    <div class="container material">
-        <paper-material elevation="1" class="over-content">
+       <paper-material elevation="1" class="over-content">
             <div class="profile-img horizontal layout center pad">
                 <img src="http://placehold.it/50x50">
                 <h2>{{space.name}}</h2>
@@ -34,33 +34,55 @@
                 <div class="descripcion">
                     <p ng-text-truncate="space.description"
                        ng-tt-chars-threshold="100"></p>
-
                 </div>
 
             </div>
-            <paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>
-            <iron-collapse id="collapse">
                 <div class="col-lg-6">
                     <h2 class="paper-font-title">Servicios</h2>
                     <div class="icon-content horizontal layout wrap center" style="width: 100%">
-                        <div><iron-icon icon="notification:wifi"></iron-icon><span>Wifi</span></div>
-                        <div><iron-icon icon="maps:directions-subway"></iron-icon><span>Metro</span></div>
-                        <div><iron-icon icon="maps:local-printshop"></iron-icon><span>Impresora</span></div>
-                        <div><iron-icon icon="icons:event-seat"></iron-icon><span>Sala reuniones</span></div>
-                        <div><iron-icon icon="icons:lock"></iron-icon><span>Alarma</span></div>
-                        <div><iron-icon icon="maps:restaurant-menu"></iron-icon><span>Comedor</span></div>
-                        <div><iron-icon icon="maps:local-parking"></iron-icon><span>Parking</span></div>
-                        <div><iron-icon icon="hardware:toys"></iron-icon><span>Aire acondicionado</span></div>
+                        <span ng-repeat="service in space.services">
+                            <div class="col-sm-6 col-md-6"><iron-icon icon="{{service.icon}}"></iron-icon><span>{{service.name}}</span></div>
+                        </span>
+                        <paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>
                     </div>
                 </div>
-            </iron-collapse>
-            <div>
-                <h2 class="paper-font-title pad">Fotos</h2>
-                <div id="image-row">
-                    Images
+           <div class="row">
+               <div class="col-lg-12">
+                   <h2>Fotos</h2>
+                   <div id="image-row">
+                       Images
+                   </div>
+               </div>
+               <div class="col-lg-6">
+                   <h2>Reviews</h2>
+                   <div class="reviews" ng-repeat="reviewByCurrentSpace in reviewsByCurrentSpace">
+                       <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewBySpace)">
+                           <div style="height: 55px;">
+                               <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                               <div style="height:100%; padding-top: 3px;">
+                                   <h5 class="titlereview">
+                                       <span class="name">{{reviewByCurrentSpace.user.firstName}}</span>
+                                       <span class="time">{{reviewByCurrentSpace.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
+                                   </h5>
+                                   <span class="text">{{reviewByCurrentSpace.text | limitTo: 35}}{{reviewByCurrentSpace.text.length > 35 ? '...' : ''}}</span>
+                               </div>
+                           </div>
+                       </a>
+                   </div>
+               </div>
+               <div class="col-lg-6">
+                   <h2>Enviar mensaje</h2>
+                   <form ng-show="getConversation == null" ng-submit="addMessage()" >
+                       <input ng-model="text2" type="text" class="form-control" />
+                       <input class="btn btn-info" type="submit" />
+                   </form>
+                   <div ng-show="getConversation != null">
+                    <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
+                   </div>
                 </div>
-            </div>
-            <div class="map">
+
+           </div>
+            <div>
                 <h2>Mapa</h2>
                 <ng-map
                     zoom="16"
@@ -86,15 +108,6 @@
                         </a>
                     </custom-marker>
                 </ng-map>
-            </div>
-            <div class="spacer"></div>
-            <div class="booking pad">
-                <div class="horizontal justified layout">
-                    <div style="width: 45%"><paper-input label="Nombre"></paper-input></div>
-                    <div style="width: 45%"><paper-input typle="email" label="Email"></paper-input></div>
-                </div>
-                <paper-input label="Escribe el mensaje..."></paper-input>
-                <paper-button class="book-button" raised>Send</paper-button>
             </div>
         </paper-material>
     </div>
@@ -135,7 +148,42 @@
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
         }
-
+        .titlereview{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .reviews{
+            padding: 10px;
+        }
+        .reviews a{
+            text-decoration: none;
+        }
+        .reviews:hover{
+            background-color: #e4e4e4;
+        }
+        img.reviewimg{
+            float: left;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        span.name{
+            vertical-align:top;
+            color: rgba(0,0,0,0.87);
+            font-weight: bold;
+        }
+        span.time{
+            vertical-align:top;
+            color: rgba(0,0,0,0.54);
+            float: right;
+        }
+        span.text{
+            vertical-align:top;
+            color: rgba(0,0,0,0.87);
+        }
+        paper-material{
+            background-color: white;
+            margin-bottom: 20px;
+        }
     </style>
 
 <!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">

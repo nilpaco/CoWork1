@@ -67,7 +67,7 @@ class ServiceGatlingTest extends Simulation {
             .exec(http("Create new service")
             .post("/api/services")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT"}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "icon":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_service_url")))
             .pause(10)

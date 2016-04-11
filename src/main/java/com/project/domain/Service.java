@@ -27,6 +27,9 @@ public class Service implements Serializable {
     @Column(name = "name")
     private String name;
     
+    @Column(name = "icon")
+    private String icon;
+    
     @ManyToMany(mappedBy = "services")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -46,6 +49,14 @@ public class Service implements Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+    
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Set<Space> getSpaces() {
@@ -81,6 +92,7 @@ public class Service implements Serializable {
         return "Service{" +
             "id=" + id +
             ", name='" + name + "'" +
+            ", icon='" + icon + "'" +
             '}';
     }
 }

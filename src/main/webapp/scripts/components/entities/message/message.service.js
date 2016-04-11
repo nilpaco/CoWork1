@@ -25,6 +25,9 @@ angular.module('project1App')
                     data.time = DateUtils.convertLocaleDateToServer(data.time);
                     return angular.toJson(data);
                 }
+            },
+            'addMessage': {
+                method: 'POST', isArray: false, url: 'api/space/:id/message'
             }
         });
     });

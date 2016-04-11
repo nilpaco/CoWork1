@@ -32,6 +32,7 @@ class="hidden-xs"                        translate="project1App.service.home.cre
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span translate="project1App.service.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="icon"><span translate="project1App.service.icon">Icon</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -39,6 +40,7 @@ class="hidden-xs"                        translate="project1App.service.home.cre
                 <tr ng-repeat="service in services track by service.id">
                     <td><a ui-sref="service.detail({id:service.id})">{{service.id}}</a></td>
                     <td>{{service.name}}</td>
+                    <td>{{service.icon}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

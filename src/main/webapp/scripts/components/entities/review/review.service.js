@@ -17,6 +17,13 @@ angular.module('project1App')
                 method: 'GET',
                 isArray: true,
                 url: 'api/reviewsbyspace'
+            },
+            'reviewsByCurrentSpace': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/space/:id/reviews'
             }
+
+
         });
     });

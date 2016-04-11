@@ -44,6 +44,8 @@ public class ServiceResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
+    private static final String DEFAULT_ICON = "AAAAA";
+    private static final String UPDATED_ICON = "BBBBB";
 
     @Inject
     private ServiceRepository serviceRepository;
@@ -76,6 +78,7 @@ public class ServiceResourceIntTest {
     public void initTest() {
         service = new Service();
         service.setName(DEFAULT_NAME);
+        service.setIcon(DEFAULT_ICON);
     }
 
     @Test
@@ -95,6 +98,7 @@ public class ServiceResourceIntTest {
         assertThat(services).hasSize(databaseSizeBeforeCreate + 1);
         Service testService = services.get(services.size() - 1);
         assertThat(testService.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testService.getIcon()).isEqualTo(DEFAULT_ICON);
     }
 
     @Test
@@ -108,7 +112,8 @@ public class ServiceResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(service.getId().intValue())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON.toString())));
     }
 
     @Test
@@ -122,7 +127,8 @@ public class ServiceResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(service.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.icon").value(DEFAULT_ICON.toString()));
     }
 
     @Test
@@ -143,6 +149,7 @@ public class ServiceResourceIntTest {
 
         // Update the service
         service.setName(UPDATED_NAME);
+        service.setIcon(UPDATED_ICON);
 
         restServiceMockMvc.perform(put("/api/services")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -154,6 +161,7 @@ public class ServiceResourceIntTest {
         assertThat(services).hasSize(databaseSizeBeforeUpdate);
         Service testService = services.get(services.size() - 1);
         assertThat(testService.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testService.getIcon()).isEqualTo(UPDATED_ICON);
     }
 
     @Test

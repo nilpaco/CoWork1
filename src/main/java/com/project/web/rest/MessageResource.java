@@ -1,9 +1,16 @@
 package com.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.project.domain.Conversation;
 import com.project.domain.Message;
+import com.project.domain.Space;
+import com.project.domain.User;
+import com.project.repository.ConversationRepository;
 import com.project.repository.MessageRepository;
+import com.project.repository.SpaceRepository;
+import com.project.repository.UserRepository;
 import com.project.repository.search.MessageSearchRepository;
+import com.project.security.SecurityUtils;
 import com.project.web.rest.util.HeaderUtil;
 import com.project.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -34,13 +41,23 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class MessageResource {
 
     private final Logger log = LoggerFactory.getLogger(MessageResource.class);
-        
+
     @Inject
     private MessageRepository messageRepository;
-    
+
     @Inject
     private MessageSearchRepository messageSearchRepository;
-    
+
+    @Inject
+    private UserRepository userRepository;
+
+    @Inject
+    private ConversationRepository conversationRepository;
+
+    @Inject
+    private SpaceRepository spaceRepository;
+
+
     /**
      * POST  /messages -> Create a new message.
      */
@@ -89,7 +106,7 @@ public class MessageResource {
     public ResponseEntity<List<Message>> getAllMessages(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Messages");
-        Page<Message> page = messageRepository.findAll(pageable); 
+        Page<Message> page = messageRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/messages");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -139,4 +156,35 @@ public class MessageResource {
             .stream(messageSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+
+    /**
+     * POST  /messages -> Create a new message and conversation.
+     */
+    @RequestMapping(value = "/space/{id}/message",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Message> createMessageAndConversation(@PathVariable Long id, @RequestBody Message message) throws URISyntaxException {
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        Space space = spaceRepository.findOne(id);
+
+        Conversation conversation = new Conversation();
+        conversation.setUser(user);
+        conversation.setSpace(space);
+        conversation.setName(space.getName());
+
+        Conversation result1 = conversationRepository.save(conversation);
+
+        message.setConversation(conversation);
+        message.setUser(user);
+        Message result = messageRepository.save(message);
+
+        messageSearchRepository.save(result);
+
+        return ResponseEntity.created(new URI("/api/space/" + result1.getId() +"/message/"))
+            .headers(HeaderUtil.createEntityCreationAlert("message", result.getId().toString()))
+            .body(result);
+    }
+
 }

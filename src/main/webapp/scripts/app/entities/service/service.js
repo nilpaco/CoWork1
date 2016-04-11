@@ -62,6 +62,7 @@ angular.module('project1App')
                             entity: function () {
                                 return {
                                     name: null,
+                                    icon: null,
                                     id: null
                                 };
                             }
