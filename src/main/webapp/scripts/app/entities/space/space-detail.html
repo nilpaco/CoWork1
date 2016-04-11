@@ -1,35 +1,22 @@
-    <paper-toolbar class="tall" id="main" style="background-image: url(http://placehold.it/550x550); height: 350px;">
+    <paper-toolbar class="tall" id="main" style="background: url(http://placehold.it/550x550) no-repeat center center fixed; height: 350px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+">
         <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
-        <div class="bottom title">{{space.price}}€</div>
+        <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
         <paper-fab icon="favorite" class="bottom" id="paper-fab"></paper-fab>
     </paper-toolbar>
    <div class="container material">
        <paper-material elevation="1" class="over-content">
-            <div class="profile-img horizontal layout center pad">
-                <img src="http://placehold.it/50x50">
-                <h2>{{space.name}}</h2>
-                <h4 class="subtitle">{{space.user.firstName}}</h4>
-            </div>
-            <div class="horizontal around-justified layout wrap pad">
-                <div class="horizontal layout center">
-                    <iron-icon icon="social:people" class="big"></iron-icon>
-                    <span>4</span>
-                </div>
-                <div class="horizontal layout center">
-                    <iron-icon icon="icons:event" class="big"></iron-icon>
-                    <span>Sep to Dec, 2016</span>
-                </div>
-                <div class="horizontal layout center">
-                    <iron-icon icon="icons:credit-card" class="big"></iron-icon>
-                    <span>700</span>
-                </div>
-                <div class="horizontal layout center">
-                    <iron-icon icon="icons:query-builder" class="big"></iron-icon>
-                    <span>7:00 to 18:00</span>
-                </div>
+            <div class="modal-header" style="padding: 20px;">
+                <img src="http://placehold.it/80x80" height="80">
+                <h2 class="modal-title">{{space.name}}</h2>
+                <h5 class="subtitle">User: {{space.user.firstName}}</h5>
             </div>
             <div class="spacer"></div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="padding: 0px 20px;">
                 <h2 class="paper-font-title">Descripción</h2>
                 <div class="descripcion">
                     <p ng-text-truncate="space.description"
@@ -37,26 +24,26 @@
                 </div>
 
             </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="padding: 0px 20px;">
                     <h2 class="paper-font-title">Servicios</h2>
                     <div class="icon-content horizontal layout wrap center" style="width: 100%">
                         <span ng-repeat="service in space.services">
                             <div class="col-sm-6 col-md-6"><iron-icon icon="{{service.icon}}"></iron-icon><span>{{service.name}}</span></div>
                         </span>
-                        <paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>
+                        <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
                     </div>
                 </div>
-           <div class="row">
-               <div class="col-lg-12">
+           <div class="row" style="margin: 0px 0px">
+               <div class="col-lg-12" style="padding: 0px 20px;">
                    <h2>Fotos</h2>
                    <div id="image-row">
                        Images
                    </div>
                </div>
-               <div class="col-lg-6">
+               <div class="col-lg-6" style="padding: 0px 20px;">
                    <h2>Reviews</h2>
                    <div class="reviews" ng-repeat="reviewByCurrentSpace in reviewsByCurrentSpace">
-                       <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewBySpace)">
+                       <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewByCurrentSpace)">
                            <div style="height: 55px;">
                                <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
                                <div style="height:100%; padding-top: 3px;">
@@ -69,8 +56,16 @@
                            </div>
                        </a>
                    </div>
+                   <form ng-submit="addReview()" >
+                       <div class="input-group">
+                           <input ng-model="text3" type="text" class="form-control" placeholder="Escribe aqui tu review" />
+                          <span class="input-group-btn">
+                              <input class="btn btn-default" type="submit" />
+                          </span>
+                       </div><!-- /input-group -->
+                   </form>
                </div>
-               <div class="col-lg-6">
+               <div class="col-lg-6" style="padding: 0px 20px;">
                    <h2>Enviar mensaje</h2>
                    <form ng-show="getConversation == null" ng-submit="addMessage()" >
                        <input ng-model="text2" type="text" class="form-control" />
@@ -83,7 +78,7 @@
 
            </div>
             <div>
-                <h2>Mapa</h2>
+                <h2 style="padding: 0px 20px">Mapa</h2>
                 <ng-map
                     zoom="16"
                     style="height: 300px;"
@@ -183,10 +178,58 @@
         paper-material{
             background-color: white;
             margin-bottom: 20px;
+            margin-top: 20px;
         }
     </style>
 
-<!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="http://placehold.it/250x250" alt="img" height="80">
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{selectedReview.user.firstName}}
+                    </h4>
+                    <h5>{{selectedReview.time}}</h5>
+                </div>
+                <div class="modal-header">
+                    <h5>Texto:</h5>
+                    {{selectedReview.text}}
+                </div>
+                <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
+                    <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                        <h3>{{selectedReview.space.name}}</h3>
+                        <h4>{{selectedReview.space.price}}€</h4>
+
+                    </div>
+                </a>
+                <div class="modal-footer">
+                    <paper-button raised data-dismiss="modal">Close</paper-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .modal-header img{
+            border-radius: 50%;
+            float: left;
+            margin-right: 12px;
+        }
+        .modal-header h4{
+            padding-top: 12px;
+        }
+        .rspace{
+            height: 200px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+    </style>
+
+
+    <!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
     <h3>{{space.name}}</h3> <h3>{{space.price}}€</h3>
 </div>
 <div>

@@ -26,6 +26,11 @@ angular.module('project1App')
             Message.addMessage({id:$stateParams.id}, {text:$scope.text2});
         }
 
+        $scope.addReview = function (){
+            Review.addReview({id:$stateParams.id}, {text:$scope.text3});
+        }
+
+
         $scope.loadConversation = function(id) {
             Conversation.getConversationFromSpace({id: id}, function(result) {
                 $scope.getConversation = result;
@@ -33,7 +38,8 @@ angular.module('project1App')
         };
         $scope.loadConversation($stateParams.id);
 
-
-
+        $scope.onClickMarker = function (review){
+            $scope.selectedReview = review;
+        };
 
     });

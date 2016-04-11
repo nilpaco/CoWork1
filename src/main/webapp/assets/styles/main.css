@@ -242,3 +242,16 @@ ul#strengthBar {
 .subtitle{
     font-weight: 300;
 }
+
+paper-button.fancy{
+    background: #E91E63;
+    color: white;
+}
+paper-button.delete{
+    background: #F44336;
+    color: white;
+}
+paper-button.edit{
+    background: #00B0FF;
+    color: white;
+}

@@ -3,14 +3,19 @@ package com.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.project.domain.Review;
 import com.project.domain.Space;
+import com.project.domain.User;
 import com.project.repository.ReviewRepository;
+import com.project.repository.SpaceRepository;
+import com.project.repository.UserRepository;
 import com.project.repository.search.ReviewSearchRepository;
+import com.project.security.SecurityUtils;
 import com.project.web.rest.util.HeaderUtil;
 import com.project.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,18 +48,30 @@ public class ReviewResource {
     @Inject
     private ReviewSearchRepository reviewSearchRepository;
 
+    @Inject
+    private UserRepository userRepository;
+
+    @Inject
+    private SpaceRepository spaceRepository;
+
+
     /**
      * POST  /reviews -> Create a new review.
      */
-    @RequestMapping(value = "/reviews",
+    @RequestMapping(value = "/space/{id}/reviews",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException {
+    public ResponseEntity<Review> createReview(@RequestBody Review review, @PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to save Review : {}", review);
         if (review.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("review", "idexists", "A new review cannot already have an ID")).body(null);
         }
+
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        Space space = spaceRepository.findOne(id);
+        review.setUser(user);
+        review.setSpace(space);
 
         Review result = reviewRepository.save(review);
         reviewSearchRepository.save(result);
@@ -70,10 +87,10 @@ public class ReviewResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Review> updateReview(@RequestBody Review review) throws URISyntaxException {
+    public ResponseEntity<Review> updateReview(@RequestBody Review review, @PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to update Review : {}", review);
         if (review.getId() == null) {
-            return createReview(review);
+            return createReview(review, id);
         }
         Review result = reviewRepository.save(review);
         reviewSearchRepository.save(result);

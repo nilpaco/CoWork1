@@ -149,6 +149,10 @@
         vertical-align:top;
         color: rgba(0,0,0,0.87);
     }
+    paper-button.fancy{
+        background: #E91E63;
+        color: white;
+    }
 </style>
 
 <div class="container">
@@ -163,10 +167,16 @@
                     {{account.lastName}}</h3>
                 </div>
                 <h4 style="color: rgba(0,0,0,0.54);">{{account.login}}</h4>
+                <div style="line-height: 40px;">
+                    <iron-icon icon="icons:mail" item-icon></iron-icon>{{account.email}}<br/>
+                    <iron-icon icon="icons:language" item-icon></iron-icon>{{account.langKey}}
+                </div>
+                <div>
+                    <paper-button ui-sref="password" class="fancy">Cambiar contraseña</paper-button>
+                    <paper-button class="fancy">Editar perfil</paper-button>
+                </div>
             </div>
             <div class="col-md-4">
-                <iron-icon icon="icons:mail" item-icon></iron-icon>{{account.email}}<br/>
-                <iron-icon icon="icons:language" item-icon></iron-icon>{{account.langKey}}
             </div>
         </div>
     </div>
@@ -259,22 +269,5 @@
         </div>
     </div>
 </div>
-<style>
-    .modal-header img{
-        border-radius: 50%;
-        float: left;
-        margin-right: 12px;
-    }
-    .modal-header h4{
-        padding-top: 12px;
-    }
-    .rspace{
-        height: 200px;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-    }
-
-</style>
 
 

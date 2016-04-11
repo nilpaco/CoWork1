@@ -88,11 +88,13 @@ class="hidden-xs"                        translate="project1App.conversation.hom
                 </span>
                 </paper-toolbar>
                 <paper-menu>
-                        <paper-item>
-                            <a ui-sref="conversation.detail({id:conversation.id})" ng-repeat="conversation in conversations track by conversation.id">
-                                {{conversation.name}}
+                        <div class="insidelist" ng-repeat="conversation in conversations track by conversation.id">
+                            <a ui-sref="conversation.detail({id:conversation.id})">
+                                <div class="lists">
+                                    {{conversation.name}}
+                                </div>
                             </a>
-                        </paper-item>
+                        </div>
                 </paper-menu>
 
             </paper-header-panel>
@@ -103,6 +105,15 @@ class="hidden-xs"                        translate="project1App.conversation.hom
 </div>
 
 <style>
+    .lists{
+        padding: 20px;
+    }
+    .insidelist a{
+        text-decoration: none;
+    }
+    .lists:hover{
+     background-color: #e7e7e7;
+    }
     .horizontal-section{
         background-color: white;
         padding: 0;

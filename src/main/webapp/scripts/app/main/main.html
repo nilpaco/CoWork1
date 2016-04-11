@@ -6,12 +6,7 @@
                 <a class="paper-item-link" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     <paper-button class="fancy" raised><iron-icon icon="icons:filter-list"></iron-icon> Filters</paper-button>
                 </a>
-                <div class="collapse" id="collapseExample">
-                    <div class="well" style="width: 100%">
-                        ...
-                    </div>
-                </div>
-                <div class="col-xs-8 no-padding-right">
+                <div class="no-padding-right" style="float: right">
                     <form name="searchForm" class="form-inline">
                         <div>
                             <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
@@ -22,6 +17,11 @@
                         </span>
                         </div>
                     </form>
+                </div>
+                <div class="collapse" id="collapseExample">
+                    <div class="well" style="width: 100%">
+                        ...
+                    </div>
                 </div>
             </div>
 
@@ -150,7 +150,8 @@
                         position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
                         data="{{data[$index]}}"
                         on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                    <a ng-click="onClickMarker(spaceDTO.space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
+                    <!--<a ng-click="onClickMarker(spaceDTO.space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">-->
+                        <a ng-click="onClickMarker(spaceDTO.space)">
                         <div class="cm outside">
                             {{spaceDTO.space.price}}€
                         </div>

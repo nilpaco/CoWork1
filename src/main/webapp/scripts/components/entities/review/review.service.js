@@ -22,7 +22,11 @@ angular.module('project1App')
                 method: 'GET',
                 isArray: true,
                 url: 'api/space/:id/reviews'
+            },
+            'addReview': {
+                method: 'POST', isArray: false, url: 'api/space/:id/reviews'
             }
+
 
 
         });

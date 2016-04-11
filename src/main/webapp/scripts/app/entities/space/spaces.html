@@ -1,20 +1,20 @@
-<div>
-    <h2 translate="project1App.space.home.title">Spaces</h2>
+<div class="container">
+    <h2>Tus espacios</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="space.new" >
+                <paper-button raised class="fancy" ui-sref="space.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
 class="hidden-xs"                        translate="project1App.space.home.createLabel">Create new Space
                     </span>
-                </button>
+                </paper-button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
+                        <input style="z-index:0" type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -36,9 +36,6 @@ class="hidden-xs"                        translate="project1App.space.home.creat
                     <th jh-sort-by="price"><span translate="project1App.space.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="personMax"><span translate="project1App.space.personMax">PersonMax</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="streetAddress"><span translate="project1App.space.streetAddress">StreetAddress</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lat"><span translate="project1App.space.lat">Lat</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lng"><span translate="project1App.space.lng">Lng</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="user.email"><span translate="project1App.space.user">user</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,35 +43,22 @@ class="hidden-xs"                        translate="project1App.space.home.creat
                 <tr ng-repeat="space in spaces track by space.id">
                     <td><a ui-sref="space.detail({id:space.id})">{{space.id}}</a></td>
                     <td>{{space.name}}</td>
-                    <td>{{space.description}}</td>
+                    <td>{{space.description | limitTo: 35}}{{space.description.length > 35 ? '...' : ''}}</td>
                     <td>{{space.price}}</td>
                     <td>{{space.personMax}}</td>
                     <td>{{space.streetAddress}}</td>
-                    <td>{{space.lat}}</td>
-                    <td>{{space.lng}}</td>
-                    <td>
-                        {{space.user.email}}
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="space.detail({id:space.id})"
-                                    class="btn btn-info btn-sm"> 
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="space.edit({id:space.id})"
-                                    class="btn btn-primary btn-sm">
+                            <paper-button class="edit" type="submit"
+                                    ui-sref="space.edit({id:space.id})">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="space.delete({id:space.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                            </paper-button>
+                            <paper-button class="delete" type="submit"
+                                    ui-sref="space.delete({id:space.id})">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </button>
+                            </paper-button>
                         </div>
                     </td>
                 </tr>
