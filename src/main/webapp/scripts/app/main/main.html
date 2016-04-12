@@ -37,7 +37,7 @@
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
                                 <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]" icon="favorite-border" style="float: right; top: -30px; right: 18px; background-color: white;"></paper-fab>
                             </a>
-                            <a ui-sref="space.detail({id:space.id})" class="decoration">
+                            <a ui-sref="space.detail({id:spaceDTO.space.id})" class="decoration">
                                 <div class="caption">
                                     <h3>{{spaceDTO.space.name}}</h3>
                                     <p style="color: rgba(0,0,0,0.54)">{{space.description}}</p>

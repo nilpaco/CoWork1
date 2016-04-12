@@ -54,4 +54,5 @@ angular.module('project1App').controller('SpaceDialogController',
                 vm.map = map;
             });
 
+
         }]);

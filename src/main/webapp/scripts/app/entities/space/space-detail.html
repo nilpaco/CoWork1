@@ -1,4 +1,4 @@
-    <paper-toolbar class="tall" id="main" style="background: url(http://placehold.it/550x550) no-repeat center center fixed; height: 350px;
+    <paper-toolbar class="tall" id="main" style="back: url(http://placehold.it/550x550) no-repeat center center fixed; height: 350px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -6,7 +6,7 @@
 ">
         <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
         <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
-        <paper-fab icon="favorite" class="bottom" id="paper-fab"></paper-fab>
+        <paper-fab icon="favorite-border" class="bottom fav" id="paper-fab" style="top: 30px;"></paper-fab>
     </paper-toolbar>
    <div class="container material">
        <paper-material elevation="1" class="over-content">
@@ -67,9 +67,14 @@
                </div>
                <div class="col-lg-6" style="padding: 0px 20px;">
                    <h2>Enviar mensaje</h2>
+
                    <form ng-show="getConversation == null" ng-submit="addMessage()" >
-                       <input ng-model="text2" type="text" class="form-control" />
-                       <input class="btn btn-info" type="submit" />
+                       <div class="input-group">
+                           <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje" />
+                          <span class="input-group-btn">
+                              <input class="btn btn-default" type="submit" />
+                          </span>
+                       </div><!-- /input-group -->
                    </form>
                    <div ng-show="getConversation != null">
                     <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
@@ -180,6 +185,11 @@
             margin-bottom: 20px;
             margin-top: 20px;
         }
+        paper-fab.fav{
+            background: #F44336 !important;
+            color: white;
+        }
+
     </style>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
