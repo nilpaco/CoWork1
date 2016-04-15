@@ -3,13 +3,18 @@
         <!-- add toaster -->
         <div class="col-lg-6" id="col-left">
             <div class="padding">
-                <a class="paper-item-link" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    <paper-button class="fancy" raised><iron-icon icon="icons:filter-list"></iron-icon> Filters</paper-button>
+                <a class="paper-item-link" role="button" data-toggle="collapse" href="#collapseExample"
+                   aria-expanded="false" aria-controls="collapseExample">
+                    <paper-button class="fancy" raised>
+                        <iron-icon icon="icons:filter-list"></iron-icon>
+                        Filters
+                    </paper-button>
                 </a>
                 <div class="no-padding-right" style="float: right">
                     <form name="searchForm" class="form-inline">
                         <div>
-                            <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
+                            <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery"
+                                   placeholder="{{ 'project1App.space.home.search' | translate }}">
                         <span>
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -25,7 +30,8 @@
                 </div>
             </div>
 
-            <toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
+            <toaster-container
+                toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces">
@@ -35,13 +41,16 @@
                                 <img style="min-width: 100%;" src="http://placehold.it/350x150">
                             </a>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
-                                <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]" icon="favorite-border" style="float: right; top: -30px; right: 18px; background-color: white;"></paper-fab>
+                                <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]"
+                                           icon="favorite-border"
+                                           style="float: right; top: -30px; right: 18px; background-color: white;"></paper-fab>
                             </a>
                             <a ui-sref="space.detail({id:spaceDTO.space.id})" class="decoration">
                                 <div class="caption">
                                     <h3>{{spaceDTO.space.name}}</h3>
                                     <p style="color: rgba(0,0,0,0.54)">{{space.description}}</p>
-                                    <p style="color: #43DBB9; text-align: right; font-size: 24px;font-weight: 600;">{{spaceDTO.space.price}} €</p>
+                                    <p style="color: #43DBB9; text-align: right; font-size: 24px;font-weight: 600;">
+                                        {{spaceDTO.space.price}} €</p>
                                 </div>
                             </a>
                         </div>
@@ -49,7 +58,7 @@
                 </div>
             </div>
             <style>
-                #col-right{
+                #col-right {
                     height: 100%;
                     float: right;
                     padding: 0;
@@ -57,35 +66,42 @@
                     position: absolute;
                     width: 46%;
                 }
-                #col-left{
+
+                #col-left {
                     position: absolute;
                     top: 0;
                     bottom: 0;
                     overflow-y: auto;
                     width: 55%;
                 }
-                .material{
+
+                .material {
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-                    border:none;
+                    border: none;
                     overflow: hidden;
                     padding: 0;
                     border-radius: 3px;
                 }
+
                 paper-fab[icon="favorite-border"] {
                     color: #F44336;
                 }
-                paper-fab.fav{
+
+                paper-fab.fav {
                     background: #F44336 !important;
                     color: white;
                 }
-                paper-button.fancy{
+
+                paper-button.fancy {
                     background: #E91E63;
                     color: white;
                 }
-                .padding{
+
+                .padding {
                     padding: 15px;
                 }
-                .cm{
+
+                .cm {
                     color: #fff;
                     padding: 2px 4px;
                     font-size: 14px;
@@ -94,7 +110,8 @@
                     background-color: #E91E63;
                     border-radius: 2px;
                 }
-                .cm:after{
+
+                .cm:after {
                     content: "";
                     display: inline-block;
                     position: absolute;
@@ -109,29 +126,35 @@
                     margin-left: -5px;
                     border-width: 5px;
                 }
-                .custom-marker{
-                    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-                    -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-                    box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+
+                .custom-marker {
+                    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+                    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+                    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
                     border-radius: 2px;
                 }
-                .cm.outside:last-child{
+
+                .cm.outside:last-child {
                     box-shadow: none;
                     -webkit-box-shadow: none;
                     -moz-box-shadow: none;
                 }
-                a.decoration, a.decoration:hover, a.ng-scope, a.ng-scope:hover{
+
+                a.decoration, a.decoration:hover, a.ng-scope, a.ng-scope:hover {
                     text-decoration: none;
                 }
-                .gm-style-iw > div{
+
+                .gm-style-iw > div {
                     padding-left: 20px;
                 }
-                .ng-map-info-window{
+
+                .ng-map-info-window {
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
                 }
             </style>
             <div class="text-center">
-                <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+                <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page"
+                                ng-change="loadAll()"></uib-pagination>
             </div>
         </div>
         <div class="col-lg-6" style="height: 100%;" id="col-right" ng-init="showDetails==true">
@@ -147,11 +170,11 @@
                 zoom-to-include-markers="auto" style="height: 100%;">
                 <custom-marker ng-repeat="spaceDTO in spaces"
                                id="custom-marker-{{$index}}"
-                        position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
-                        data="{{data[$index]}}"
-                        on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
+                               position="[{{spaceDTO.space.lat}},{{spaceDTO.space.lng}}]"
+                               data="{{data[$index]}}"
+                               on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
                     <!--<a ng-click="onClickMarker(spaceDTO.space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">-->
-                        <a ng-click="onClickMarker(spaceDTO.space)">
+                    <a ng-click="onClickMarker(spaceDTO.space)">
                         <div class="cm outside">
                             {{spaceDTO.space.price}}€
                         </div>

@@ -61,7 +61,7 @@
    * @memberof NgMapPool
    * @function returnMapInstance
    * @param {Map} an instance of google.maps.Map
-   * @desc sets the flag inUse of the given map instance to false, so that it 
+   * @desc sets the flag inUse of the given map instance to false, so that it
    * can be reused later
    */
   var returnMapInstance = function(map) {

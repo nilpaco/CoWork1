@@ -68,4 +68,19 @@ class="hidden-xs"                        translate="project1App.space.home.creat
     <div class="text-center">
         <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
     </div>
+
+    <input class="form-control" autocomplete="no" places-auto-complete size=80
+           ng-model="vm.address"
+           component-restrictions="{country:'es'}"
+           types="{{types}}"
+           on-place-changed="vm.placeChanged()" /> <br/>
+    <div ng-show="vm.place">
+        Address = {{vm.place.formatted_address}} <br/>
+        Location: {{vm.place.geometry.location}}<br/>
+        Lat: {{vm.place.geometry.location.lat}}<br/>
+        address : {{vm.address}}
+    </div>
+
+    <ng-map id="foomap"><marker position="{{vm.place.geometry.location}}"></marker></ng-map>
+
 </div>

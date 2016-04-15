@@ -13,7 +13,7 @@ angular.module('project1App')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/space/spaces.html',
-                        controller: 'SpaceController'
+                        controller: 'SpaceController as vm'
                     }
                 },
                 resolve: {

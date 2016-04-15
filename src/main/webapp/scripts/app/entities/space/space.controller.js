@@ -49,9 +49,21 @@ angular.module('project1App')
             };
         };
         var vm = this;
-        NgMap.getMap().then(function(map) {
+        NgMap.getMap({id: 'foomap'}).then(function(map) {
             vm.map = map;
+            console.log('NgMap.getMap in SpaceController', map);
         });
+        $scope.lat = [];
+        $scope.lng = [];
+        vm.placeChanged = function() {
+            vm.place = this.getPlace();
+            console.log('location', vm.place.geometry.location);
+            vm.map.setCenter(vm.place.geometry.location);
+            $scope.lat = vm.place.geometry.location.lat();
+            $scope.lng = vm.place.geometry.location.lng();
+
+        }
+
 
 
     });

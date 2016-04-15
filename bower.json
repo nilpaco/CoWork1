@@ -39,7 +39,8 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.7",
     "AngularJS-Toaster": "angularjs-toaster#^1.2.0",
     "paper-tabs": "PolymerElements/paper-tabs#^1.4.1",
-    "iron-pages": "PolymerElements/iron-pages#^1.0.7"
+    "iron-pages": "PolymerElements/iron-pages#^1.0.7",
+    "alv-ch-ng.text-truncate": "^0.2.0"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",

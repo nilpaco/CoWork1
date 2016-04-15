@@ -1,4 +1,4 @@
-    <paper-toolbar class="tall" id="main" style="back: url(http://placehold.it/550x550) no-repeat center center fixed; height: 350px;
+    <paper-toolbar class="tall" id="main" style="background: url(http://placehold.it/550x550) no-repeat center center fixed; height: 350px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -97,6 +97,8 @@
                     street-view-control="false"
                     center="[{{space.lat}},{{space.lng}}]"
                     style="height: 100%;">
+                    <marker position="[{{space.lat}},{{space.lng}}]"></marker>
+                    <!--
                     <custom-marker id="custom-marker-{{$index}}"
                                    position="[{{space.lat}},{{space.lng}}]"
                                    data="{{data[$index]}}"
@@ -106,7 +108,7 @@
                                 {{space.price}}€
                             </div>
                         </a>
-                    </custom-marker>
+                    </custom-marker>-->
                 </ng-map>
             </div>
         </paper-material>

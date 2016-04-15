@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -72,6 +74,9 @@ public class ReviewResource {
         Space space = spaceRepository.findOne(id);
         review.setUser(user);
         review.setSpace(space);
+        ZonedDateTime today = ZonedDateTime.now();
+        review.setTime(today);
+
 
         Review result = reviewRepository.save(review);
         reviewSearchRepository.save(result);
