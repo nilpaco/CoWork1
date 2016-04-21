@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('project1App').controller('SpaceDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Space', 'Service', 'Image', 'Favorite', 'Review', 'Conversation', 'User', 'NgMap',
-        function($scope, $stateParams, $uibModalInstance, entity, Space, Service, Image, Favorite, Review, Conversation, User, NgMap) {
+    ['$scope', '$stateParams', 'entity', 'Space', 'Service', 'Image', 'Favorite', 'Review', 'Conversation', 'User', 'NgMap', '$state',
+        function($scope, $stateParams, entity, Space, Service, Image, Favorite, Review, Conversation, User, NgMap, $state) {
 
         $scope.space = entity;
         $scope.services = Service.query();
@@ -19,7 +19,8 @@ angular.module('project1App').controller('SpaceDialogController',
 
         var onSaveSuccess = function (result) {
             $scope.$emit('project1App:spaceUpdate', result);
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
+            $state.go('space', null, {reload: true});
             $scope.isSaving = false;
         };
 
@@ -28,6 +29,8 @@ angular.module('project1App').controller('SpaceDialogController',
         };
 
         $scope.save = function () {
+            $scope.space.lat = $scope.lat;
+            $scope.space.lng = $scope.lng;
             $scope.isSaving = true;
             if ($scope.space.id != null) {
                 Space.update($scope.space, onSaveSuccess, onSaveError);
@@ -42,7 +45,6 @@ angular.module('project1App').controller('SpaceDialogController',
         var vm = this;
         NgMap.getMap({id: 'foomap'}).then(function(map) {
             vm.map = map;
-            console.log('NgMap.getMap in SpaceDialogController', map);
         });
 
 
@@ -50,11 +52,9 @@ angular.module('project1App').controller('SpaceDialogController',
         $scope.lng = [];
         vm.placeChanged = function() {
             vm.place = this.getPlace();
-            console.log('location', vm.place.geometry.location);
             vm.map.setCenter(vm.place.geometry.location);
             $scope.lat = vm.place.geometry.location.lat();
             $scope.lng = vm.place.geometry.location.lng();
-
         }
 
 

@@ -104,7 +104,7 @@ class="hidden-xs"                        translate="project1App.favorite.home.cr
                     <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]" icon="favorite-border" style="float: right; top: -30px; right: 18px; background-color: white;"></paper-fab>
                 </a>
 -->
-                <a ui-sref="space.detail({id:space.id})" class="decoration" style="text-decoration: none">
+                <a ui-sref="space.detail({id:favorite.space.id})" class="decoration" style="text-decoration: none">
                     <div class="caption">
                         <h3>{{favorite.space.name}}</h3>
                         <p style="color: rgba(0,0,0,0.54)">{{favorite.space.description}}</p>

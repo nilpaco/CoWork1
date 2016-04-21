@@ -27,7 +27,9 @@ angular.module('project1App')
         }
 
         $scope.addReview = function (){
-            Review.addReview({id:$stateParams.id}, {text:$scope.text3});
+            Review.addReview({id:$stateParams.id}, {text:$scope.text3},function(result){
+                $scope.reviewsByCurrentSpace.push(result);
+            });
         }
 
 

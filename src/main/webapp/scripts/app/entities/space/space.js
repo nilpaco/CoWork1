@@ -52,32 +52,28 @@ angular.module('project1App')
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
+                    pageTitle: 'project1App.space.detail.title'
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
+                views: {
+                    'content@': {
                         templateUrl: 'scripts/app/entities/space/space-dialog.html',
-                        controller: 'SpaceDialogController as vm',
-                        size: 'lg',
-                        resolve: {
-                            entity: function () {
-                                return {
-                                    name: null,
-                                    description: null,
-                                    price: null,
-                                    personMax: null,
-                                    streetAddress: null,
-                                    lat: null,
-                                    lng: null,
-                                    id: null
-                                };
-                            }
-                        }
-                    }).result.then(function(result) {
-                        $state.go('space', null, { reload: true });
-                    }, function() {
-                        $state.go('space');
-                    })
-                }]
+                        controller: 'SpaceDialogController as vm'
+                    }
+                },
+                resolve: {
+                    entity: function () {
+                        return {
+                            name: null,
+                            description: null,
+                            price: null,
+                            personMax: null,
+                            streetAddress: null,
+                            lat: null,
+                            lng: null,
+                            id: null
+                        };
+                    }
+                }
             })
             .state('space.edit', {
                 parent: 'space',

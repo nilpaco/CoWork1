@@ -1,92 +1,72 @@
+<div class="container">
+    <form name="editForm" role="form" novalidate ng-submit="save()">
 
-<form name="editForm" role="form" novalidate ng-submit="save()">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                    ng-click="clear()">&times;</button>
+            <h4 class="modal-title" id="mySpaceLabel" translate="project1App.space.home.createOrEditLabel">Create or edit a Space</h4>
+        </div>
+        <div class="modal-body">
+            <jh-alert-error></jh-alert-error>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="mySpaceLabel" translate="project1App.space.home.createOrEditLabel">Create or edit a Space</h4>
-    </div>
-    <div class="modal-body">
-        <jh-alert-error></jh-alert-error>
+            <div class="form-group">
+                <label class="control-label" translate="project1App.space.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="space.name"
+                />
+            </div>
+            <div class="form-group">
+                <label class="control-label" translate="project1App.space.description" for="field_description">Description</label>
+                <input type="text" class="form-control" name="description" id="field_description"
+                       ng-model="space.description"
+                />
+            </div>
+            <input class="form-control" autocomplete="no" places-auto-complete size=80
+                   ng-model="vm.address"
+                   component-restrictions="{country:'es'}"
+                   types="{{types}}"
+                   on-place-changed="vm.placeChanged()" /> <br/>
+            <div ng-show="vm.place">
+                Address = {{vm.place.formatted_address}} <br/>
+                Location: {{vm.place.geometry.location}}<br/>
+                Lat: {{vm.place.geometry.location.lat}}<br/>
+                address : {{vm.address}}
+            </div>
+            <ng-map   id="foomap"><marker position="{{vm.place.geometry.location}}"></marker></ng-map>
 
-        <div class="form-group">
-            <label for="id" translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="space.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="space.name"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.description" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="space.description"
-                     />
-        </div>
-        <input class="form-control" autocomplete="no" places-auto-complete size=80
-               ng-model="vm.address"
-               component-restrictions="{country:'es'}"
-               types="{{types}}"
-               on-place-changed="vm.placeChanged()" /> <br/>
-        <div ng-show="vm.place">
-            Address = {{vm.place.formatted_address}} <br/>
-            Location: {{vm.place.geometry.location}}<br/>
-            Lat: {{vm.place.geometry.location.lat}}<br/>
-            address : {{vm.address}}
-        </div>
+            <div class="form-group">
+                <label class="control-label" translate="project1App.space.price" for="field_price">Price</label>
+                <input type="number" class="form-control" name="price" id="field_price"
+                       ng-model="space.price"
+                />
+            </div>
+            <div class="form-group">
+                <label class="control-label" translate="project1App.space.personMax" for="field_personMax">PersonMax</label>
+                <input type="number" class="form-control" name="personMax" id="field_personMax"
+                       ng-model="space.personMax"
+                />
+            </div>
+            <div class="form-group">
+                <label class="control-label" translate="project1App.space.streetAddress" for="field_streetAddress">StreetAddress</label>
+                <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
+                       ng-model="space.streetAddress"
+                />
+            </div>
 
-        <ng-map id="foomap"><marker position="{{vm.place.geometry.location}}"></marker></ng-map>
-
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.price" for="field_price">Price</label>
-            <input type="number" class="form-control" name="price" id="field_price"
-                    ng-model="space.price"
-                     />
+            <div class="form-group">
+                <label translate="project1App.space.service" for="field_service">service</label>
+                <select class="form-control" id="field_service" multiple name="service" ng-model="space.services" ng-options="service as service.name for service in services track by service.id"></select>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.personMax" for="field_personMax">PersonMax</label>
-            <input type="number" class="form-control" name="personMax" id="field_personMax"
-                    ng-model="space.personMax"
-                     />
+        <div class="modal-footer">
+            <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+            </button>
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.streetAddress" for="field_streetAddress">StreetAddress</label>
-            <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
-                    ng-model="space.streetAddress"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.lat" for="field_lat">Lat</label>
-            <input type="number" class="form-control" name="lat" id="field_lat"
-                    ng-model="space.lat"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" translate="project1App.space.lng" for="field_lng">Lng</label>
-            <input type="number" class="form-control" name="lng" id="field_lng"
-                    ng-model="space.lng"
-                     />
-        </div>
-
-        <div class="form-group">
-            <label translate="project1App.space.service" for="field_service">service</label>
-            <select class="form-control" id="field_service" multiple name="service" ng-model="space.services" ng-options="service as service.name for service in services track by service.id"></select>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-        </button>
-    </div>
-</form>
-<style>
-    .pac-container{
-        z-index: 2000000;
-    }
-</style>
+    </form>
+    <style>
+        .pac-container{
+            z-index: 2000000;
+        }
+    </style>
+</div>
