@@ -13,13 +13,19 @@ angular.module('project1App')
         });
         $scope.$on('$destroy', unsubscribe);
 
-        $scope.load = function (id) {
-            Conversation.getMessagesFromConversation({id: id}, function(result) {
+        $scope.load2 = function () {
+            Conversation.getMessagesFromConversation({id: $stateParams.id}, function(result) {
                 $scope.messages = result;
             });
         };
+        $scope.load2();
+
         $scope.sendMessage = function(){
-            Conversation.postMessageFromConversation({id: $stateParams.id}, {text: $scope.text2});
+            Message.postMessageFromConversation({id: $stateParams.id}, {text: $scope.text2}, function (result) {
+                $scope.messages.push(result);
+                $scope.text2 = null;
+            });
         }
+
 
     });

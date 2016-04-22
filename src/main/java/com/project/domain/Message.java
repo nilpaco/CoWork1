@@ -2,7 +2,7 @@ package com.project.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class Message implements Serializable {
     private String text;
     
     @Column(name = "time")
-    private LocalDate time;
+    private ZonedDateTime time;
     
     @ManyToOne
     @JoinColumn(name = "conversation_id")
@@ -54,11 +54,11 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    public LocalDate getTime() {
+    public ZonedDateTime getTime() {
         return time;
     }
     
-    public void setTime(LocalDate time) {
+    public void setTime(ZonedDateTime time) {
         this.time = time;
     }
 

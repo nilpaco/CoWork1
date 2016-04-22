@@ -24,7 +24,7 @@
     {
       "fieldId": 2,
       "fieldName": "time",
-      "fieldType": "LocalDate"
+      "fieldType": "ZonedDateTime"
     }
   ],
   "changelogDate": "20160329150242",

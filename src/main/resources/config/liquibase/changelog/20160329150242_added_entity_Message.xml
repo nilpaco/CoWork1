@@ -23,12 +23,14 @@
             </column>
             <column name="text" type="varchar(255)"/>
             
-            <column name="time" type="date"/>
+            <column name="time" type="timestamp"/>
             
             <column name="conversation_id" type="bigint"/>
             <column name="user_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="message" columnName="time" columnDataType="datetime"/>
+
         
         <addForeignKeyConstraint baseColumnNames="conversation_id"
                                  baseTableName="message"

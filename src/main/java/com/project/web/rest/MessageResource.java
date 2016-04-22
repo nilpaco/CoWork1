@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,15 +62,24 @@ public class MessageResource {
     /**
      * POST  /messages -> Create a new message.
      */
-    @RequestMapping(value = "/messages",
+    @RequestMapping(value = "/conversation/{id}/message",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Message> createMessage(@RequestBody Message message) throws URISyntaxException {
+    public ResponseEntity<Message> createMessage(@RequestBody Message message, @PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to save Message : {}", message);
         if (message.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("message", "idexists", "A new message cannot already have an ID")).body(null);
         }
+        User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+        message.setUser(user);
+
+        ZonedDateTime today = ZonedDateTime.now();
+        message.setTime(today);
+
+        Conversation conversation = conversationRepository.findOne(id);
+        message.setConversation(conversation);
+
         Message result = messageRepository.save(message);
         messageSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/messages/" + result.getId()))
@@ -84,10 +94,10 @@ public class MessageResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Message> updateMessage(@RequestBody Message message) throws URISyntaxException {
+    public ResponseEntity<Message> updateMessage(@RequestBody Message message, @PathVariable Long id) throws URISyntaxException {
         log.debug("REST request to update Message : {}", message);
         if (message.getId() == null) {
-            return createMessage(message);
+            return createMessage(message, id);
         }
         Message result = messageRepository.save(message);
         messageSearchRepository.save(result);

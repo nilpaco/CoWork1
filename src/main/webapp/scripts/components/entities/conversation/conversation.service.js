@@ -13,7 +13,6 @@ angular.module('project1App')
             },
             'update': { method:'PUT' },
             'getMessagesFromConversation': {method: 'GET', isArray: true, url: 'api/conversations/:id/messages'},
-            'postMessageFromConversation': {method: 'POST', isArray: false, url: 'api/conversation/:id/messages'},
             'getConversationFromSpace': {method: 'GET', isArray: false, url: 'api/space/:id/conversations'},
         });
     });

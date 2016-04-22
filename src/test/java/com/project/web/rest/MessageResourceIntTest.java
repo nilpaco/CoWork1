@@ -24,7 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.util.List;
 
@@ -44,11 +46,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class MessageResourceIntTest {
 
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
+
     private static final String DEFAULT_TEXT = "AAAAA";
     private static final String UPDATED_TEXT = "BBBBB";
 
-    private static final LocalDate DEFAULT_TIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_TIME = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
+    private static final ZonedDateTime UPDATED_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_TIME_STR = dateTimeFormatter.format(DEFAULT_TIME);
 
     @Inject
     private MessageRepository messageRepository;
@@ -116,7 +121,7 @@ public class MessageResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(message.getId().intValue())))
                 .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT.toString())))
-                .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
+                .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME_STR)));
     }
 
     @Test
@@ -131,7 +136,7 @@ public class MessageResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(message.getId().intValue()))
             .andExpect(jsonPath("$.text").value(DEFAULT_TEXT.toString()))
-            .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()));
+            .andExpect(jsonPath("$.time").value(DEFAULT_TIME_STR));
     }
 
     @Test

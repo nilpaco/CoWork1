@@ -8,26 +8,11 @@ angular.module('project1App')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
-                    data.time = DateUtils.convertLocaleDateFromServer(data.time);
+                    data.time = DateUtils.convertDateTimeFromServer(data.time);
                     return data;
                 }
             },
-            'update': {
-                method: 'PUT',
-                transformRequest: function (data) {
-                    data.time = DateUtils.convertLocaleDateToServer(data.time);
-                    return angular.toJson(data);
-                }
-            },
-            'save': {
-                method: 'POST',
-                transformRequest: function (data) {
-                    data.time = DateUtils.convertLocaleDateToServer(data.time);
-                    return angular.toJson(data);
-                }
-            },
-            'addMessage': {
-                method: 'POST', isArray: false, url: 'api/space/:id/message'
-            }
+            'update': { method:'PUT' },
+            'postMessageFromConversation': {method: 'POST', isArray: false, url: 'api/conversation/:id/message'}
         });
     });
