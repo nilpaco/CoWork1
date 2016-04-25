@@ -26,8 +26,8 @@ public class Conversation implements Serializable {
 
     @Column(name = "name")
     private String name;
-    
-    @OneToMany(mappedBy = "conversation")
+
+    @OneToMany(mappedBy = "conversation", fetch = FetchType.EAGER)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Message> messages = new HashSet<>();
@@ -51,7 +51,7 @@ public class Conversation implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
