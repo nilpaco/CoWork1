@@ -22,6 +22,14 @@ angular.module('project1App')
             $scope.loadAll();
         };
         $scope.loadAll();
+        $scope.searchSpace   = '';
+
+        $scope.predicate = 'name';
+        $scope.reverse = true;
+        $scope.order = function(predicate) {
+            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+            $scope.predicate = predicate;
+        };
 
 
         $scope.search = function () {

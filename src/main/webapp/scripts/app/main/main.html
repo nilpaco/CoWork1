@@ -13,8 +13,8 @@
                 <div class="no-padding-right" style="float: right">
                     <form name="searchForm" class="form-inline">
                         <div>
-                            <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery"
-                                   placeholder="{{ 'project1App.space.home.search' | translate }}">
+                            <input type="text" class="form-control" id="searchQuery"
+                                   placeholder="{{ 'project1App.space.home.search' | translate }}" ng-model="searchSpace.space.name">
                         <span>
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -25,7 +25,50 @@
                 </div>
                 <div class="collapse" id="collapseExample">
                     <div class="well" style="width: 100%">
-                        ...
+                        <div class="col-lg-6">
+                            Precio:
+                            Num Personas:
+                        </div>
+                        <div class="col-lg-6">
+asdf
+                        </div>
+                        <div class="col-lg-12">
+                            Servicios:
+                            <div class="col-lg-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Check me out
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,7 +77,7 @@
                 toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces">
+                    <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces | orderBy:predicate:reverse | filter: searchSpace">
                         <div class="thumbnail material">
                             <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                 <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
