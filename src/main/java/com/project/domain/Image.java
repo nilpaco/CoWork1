@@ -23,11 +23,9 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Lob
     @Column(name = "image")
-    private byte[] image;
+    private String image;
     
-    @Column(name = "image_content_type")        private String imageContentType;
     @ManyToOne
     @JoinColumn(name = "space_id")
     private Space space;
@@ -40,20 +38,12 @@ public class Image implements Serializable {
         this.id = id;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
     
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getImageContentType() {
-        return imageContentType;
-    }
-
-    public void setImageContentType(String imageContentType) {
-        this.imageContentType = imageContentType;
     }
 
     public Space getSpace() {
@@ -89,7 +79,6 @@ public class Image implements Serializable {
         return "Image{" +
             "id=" + id +
             ", image='" + image + "'" +
-            ", imageContentType='" + imageContentType + "'" +
             '}';
     }
 }

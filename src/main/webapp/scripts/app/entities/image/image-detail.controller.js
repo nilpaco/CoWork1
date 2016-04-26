@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('ImageDetailController', function ($scope, $rootScope, $stateParams, DataUtils, entity, Image, Space) {
+    .controller('ImageDetailController', function ($scope, $rootScope, $stateParams, entity, Image, Space) {
         $scope.image = entity;
         $scope.load = function (id) {
             Image.get({id: id}, function(result) {
@@ -13,5 +13,4 @@ angular.module('project1App')
         });
         $scope.$on('$destroy', unsubscribe);
 
-        $scope.byteSize = DataUtils.byteSize;
     });

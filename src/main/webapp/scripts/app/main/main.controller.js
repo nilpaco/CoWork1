@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster, NgMap) {
+    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster, NgMap, Service) {
         Principal.identity().then(function(account) {
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
@@ -24,12 +24,19 @@ angular.module('project1App')
         $scope.loadAll();
         $scope.searchSpace   = '';
 
-        $scope.predicate = 'name';
-        $scope.reverse = true;
-        $scope.order = function(predicate) {
-            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-            $scope.predicate = predicate;
+        $scope.loadAll = function() {
+            Space.getByPrice({price: $scope.price, page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.spaces = result;
+            });
         };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
+        };
+        $scope.loadAll();
+        $scope.searchSpace   = '';
 
 
         $scope.search = function () {
@@ -93,6 +100,21 @@ angular.module('project1App')
         $scope.showMarker = function (){
 
         }
+
+        $scope.loadAll2 = function() {
+            Service.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.services = result;
+            });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll2();
+        };
+        $scope.loadAll2();
+
+
 
 
     });

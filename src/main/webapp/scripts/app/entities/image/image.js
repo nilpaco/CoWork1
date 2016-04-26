@@ -62,7 +62,6 @@ angular.module('project1App')
                             entity: function () {
                                 return {
                                     image: null,
-                                    imageContentType: null,
                                     id: null
                                 };
                             }

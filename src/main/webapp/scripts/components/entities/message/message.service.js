@@ -13,6 +13,7 @@ angular.module('project1App')
                 }
             },
             'update': { method:'PUT' },
+            'addMessage': {method: 'POST', isArray: false, url: 'api/space/:id/message'},
             'postMessageFromConversation': {method: 'POST', isArray: false, url: 'api/conversation/:id/message'}
         });
     });

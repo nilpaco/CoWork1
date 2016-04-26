@@ -13,28 +13,11 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="image.id" readonly />
         </div>
-        <div class="form-group" ngf-drop ngf-change="setImage($file, image)" ngf-pattern="'image/*'">
+        <div class="form-group">
             <label class="control-label" translate="project1App.image.image" for="field_image">Image</label>
-            <div>
-                <img data-ng-src="{{'data:' + image.imageContentType + ';base64,' + image.image}}" style="max-height: 100px;" ng-if="image.image"/>
-                <div class="help-block clearfix">
-                    <span class="pull-left">{{image.imageContentType}} {{byteSize(image.image)}}</span>
-                    <button ng-click="image.image=null;image.imageContentType=null;"
-                            ng-if="image.image"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>
-                <button type="file" ngf-select class="btn btn-default btn-block"
-                        ngf-change="setImage($file, image)" accept="image/*" translate="entity.action.addimage">
-                    Add image
-                </button>
-            </div>
-            <input type="hidden" class="form-control" name="image" id="field_image"
+            <input type="text" class="form-control" name="image" id="field_image"
                     ng-model="image.image"
                      />
-            <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
-                    ng-model="image.imageContentType" />
         </div>
 
         <div class="form-group">

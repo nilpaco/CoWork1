@@ -15,8 +15,7 @@
                     <span translate="project1App.image.image">Image</span>
                 </td>
                 <td>
-                    <img data-ng-src="{{'data:' + image.imageContentType + ';base64,' + image.image}}" style="max-width: 100%;" ng-if="image.image"/>
-                    <div>{{image.imageContentType}}  {{byteSize(image.image)}}</div>
+                    <span class="form-control-static">{{image.image}}</span>
                 </td>
             </tr>
             <tr>

@@ -16,6 +16,12 @@ angular.module('project1App')
                 method: 'GET',
                 isArray: true,
                 url: 'api/spaces/userliked'
-            }
-            });
+            },
+            'getByPrice': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/spaces/userliked/:price'
+            },
+
+        });
     });

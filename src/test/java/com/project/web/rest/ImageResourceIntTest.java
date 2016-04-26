@@ -21,7 +21,6 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -43,11 +42,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IntegrationTest
 public class ImageResourceIntTest {
 
-
-    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(2, "1");
-    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_IMAGE = "AAAAA";
+    private static final String UPDATED_IMAGE = "BBBBB";
 
     @Inject
     private ImageRepository imageRepository;
@@ -80,7 +76,6 @@ public class ImageResourceIntTest {
     public void initTest() {
         image = new Image();
         image.setImage(DEFAULT_IMAGE);
-        image.setImageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -100,7 +95,6 @@ public class ImageResourceIntTest {
         assertThat(images).hasSize(databaseSizeBeforeCreate + 1);
         Image testImage = images.get(images.size() - 1);
         assertThat(testImage.getImage()).isEqualTo(DEFAULT_IMAGE);
-        assertThat(testImage.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -114,8 +108,7 @@ public class ImageResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(image.getId().intValue())))
-                .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
-                .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
+                .andExpect(jsonPath("$.[*].image").value(hasItem(DEFAULT_IMAGE.toString())));
     }
 
     @Test
@@ -129,8 +122,7 @@ public class ImageResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(image.getId().intValue()))
-            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
+            .andExpect(jsonPath("$.image").value(DEFAULT_IMAGE.toString()));
     }
 
     @Test
@@ -151,7 +143,6 @@ public class ImageResourceIntTest {
 
         // Update the image
         image.setImage(UPDATED_IMAGE);
-        image.setImageContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restImageMockMvc.perform(put("/api/images")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -163,7 +154,6 @@ public class ImageResourceIntTest {
         assertThat(images).hasSize(databaseSizeBeforeUpdate);
         Image testImage = images.get(images.size() - 1);
         assertThat(testImage.getImage()).isEqualTo(UPDATED_IMAGE);
-        assertThat(testImage.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test

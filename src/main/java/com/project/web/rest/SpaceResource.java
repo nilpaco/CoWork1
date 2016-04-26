@@ -155,6 +155,11 @@ public class SpaceResource {
             .stream(spaceSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
     }
+
+    /**
+     * SEARCH  //spaces/userliked -> get all spaces by user liked
+     * to the query.
+     */
     @RequestMapping(value = "/spaces/userliked",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -164,6 +169,14 @@ public class SpaceResource {
         log.debug("REST request to get a page of Spaces");
         Page<Space> page = spaceRepository.findAll(pageable);
 
+        List<SpaceDTO> listSpaceDTO = getSpaceDTOs(page);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spaces");
+        return new ResponseEntity<>(listSpaceDTO, headers, HttpStatus.OK);
+
+    }
+
+    private List<SpaceDTO> getSpaceDTOs(Page<Space> page) {
         List<SpaceDTO> listSpaceDTO = new ArrayList<>();
 
         for (Space space : page.getContent()) {
@@ -181,10 +194,24 @@ public class SpaceResource {
         }
 
         Page<SpaceDTO> result = new PageImpl<SpaceDTO>(listSpaceDTO);
+        return listSpaceDTO;
+    }
+
+    @RequestMapping(value = "/spaces/userliked/{price}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<SpaceDTO>> getSpacesByPrice(Pageable pageable, @PathVariable Integer price)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Spaces");
+        Page<Space> page = spaceRepository.findAllByPrice(pageable, price.doubleValue());
+
+        List<SpaceDTO> listSpaceDTO = getSpaceDTOs(page);
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spaces");
         return new ResponseEntity<>(listSpaceDTO, headers, HttpStatus.OK);
 
     }
+
 
 }

@@ -23,4 +23,7 @@ public interface SpaceRepository extends JpaRepository<Space,Long> {
     @Query("select space from Space space left join fetch space.services where space.id =:id")
     Space findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select space from Space space where space.price >= :price")
+    Page<Space> findAllByPrice(Pageable pageable, @Param("price") Double price);
+
 }

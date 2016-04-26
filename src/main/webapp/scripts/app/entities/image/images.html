@@ -39,9 +39,7 @@ class="hidden-xs"                        translate="project1App.image.home.creat
             <tbody>
                 <tr ng-repeat="image in images track by image.id">
                     <td><a ui-sref="image.detail({id:image.id})">{{image.id}}</a></td>
-                    <td>
-                        <img data-ng-src="{{'data:' + image.imageContentType + ';base64,' + image.image}}" style="max-height: 30px;" ng-if="image.image"/> {{image.imageContentType}} {{byteSize(image.image)}}
-                    </td>
+                    <td>{{image.image}}</td>
                     <td>
                         <a ui-sref="space.detail({id:image.space.id})">{{image.space.name}}</a>
                     </td>

@@ -6,7 +6,7 @@
     </paper-toolbar>
     <div class="chat-body">
         <div class="chat-mess">
-            <div class="text-mess" ng-repeat="message in messages">{{message.text}}</div>
+            <div ng-class="{true: 'message-1', false: 'message-2'}[account.login == message.user.login]" class="text-mess bubble" ng-repeat="message in messages">{{message.text}}</div>
         </div>
     </div>
 

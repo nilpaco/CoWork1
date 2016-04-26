@@ -14,7 +14,7 @@
                     <form name="searchForm" class="form-inline">
                         <div>
                             <input type="text" class="form-control" id="searchQuery"
-                                   placeholder="{{ 'project1App.space.home.search' | translate }}" ng-model="searchSpace.space.name">
+                                   placeholder="{{ 'project1App.space.home.search' | translate }}" ng-model="searchSpace.space.streetAddress">
                         <span>
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -24,50 +24,55 @@
                     </form>
                 </div>
                 <div class="collapse" id="collapseExample">
-                    <div class="well" style="width: 100%">
-                        <div class="col-lg-6">
-                            Precio:
-                            Num Personas:
-                        </div>
-                        <div class="col-lg-6">
-asdf
-                        </div>
-                        <div class="col-lg-12">
-                            Servicios:
+                    <div class="well filter-back" style="width: 100%; margin: 15px 0px;">
+                        <div class="row">
                             <div class="col-lg-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4 class="co-filters">Precio</h4>
+                                        <input ng-model="price" type="number" class="form-control">
+                                        <input ng-click="loadAll()" type="submit">
+                                    </div>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4 class="co-filters">Num. Personas</h4>
+                                        <input type="number" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <h4 class="co-filters">Ordenar por:</h4>
+                                <paper-radio-group>
+                                    <paper-radio-button name="preciomax">Precio mayor</paper-radio-button>
+                                    <paper-radio-button name="preciomin">Precio menor</paper-radio-button>
+                                    <paper-radio-button name="recent">Recientes</paper-radio-button>
+                                </paper-radio-group>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4 class="co-filters">Services</h4>
+                                <div class="col-lg-3">
+                                    <paper-checkbox>WiFi</paper-checkbox>
+                                    <paper-checkbox>WiFi</paper-checkbox>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <div class="col-lg-3">
+                                    <paper-checkbox>WiFi</paper-checkbox>
+                                    <paper-checkbox>WiFi</paper-checkbox>
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Check me out
-                                    </label>
+                                <div class="col-lg-3">
+                                    <paper-checkbox>WiFi</paper-checkbox>
+                                    <paper-checkbox>WiFi</paper-checkbox>
+                                </div>
+                                <div class="col-lg-3">
+                                    <paper-checkbox>WiFi</paper-checkbox>
+                                    <paper-checkbox>WiFi</paper-checkbox>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <paper-button style="float: right">Clear All</paper-button>
                         </div>
                     </div>
                 </div>
@@ -77,7 +82,7 @@ asdf
                 toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces | orderBy:predicate:reverse | filter: searchSpace">
+                    <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">
                         <div class="thumbnail material">
                             <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                 <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
@@ -101,6 +106,26 @@ asdf
                 </div>
             </div>
             <style>
+                paper-radio-button, paper-checkbox{
+                    display: block !important;
+                }
+                paper-checkbox{
+                    margin-bottom: 10px;
+                }
+                .co-filters{
+                    border-bottom: 1px solid #cfd8dc;
+                    font-weight: 600;
+                    margin-bottom: 16px;
+                    padding-bottom: 8px;
+                    font-size: 16px;
+                    color: rgba(0,0,0,0.7);
+                }
+                .filter-back{
+                    background: rgba(255,255,255,0.9);
+                    box-shadow: 0px 5px 2px -3px rgba(0,0,0,0.2);
+                    border: 1px solid #f4f4f4;
+                    border-radius: 2px;
+                }
                 #col-right {
                     height: 100%;
                     float: right;

@@ -12,8 +12,7 @@
     {
       "fieldId": 1,
       "fieldName": "image",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldType": "String"
     }
   ],
   "changelogDate": "20160329150241",

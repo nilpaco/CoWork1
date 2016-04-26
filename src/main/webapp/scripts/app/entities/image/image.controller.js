@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('ImageController', function ($scope, $state, DataUtils, Image, ImageSearch, ParseLinks) {
+    .controller('ImageController', function ($scope, $state, Image, ImageSearch, ParseLinks) {
 
         $scope.images = [];
         $scope.predicate = 'id';
@@ -39,12 +39,7 @@ angular.module('project1App')
         $scope.clear = function () {
             $scope.image = {
                 image: null,
-                imageContentType: null,
                 id: null
             };
         };
-
-        $scope.abbreviate = DataUtils.abbreviate;
-
-        $scope.byteSize = DataUtils.byteSize;
     });
