@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Frutiger Neue";
+    src: url("../fonts/frutiger/frutigerneuew02bd/df8cdd77-a94a-4ab9-a957-5fe084222a1d.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02bd/4b603308-1f36-48f6-be79-dd806bf12b9e.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02bd/2e7c7763-eea5-4948-bf03-449a5290c2e9.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02bd/1a08d2b3-db40-4a33-835d-0a476a906ece.svg#1a08d2b3-db40-4a33-835d-0a476a906ece") format("svg");
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Frutiger Neue";
+  src: url("../fonts/frutiger/frutigerneuew02it/c606e802-323f-45a2-b99a-8a3105da7f88.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02it/168a0b0c-feca-4f19-8b2e-aa76cee9018d.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02it/83ac5f50-20eb-49b1-81a2-99ef6e21e861.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02it/3e2948c8-46c0-405b-b79f-be6a75b9f087.svg#3e2948c8-46c0-405b-b79f-be6a75b9f087") format("svg");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+    font-family: "Frutiger Neue";
+  src: url("../fonts/frutiger/frutigerneuew02light/d610d28f-7853-4eae-b190-02e3b1c6bce2.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02light/93370a6a-7a5c-487f-9caa-c1d6e5457e21.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02light/f121f2cc-48ac-4d0a-a54e-14e038ef88da.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02light/997ff52e-2b03-4091-8fb4-0b36654c16c5.svg#997ff52e-2b03-4091-8fb4-0b36654c16c5") format("svg");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+    font-family: "Frutiger Neue";
+  src: url("../fonts/frutiger/frutigerneuew02regular/976bf70e-eff4-4d7d-9b1c-3b7baf2e83f0.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02regular/37b02020-a0ec-4a3c-b5f3-7d37169e689b.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02regular/b5d7d02f-6c00-45ba-9f40-10c82f22bf6f.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02regular/f7636eb9-4ec2-418d-b391-4c2fff3d8ef2.svg#f7636eb9-4ec2-418d-b391-4c2fff3d8ef2") format("svg");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+    font-family: "Frutiger Neue Light";
+  src: url("../fonts/frutiger/frutigerneuew02bd/df8cdd77-a94a-4ab9-a957-5fe084222a1d.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02bd/4b603308-1f36-48f6-be79-dd806bf12b9e.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02bd/2e7c7763-eea5-4948-bf03-449a5290c2e9.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02bd/1a08d2b3-db40-4a33-835d-0a476a906ece.svg#1a08d2b3-db40-4a33-835d-0a476a906ece") format("svg");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+    font-family: "Frutiger Neue Light";
+  src: url("../fonts/frutiger/frutigerneuew02it/c606e802-323f-45a2-b99a-8a3105da7f88.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02it/168a0b0c-feca-4f19-8b2e-aa76cee9018d.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02it/83ac5f50-20eb-49b1-81a2-99ef6e21e861.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02it/3e2948c8-46c0-405b-b79f-be6a75b9f087.svg#3e2948c8-46c0-405b-b79f-be6a75b9f087") format("svg");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+    font-family: "Frutiger Neue Light";
+  src: url("../fonts/frutiger/frutigerneuew02light/d610d28f-7853-4eae-b190-02e3b1c6bce2.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02light/93370a6a-7a5c-487f-9caa-c1d6e5457e21.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02light/f121f2cc-48ac-4d0a-a54e-14e038ef88da.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02light/997ff52e-2b03-4091-8fb4-0b36654c16c5.svg#997ff52e-2b03-4091-8fb4-0b36654c16c5") format("svg");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+    font-family: "Frutiger Neue Light";
+  src: url("../fonts/frutiger/frutigerneuew02regular/976bf70e-eff4-4d7d-9b1c-3b7baf2e83f0.eot?#iefix") format("embedded-opentype"), url("../fonts/frutiger/frutigerneuew02regular/37b02020-a0ec-4a3c-b5f3-7d37169e689b.woff") format("woff"), url("../fonts/frutiger/frutigerneuew02regular/b5d7d02f-6c00-45ba-9f40-10c82f22bf6f.ttf") format("truetype"), url("../fonts/frutiger/frutigerneuew02regular/f7636eb9-4ec2-418d-b391-4c2fff3d8ef2.svg#f7636eb9-4ec2-418d-b391-4c2fff3d8ef2") format("svg");
+  font-style: normal;
+  font-weight: 500;
+}
