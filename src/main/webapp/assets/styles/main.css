@@ -288,3 +288,13 @@ paper-button.edit{
 .chat-body{
     padding: 0px 15px;
 }
+.edit-settings{
+    padding: 20px 45px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 3px;
+}
+paper-button.fancy{
+    background: #E91E63;
+    color: white;
+}
