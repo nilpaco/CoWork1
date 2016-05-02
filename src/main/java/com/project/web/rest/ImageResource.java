@@ -182,7 +182,7 @@ public class ImageResource {
 
             //Create new file in path
             BufferedOutputStream stream =
-                new BufferedOutputStream(new FileOutputStream(new File("./src/main/webapp/uploads/"+nameSpace)));
+                new BufferedOutputStream(new FileOutputStream(new File("./src/main/webapp/uploads/"+nameSpace+".jpg")));
 
             stream.write(file.getBytes());
             stream.close();
