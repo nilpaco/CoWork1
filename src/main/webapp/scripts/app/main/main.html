@@ -86,7 +86,7 @@
                         <div class="thumbnail material">
                             <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                 <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
-                                <img style="min-width: 100%;" src="http://placehold.it/350x150">
+                                <img style="min-width: 100%;" src="uploads/{{spaceDTO.space.name}}{{spaceDTO.space.id}}0.jpg">
                             </a>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
                                 <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]"

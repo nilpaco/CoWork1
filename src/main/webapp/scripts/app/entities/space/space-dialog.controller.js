@@ -24,8 +24,8 @@ angular.module('project1App').controller('SpaceDialogController',
             //$uibModalInstance.close(result);
             console.log(result.id);
             for (var i = 0; i < $scope.archivos.length; i++) {
-                $scope.upload($scope.archivos[i], result);
-                $scope.image.image = result.name+result.id;
+                $scope.upload($scope.archivos[i], result,i);
+                $scope.image.image = result.name+result.id+i;
                 $scope.image.space = {id: result.id};
                 console.log($scope.image);
                 Image.save($scope.image);
@@ -74,11 +74,11 @@ angular.module('project1App').controller('SpaceDialogController',
                 $scope.upload($scope.file);
         };
 
-        $scope.upload = function (file, result) {
+        $scope.upload = function (file, result, i) {
             console.log(file);
             Upload.upload({
                 url: 'api/upload',
-                data: {file: file, 'name': result.name+result.id}
+                data: {file: file, 'name': result.name+result.id+i}
             }).then(function (resp) {
                 console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
             }, function (resp) {
