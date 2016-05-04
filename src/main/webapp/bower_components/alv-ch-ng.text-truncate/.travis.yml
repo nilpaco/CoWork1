@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- 0.1
+install: npm install
+before_install: npm install -g grunt-cli
+before_script: bower install
+addons:
+  code_climate:
+    repo_token:
+      secure: "jjz2uq0Fd4iwxYb1YAE7TUspvQFd+GWa/HJfc05wokBRTRBDVpGsQEcyqgQQhG0bWbTTYV+zLddex3hFW39WMdtJW6+AQ7t/dGwQWp23RCIdKJeSxWSu4OTeUK9lfMWZRXHunw3JJRFFezSeS/SBrv+j88deMPK0Fjvs8lR92y0="
+after_script:
+  - cat build/coverage/reports/lcov/lcov.info | codeclimate

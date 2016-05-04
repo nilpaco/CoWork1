@@ -1,0 +1,52 @@
+{
+  "name": "alv-ch-ng.text-truncate",
+  "version": "0.2.0",
+  "ignore": [
+    ".idea",
+    "lib",
+    "node_modules",
+    "src",
+    "test",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintignore",
+    ".jshintrc",
+    "*.iml",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular-translate": "2.6.0",
+    "bootstrap": "v3.3.1",
+    "bootstrapaccessibilityplugin": "v1.0.4",
+    "jquery": "2.1.1",
+    "ng-lodash":"latest"
+  },
+  "devDependencies": {
+    "alv-ch-ng.style": "latest",
+    "angular": "latest",
+    "angular-resource": "latest",
+    "angular-mocks": "latest",
+    "angular-route": "latest",
+    "angular-aria": "latest",
+    "angular-translate-storage-local": "latest",
+    "angular-translate-storage-cookie": "latest",
+    "angular-translate-loader-static-files": "latest",
+    "jasmine": "2.1.3",
+    "jasmine-jquery": "2.0.5",
+    "less": "1.7.0"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "angular": "~1.3.0",
+    "angular-translate": "~2.6.0"
+  },
+  "homepage": "https://github.com/alv-ch-ng/textTruncate",
+  "description": "ALV-CH AngularJS textTruncate components",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT"
+}

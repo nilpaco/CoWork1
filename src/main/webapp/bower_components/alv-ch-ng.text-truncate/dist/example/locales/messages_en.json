@@ -1,0 +1,23 @@
+{
+  "testLabel": "Test Label for testing purpose",
+  "testHelptext": "Test Helptext for testing purpose",
+  "testPlaceholder": "This is a Placeholder",
+  "testLogin": "Please login",
+  "testLoginUser": "Username",
+  "testLoginPwd": "Password",
+  "testLoginPwForgot": "Forgot password?",
+  "testLoginLoggedIn": "stay logged in",
+  "testPleaseChoose": "Nothing selected",
+  "testAutoCompletePlaceholder": "Type...",
+  "testMailcheck": "For a demo, enter a@hotmale_com or b@gmail_co in the field below",
+  "common_i18n_select_noneSelectedText": "Please choose",
+  "common_i18n_select_noSelectionText": "No selection",
+  "common_i18n_mailcheck_didYouMean": "Meinten sie:",
+  "common_i18n_language_short_de": "Deutsch",
+  "common_i18n_language_short_en": "English",
+  "common_i18n_contents": "Conntent",
+  "common_i18n_scrollToTop": "&uarr; To top",
+  "common_footer_copyright": "<+ alv-ch />",
+  "common_text_truncate_more":"More",
+  "common_text_truncate_less":"Less"
+}

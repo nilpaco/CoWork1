@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="example-app">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>alv-ch-ng.text-truncate</title>
+
+    <!-- webfontloader -->
+    <script>
+      WebFontConfig = {
+        custom: {
+          families: ['Frutiger Neue', 'Frutiger Neue Light', 'Admin Icons']
+        },
+        google: {families: ['Open+Sans:400italic,700italic,400,700:latin']}
+      };
+      (function () {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+    
+      <link rel="stylesheet" type="text/css" href="styles/frutiger.css"/>
+      <link rel="stylesheet" type="text/css" href="styles/admin-symbols.css"/>
+    
+    <!-- /webfontloader -->
+
+    <!-- styles -->
+    <link rel="stylesheet" type="text/css" href="styles/alv-ch-ng.bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/textTruncate.css"/>
+    <!-- /style -->
+
+    <!-- scripts -->
+    <script src="lib.min.js"></script>
+
+    <script src="../js/textTruncate.js"></script>
+
+    <script src="example.app.js"></script>
+    <!-- /scripts -->
+  </head>
+  <body>
+    <div id="topnav" class="topnav" scroll-fix>
+      <!-- /.systembar -->
+      <div id="systembar" class="systembar">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li>
+              <a class="pointer" href="https://github.com/alv-ch-ng/text-truncate" target="_blank">Github</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /.navbar -->
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <sidebar-toggle></sidebar-toggle>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#global-navigation">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand alv">
+              <a href="#/"><img src="images/alv-ch-ng.png"
+                                alt="alv-ch-ng Logo"/><span>alv-ch-ng.text-truncate</span></a>
+            </div>
+          </div>
+          <div class="collapse navbar-collapse" id="global-navigation">
+            <div class="nav navbar-nav navbar-right">
+              <language-switcher></language-switcher>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.subnavbar -->
+      <div class="subnavbar">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li active-startswith="/textTruncate">
+              <a href="#/textTruncate" class="pointer">Basic</a>
+            </li>
+              <li active-startswith="/demo2">
+                  <a href="#/demo2" class="pointer">Custom CSS</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/.system messages -->
+
+    <div class="container">
+      <div id="alv-divider" scroll-fix="navbar">
+        <div class="release-note poc">
+          <a release-note>ALPHA</a>
+
+          <p>0.2.0</p>
+        </div>
+      </div>
+      <div id="main" ng-view class="ng-cloak"></div>
+    </div>
+    <!--./container -->
+
+    <div class="container-footer" id="footer-container">
+      <hr id="footer" scroll-fix scroll-fix-bottom="footer-content"/>
+      <div id="footer-content" class="footer">
+        <div class="container">
+          <div class="row footer-services">
+            <div class="footer-copyright" translate="common_footer_copyright">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

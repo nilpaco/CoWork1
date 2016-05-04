@@ -1,0 +1,38 @@
+<style>
+    .ngTruncateToggleText {
+        color: red;
+        font-size: 90%;
+        font-style: italic;
+    }
+</style>
+<h1>Custom CSS Example</h1>
+<p>
+<h3>Original text</h3>
+
+<pre class="prettyprint language-javascript linenums">$scope.longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla semper augue vel scelerisque egestas. Praesent odio lacus, porta vitae nisl a, semper tempor elit. Etiam fringilla ut nisl non dictum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis eros euismod, elementum tortor ut, sagittis felis. Nulla lectus ante, eleifend non felis pharetra, porta aliquet urna. Curabitur nec elit sit amet tortor accumsan volutpat sed vitae ante. Cras semper consequat nunc, in tincidunt dolor scelerisque eget. Morbi volutpat quis est bibendum aliquet. Sed euismod neque nisl, congue fermentum eros sagittis sit amet. Nulla at tincidunt nibh.";</pre>
+</p>
+
+<p>
+<h3>Custom CSS</h3>
+
+<p>The styles defined in the <code>ngTruncateToggleText</code> class are applied to both toggling elements.</p>
+<pre class="prettyprint language-css linenums">.ngTruncateToggleText {
+    color: red;
+    font-size: 90%;
+    font-style: italic;
+}</pre>
+
+<p>So, the previous definitions along with de following statement...</p>
+
+<pre class="prettyprint language-html linenums">&lt;p ng-text-truncate="longText"
+   ng-tt-chars-threshold="40"&gt;&lt;/p&gt;</pre>
+
+<p>...produces this:</p>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p ng-text-truncate="longText"
+           ng-tt-chars-threshold="40"></p>
+    </div>
+</div>
+</p>

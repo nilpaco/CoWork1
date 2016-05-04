@@ -1,0 +1,1054 @@
+@font-face {
+    font-family: 'Admin Symbols';
+    src: url('../fonts/adminchsymbols/adminch_symbols?#iefix') format('embedded-opentype'), url('../fonts/adminchsymbols/adminch_symbols.woff') format('woff'), url('../fonts/adminchsymbols/adminch_symbols.ttf') format('truetype'), url('../fonts/adminchsymbols/adminch_symbols.svg#icomoon') format('svg');
+}
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+    content: attr(data-icon);
+}
+
+.sorttable th a:after,
+[data-icon]:before,
+[class*="icon-"] {
+    font-family: 'Admin Symbols';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: baseline;
+  /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon.icon--before:before {
+    font-family: 'Admin Symbols';
+    display: inline-block;
+}
+
+.icon.icon--after:after {
+    font-family: 'Admin Symbols';
+    display: inline-block;
+}
+
+span.icon {
+    font-family: 'Admin Symbols';
+    position: relative;
+}
+
+span.icon.icon--exclam:after {
+    content: "!";
+}
+
+.icon--before.icon--exclam:before,
+a.icon--exclam[data-toggle=collapse]:before {
+    content: "!";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--exclam:after {
+    content: "!";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--arrow-right:after {
+    content: "$";
+}
+
+.icon--before.icon--arrow-right:before,
+a.icon--arrow-right[data-toggle=collapse]:before {
+    content: "$";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--arrow-right:after {
+    content: "$";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--google:after {
+    content: "+";
+}
+
+.icon--before.icon--google:before,
+a.icon--google[data-toggle=collapse]:before {
+    content: "+";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--google:after {
+    content: "+";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--bottom:after {
+    content: ",";
+}
+
+.icon--before.icon--bottom:before,
+a.icon--bottom[data-toggle=collapse]:before {
+    content: ",";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--bottom:after {
+    content: ",";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--left:after {
+    content: ".";
+}
+
+.icon--before.icon--left:before,
+a.icon--left[data-toggle=collapse]:before {
+    content: ".";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--left:after {
+    content: ".";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--disc:after {
+    content: "0";
+}
+
+.icon--before.icon--disc:before,
+a.icon--disc[data-toggle=collapse]:before {
+    content: "0";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--disc:after {
+    content: "0";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--screen:after {
+    content: "1";
+}
+
+.icon--before.icon--screen:before,
+a.icon--screen[data-toggle=collapse]:before {
+    content: "1";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--screen:after {
+    content: "1";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--notebook:after {
+    content: "2";
+}
+
+.icon--before.icon--notebook:before,
+a.icon--notebook[data-toggle=collapse]:before {
+    content: "2";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--notebook:after {
+    content: "2";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--smartphone-portrait:after {
+    content: "3";
+}
+
+.icon--before.icon--smartphone-portrait:before,
+a.icon--smartphone-portrait[data-toggle=collapse]:before {
+    content: "3";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--smartphone-portrait:after {
+    content: "3";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--smartphone-landscape:after {
+    content: "4";
+}
+
+.icon--before.icon--smartphone-landscape:before,
+a.icon--smartphone-landscape[data-toggle=collapse]:before {
+    content: "4";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--smartphone-landscape:after {
+    content: "4";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--tablet-portrait:after {
+    content: "5";
+}
+
+.icon--before.icon--tablet-portrait:before,
+a.icon--tablet-portrait[data-toggle=collapse]:before {
+    content: "5";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--tablet-portrait:after {
+    content: "5";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--tablet-landscape:after {
+    content: "6";
+}
+
+.icon--before.icon--tablet-landscape:before,
+a.icon--tablet-landscape[data-toggle=collapse]:before {
+    content: "6";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--tablet-landscape:after {
+    content: "6";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--right:after {
+    content: ":";
+}
+
+.icon--before.icon--right:before,
+a.icon--right[data-toggle=collapse]:before {
+    content: ":";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--right:after {
+    content: ":";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--top:after {
+    content: ";";
+}
+
+.icon--before.icon--top:before,
+a.icon--top[data-toggle=collapse]:before {
+    content: ";";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--top:after {
+    content: ";";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--less:after {
+    content: "<";
+}
+
+.icon--before.icon--less:before,
+a.icon--less[data-toggle=collapse]:before {
+    content: "<";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--less:after {
+    content: "<";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--greater:after {
+    content: ">";
+}
+
+.icon--before.icon--greater:before,
+a.icon--greater[data-toggle=collapse]:before,
+a[data-toggle=collapse].collapsed:before {
+    content: ">";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--greater:after,
+a.icon--after[data-toggle=collapse].collapsed:after {
+    content: ">";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--eye:after {
+    content: "?";
+}
+
+.icon--before.icon--eye:before,
+a.icon--eye[data-toggle=collapse]:before {
+    content: "?";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--eye:after {
+    content: "?";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--pdf:after {
+    content: "A";
+}
+
+.icon--before.icon--pdf:before,
+a.icon--pdf[data-toggle=collapse]:before {
+    content: "A";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--pdf:after {
+    content: "A";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--trash:after {
+    content: "B";
+}
+
+.icon--before.icon--trash:before,
+a.icon--trash[data-toggle=collapse]:before {
+    content: "B";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--trash:after {
+    content: "B";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--cart:after {
+    content: "C";
+}
+
+.icon--before.icon--cart:before,
+a.icon--cart[data-toggle=collapse]:before {
+    content: "C";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--cart:after {
+    content: "C";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--star:after {
+    content: "F";
+}
+
+.icon--before.icon--star:before,
+a.icon--star[data-toggle=collapse]:before {
+    content: "F";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--star:after {
+    content: "F";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--list:after {
+    content: "I";
+}
+
+.icon--before.icon--list:before,
+a.icon--list[data-toggle=collapse]:before {
+    content: "I";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--list:after {
+    content: "I";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--message:after {
+    content: "M";
+}
+
+.icon--before.icon--message:before,
+a.icon--message[data-toggle=collapse]:before {
+    content: "M";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--message:after {
+    content: "M";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--print:after {
+    content: "P";
+}
+
+.icon--before.icon--print:before,
+a.icon--print[data-toggle=collapse]:before {
+    content: "P";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--print:after {
+    content: "P";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--rss:after {
+    content: "R";
+}
+
+.icon--before.icon--rss:before,
+a.icon--rss[data-toggle=collapse]:before {
+    content: "R";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--rss:after {
+    content: "R";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--search:after {
+    content: "S";
+}
+
+.icon--before.icon--search:before,
+a.icon--search[data-toggle=collapse]:before {
+    content: "S";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--search:after {
+    content: "S";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--word:after {
+    content: "W";
+}
+
+.icon--before.icon--word:before,
+a.icon--word[data-toggle=collapse]:before {
+    content: "W";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--word:after {
+    content: "W";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--excel:after {
+    content: "X";
+}
+
+.icon--before.icon--excel:before,
+a.icon--excel[data-toggle=collapse]:before {
+    content: "X";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--excel:after {
+    content: "X";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--power:after {
+    content: "^";
+}
+
+.icon--before.icon--power:before,
+a.icon--power[data-toggle=collapse]:before {
+    content: "^";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--power:after {
+    content: "^";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--calendar:after {
+    content: "c";
+}
+
+.icon--before.icon--calendar:before,
+a.icon--calendar[data-toggle=collapse]:before {
+    content: "c";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--calendar:after {
+    content: "c";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--doc:after {
+    content: "d";
+}
+
+.icon--before.icon--doc:before,
+a.icon--doc[data-toggle=collapse]:before {
+    content: "d";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--doc:after {
+    content: "d";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--pause:after {
+    content: "e";
+}
+
+.icon--before.icon--pause:before,
+a.icon--pause[data-toggle=collapse]:before {
+    content: "e";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--pause:after {
+    content: "e";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--facebook:after {
+    content: "f";
+}
+
+.icon--before.icon--facebook:before,
+a.icon--facebook[data-toggle=collapse]:before {
+    content: "f";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--facebook:after {
+    content: "f";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--step-backward:after {
+    content: "g";
+}
+
+.icon--before.icon--step-backward:before,
+a.icon--step-backward[data-toggle=collapse]:before {
+    content: "g";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--step-backward:after {
+    content: "g";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--step-forward:after {
+    content: "h";
+}
+
+.icon--before.icon--step-forward:before,
+a.icon--step-forward[data-toggle=collapse]:before {
+    content: "h";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--step-forward:after {
+    content: "h";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--list-alt:after {
+    content: "i";
+}
+
+.icon--before.icon--list-alt:before,
+a.icon--list-alt[data-toggle=collapse]:before {
+    content: "i";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--list-alt:after {
+    content: "i";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--backward:after {
+    content: "j";
+}
+
+.icon--before.icon--backward:before,
+a.icon--backward[data-toggle=collapse]:before {
+    content: "j";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--backward:after {
+    content: "j";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--forward:after {
+    content: "k";
+}
+
+.icon--before.icon--forward:before,
+a.icon--forward[data-toggle=collapse]:before {
+    content: "k";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--forward:after {
+    content: "k";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--external:after {
+    content: "l";
+}
+
+.icon--before.icon--external:before,
+a.icon--external[data-toggle=collapse]:before {
+    content: "l";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--external:after {
+    content: "l";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--menu:after {
+    content: "m";
+}
+
+.icon--before.icon--menu:before,
+a.icon--menu[data-toggle=collapse]:before {
+    content: "m";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--menu:after {
+    content: "m";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--corner:after {
+    content: "o";
+}
+
+.icon--before.icon--corner:before,
+a.icon--corner[data-toggle=collapse]:before {
+    content: "o";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--corner:after {
+    content: "o";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--tools:after {
+    content: "p";
+}
+
+.icon--before.icon--tools:before,
+a.icon--tools[data-toggle=collapse]:before {
+    content: "p";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--tools:after {
+    content: "p";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--play:after {
+    content: "q";
+}
+
+.icon--before.icon--play:before,
+a.icon--play[data-toggle=collapse]:before {
+    content: "q";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--play:after {
+    content: "q";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--settings:after {
+    content: "s";
+}
+
+.icon--before.icon--settings:before,
+a.icon--settings[data-toggle=collapse]:before {
+    content: "s";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--settings:after {
+    content: "s";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--twitter:after {
+    content: "t";
+}
+
+.icon--before.icon--twitter:before,
+a.icon--twitter[data-toggle=collapse]:before {
+    content: "t";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--twitter:after {
+    content: "t";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--fast-backward:after {
+    content: "z";
+}
+
+.icon--before.icon--fast-backward:before,
+a.icon--fast-backward[data-toggle=collapse]:before {
+    content: "z";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--fast-backward:after {
+    content: "z";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--fast-forward:after {
+    content: "u";
+}
+
+.icon--before.icon--fast-forward:before,
+a.icon--fast-forward[data-toggle=collapse]:before {
+    content: "u";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--fast-forward:after {
+    content: "u";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--root:after {
+    content: "v";
+}
+
+.icon--before.icon--root:before,
+a[data-toggle=collapse]:before {
+    content: "v";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--root:after,
+a.icon--after[data-toggle=collapse]:after {
+    content: "v";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--square:after {
+    content: "w";
+}
+
+.icon--before.icon--square:before,
+a.icon--square[data-toggle=collapse]:before {
+    content: "w";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--square:after {
+    content: "w";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--close:after {
+    content: "x";
+}
+
+.icon--before.icon--close:before,
+a.icon--close[data-toggle=collapse]:before {
+    content: "x";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--close:after {
+    content: "x";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--arrow-bottom:after {
+    content: "ä";
+}
+
+.icon--before.icon--arrow-bottom:before,
+a.icon--arrow-bottom[data-toggle=collapse]:before {
+    content: "ä";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--arrow-bottom:after {
+    content: "ä";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--arrow-left:after {
+    content: "ö";
+}
+
+.icon--before.icon--arrow-left:before,
+a.icon--arrow-left[data-toggle=collapse]:before {
+    content: "ö";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--arrow-left:after {
+    content: "ö";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+span.icon.icon--arrow-top:after {
+    content: "ü";
+}
+
+.icon--before.icon--arrow-top:before,
+a.icon--arrow-top[data-toggle=collapse]:before {
+    content: "ü";
+    padding-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
+.icon--after.icon--arrow-top:after {
+    content: "ü";
+    padding-left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+.icon--before.pull-right.icon--print:before,
+a.pull-right.icon--print[data-toggle=collapse]:before {
+    padding-right: 0;
+}
