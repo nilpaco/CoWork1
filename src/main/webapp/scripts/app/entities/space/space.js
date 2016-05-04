@@ -72,12 +72,6 @@ angular.module('project1App')
                             lng: null,
                             id: null
                         };
-                    },
-                    imageentity: function (){
-                        return{
-                            image: null,
-                            space_id: null
-                        }
                     }
                 }
             })

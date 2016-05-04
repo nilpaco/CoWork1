@@ -4,8 +4,7 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                     ng-click="clear()">&times;</button>
-            <h4 class="modal-title" id="mySpaceLabel" translate="project1App.space.home.createOrEditLabel">Create or
-                edit a Space</h4>
+            <h4 class="modal-title" id="mySpaceLabel" translate="project1App.space.home.createOrEditLabel">Create or edit a Space</h4>
         </div>
         <div class="modal-body">
             <jh-alert-error></jh-alert-error>
@@ -16,26 +15,6 @@
                        ng-model="space.name"
                 />
             </div>
-
-
-            <form enctype="multipart/form-data" name="form">
-                Single Image with validations
-                <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                     ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div>
-                Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
-                <button type="submit" ng-click="submit()">submit</button>
-            </form>
-            <button ngf-accept="image/jpeg,image/pjpeg,image/gif,image/png" ng-change="artworkShow(file)" ngf-select ng-model="artworkFile" class="md-raised">
-                <i class="material-icons" style="line-height: 35px; ">add_a_photo</i>
-                Upload image
-            </button>
-
-            <div class="artwork__holder">
-
-            </div>
-
-
-
             <div class="form-group">
                 <label class="control-label" translate="project1App.space.description" for="field_description">Description</label>
                 <input type="text" class="form-control" name="description" id="field_description"
@@ -46,16 +25,14 @@
                    ng-model="vm.address"
                    component-restrictions="{country:'es'}"
                    types="{{types}}"
-                   on-place-changed="vm.placeChanged()"/> <br/>
+                   on-place-changed="vm.placeChanged()" /> <br/>
             <div ng-show="vm.place">
                 Address = {{vm.place.formatted_address}} <br/>
                 Location: {{vm.place.geometry.location}}<br/>
                 Lat: {{vm.place.geometry.location.lat}}<br/>
                 address : {{vm.address}}
             </div>
-            <ng-map id="foomap">
-                <marker position="{{vm.place.geometry.location}}"></marker>
-            </ng-map>
+            <ng-map   id="foomap"><marker position="{{vm.place.geometry.location}}"></marker></ng-map>
 
             <div class="form-group">
                 <label class="control-label" translate="project1App.space.price" for="field_price">Price</label>
@@ -64,8 +41,7 @@
                 />
             </div>
             <div class="form-group">
-                <label class="control-label" translate="project1App.space.personMax"
-                       for="field_personMax">PersonMax</label>
+                <label class="control-label" translate="project1App.space.personMax" for="field_personMax">PersonMax</label>
                 <input type="number" class="form-control" name="personMax" id="field_personMax"
                        ng-model="space.personMax"
                 />
@@ -79,8 +55,7 @@
 
             <div class="form-group">
                 <label translate="project1App.space.service" for="field_service">service</label>
-                <select class="form-control" id="field_service" multiple name="service" ng-model="space.services"
-                        ng-options="service as service.name for service in services track by service.id"></select>
+                <select class="form-control" id="field_service" multiple name="service" ng-model="space.services" ng-options="service as service.name for service in services track by service.id"></select>
             </div>
         </div>
         <div class="modal-footer">
@@ -90,7 +65,7 @@
         </div>
     </form>
     <style>
-        .pac-container {
+        .pac-container{
             z-index: 2000000;
         }
     </style>
