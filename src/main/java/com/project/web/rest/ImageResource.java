@@ -3,6 +3,7 @@ package com.project.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.project.domain.Image;
 import com.project.repository.ImageRepository;
+import com.project.repository.SpaceRepository;
 import com.project.repository.search.ImageSearchRepository;
 import com.project.web.rest.util.HeaderUtil;
 import com.project.web.rest.util.PaginationUtil;
@@ -174,13 +175,13 @@ public class ImageResource {
                     System.out.println("DIR created");
                 }
             }
-            Image image = new Image();
+
+
 
             file.getContentType();
 
             //Get name of file
             nameSpace = name;
-            image.setImage(nameSpace);
 
             //Create new file in path
             BufferedOutputStream stream =

@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('project1App').controller('SpaceDialogController',
-    ['$scope', '$stateParams', 'entity', 'Space', 'Service', 'Image', 'Favorite', 'Review', 'Conversation', 'User', 'NgMap', '$state', 'Upload',
-        function($scope, $stateParams, entity, Space, Service, Image, Favorite, Review, Conversation, User, NgMap, $state, Upload) {
+    ['$scope', '$stateParams', 'entity', 'Space', 'Service', 'Image', 'Favorite', 'Review', 'Conversation', 'User', 'NgMap', '$state', 'Upload', 'imageentity',
+        function($scope, $stateParams, entity, Space, Service, Image, Favorite, Review, Conversation, User, NgMap, $state, Upload, imageentity) {
 
         $scope.space = entity;
+        $scope.image = imageentity;
         $scope.services = Service.query();
         $scope.images = Image.query();
         $scope.favorites = Favorite.query();
@@ -21,9 +22,13 @@ angular.module('project1App').controller('SpaceDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('project1App:spaceUpdate', result);
             //$uibModalInstance.close(result);
+            console.log(result.id);
             for (var i = 0; i < $scope.archivos.length; i++) {
-                $scope.upload($scope.archivos[i]);
-                Image.save({image: $scope.archivos[i].name, space_id: 1});
+                $scope.upload($scope.archivos[i], result);
+                $scope.image.image = result.name+result.id;
+                $scope.image.space = {id: result.id};
+                console.log($scope.image);
+                Image.save($scope.image);
             }
 
             $state.go('space', null, {reload: true});
@@ -65,30 +70,30 @@ angular.module('project1App').controller('SpaceDialogController',
         }
 
 
-            $scope.submit = function() {
-                    $scope.upload($scope.file);
-            };
+        $scope.submit = function() {
+                $scope.upload($scope.file);
+        };
 
-            $scope.upload = function (file) {
-                console.log(file);
-                Upload.upload({
-                    url: 'api/upload',
-                    data: {file: file, 'name': file.name}
-                }).then(function (resp) {
-                    console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-                }, function (resp) {
-                    console.log('Error status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                });
-            };
-
-            $scope.$watch('file', function () {
-                if ($scope.file != null) {
-                     $scope.archivos.push($scope.file);
-                }
+        $scope.upload = function (file, result) {
+            console.log(file);
+            Upload.upload({
+                url: 'api/upload',
+                data: {file: file, 'name': result.name+result.id}
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             });
+        };
+
+        $scope.$watch('file', function () {
+            if ($scope.file != null) {
+                 $scope.archivos.push($scope.file);
+            }
+        });
 
 
 /*
