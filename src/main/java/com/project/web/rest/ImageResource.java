@@ -174,11 +174,13 @@ public class ImageResource {
                     System.out.println("DIR created");
                 }
             }
+            Image image = new Image();
 
             file.getContentType();
 
             //Get name of file
             nameSpace = name;
+            image.setImage(nameSpace);
 
             //Create new file in path
             BufferedOutputStream stream =

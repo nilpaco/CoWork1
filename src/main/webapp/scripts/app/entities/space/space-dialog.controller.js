@@ -11,6 +11,7 @@ angular.module('project1App').controller('SpaceDialogController',
         $scope.reviews = Review.query();
         $scope.conversations = Conversation.query();
         $scope.users = User.query();
+        $scope.archivos = [];
         $scope.load = function(id) {
             Space.get({id : id}, function(result) {
                 $scope.space = result;
@@ -20,6 +21,11 @@ angular.module('project1App').controller('SpaceDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('project1App:spaceUpdate', result);
             //$uibModalInstance.close(result);
+            for (var i = 0; i < $scope.archivos.length; i++) {
+                $scope.upload($scope.archivos[i]);
+                Image.save({image: $scope.archivos[i].name, space_id: 1});
+            }
+
             $state.go('space', null, {reload: true});
             $scope.isSaving = false;
         };
@@ -37,6 +43,7 @@ angular.module('project1App').controller('SpaceDialogController',
             } else {
                 Space.save($scope.space, onSaveSuccess, onSaveError);
             }
+
         };
 
         $scope.clear = function() {
@@ -58,26 +65,15 @@ angular.module('project1App').controller('SpaceDialogController',
         }
 
 
-            $scope.imageStrings = [];
-            $scope.processFiles = function(files){
-                angular.forEach(files, function(flowFile, i){
-                    var fileReader = new FileReader();
-                    fileReader.onload = function (event) {
-                        var uri = event.target.result;
-                        $scope.imageStrings[i] = uri;
-                    };
-                    fileReader.readAsDataURL(flowFile.file);
-                });
-            };
-
             $scope.submit = function() {
                     $scope.upload($scope.file);
             };
 
             $scope.upload = function (file) {
+                console.log(file);
                 Upload.upload({
                     url: 'api/upload',
-                    data: {file: file, 'name': 'hola'}
+                    data: {file: file, 'name': file.name}
                 }).then(function (resp) {
                     console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
                 }, function (resp) {
@@ -87,6 +83,30 @@ angular.module('project1App').controller('SpaceDialogController',
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                 });
             };
+
+            $scope.$watch('file', function () {
+                if ($scope.file != null) {
+                     $scope.archivos.push($scope.file);
+                }
+            });
+
+
+/*
+            $scope.artworkShow = function (e) {
+                console.log(e);
+                $scope.artworkFile = e;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var image;
+                    image = new Image();
+                    image.src = e.target.result;
+                    return image.onload = function () {
+                        return $('.artwork__holder').attr("src", this.src);
+                    };
+                };
+                return reader.readAsDataURL(e);
+            }
+*/
 
 
 
