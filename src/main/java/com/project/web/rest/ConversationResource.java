@@ -89,10 +89,10 @@ public class ConversationResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Conversation>> getAllConversations(Pageable pageable)
+    public ResponseEntity<List<Conversation>> getAllConversationsFromUser(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Conversations");
-        Page<Conversation> page = conversationRepository.findAll(pageable);
+        Page<Conversation> page = conversationRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/conversations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
