@@ -46,7 +46,7 @@
     "paper-radio-group": "PolymerElements/paper-radio-group#^1.0.9",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
     "iron-input": "PolymerElements/iron-input#^1.0.10",
-    "ng-flow": "~2"
+    "ngGallery": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",

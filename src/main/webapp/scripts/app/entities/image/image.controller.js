@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('ImageController', function ($scope, $state, Image, ImageSearch, ParseLinks) {
+    .controller('ImageController', function ($scope, $state, Image, ImageSearch, ParseLinks, $timeout) {
 
         $scope.images = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 1;
+        $scope.imageGallery =[];
         $scope.loadAll = function() {
             Image.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -42,4 +43,23 @@ angular.module('project1App')
                 id: null
             };
         };
+        var self = this;
+
+        self.images2 = [
+            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 1'},
+            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 2'},
+            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 3'},
+            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 4'}
+        ];
+
+        $scope.loadImages = function () {
+            for (var i = 0; i < $scope.images.length; i++) {
+                $scope.imageGallery[i] = {thumb: 'uploads/'+$scope.images[i].image+'.jpg', img: 'uploads/'+$scope.images[i].image+'.jpg', description: $scope.images[i].space.name};
+            }
+        };
+        $timeout(function (){
+            $scope.loadImages()
+        },100);
+
+
     });
