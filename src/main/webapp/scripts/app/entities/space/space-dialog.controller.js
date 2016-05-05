@@ -18,17 +18,17 @@ angular.module('project1App').controller('SpaceDialogController',
                 $scope.space = result;
             });
         };
-
+        var list = [];
         var onSaveSuccess = function (result) {
             $scope.$emit('project1App:spaceUpdate', result);
             //$uibModalInstance.close(result);
-            console.log($scope.archivos);
             for (var i = 0; i < $scope.archivos[0].length; i++) {
+                var namespace = result.name.split(' ').join('_');
                 $scope.upload($scope.archivos[0][i], result,i);
-                $scope.image.image = result.name+result.id+i;
-                $scope.image.space = {id: result.id};
-                console.log($scope.image);
-                Image.save($scope.image);
+                // list[i].image = result.name+result.id+i;
+                // list[i].space = {id: result.id};
+                list[i] = {image: namespace+result.id+i+'.jpg', space: {id: result.id}}
+                Image.save(list[i]);
             }
 
             $state.go('space', null, {reload: true});
@@ -75,9 +75,10 @@ angular.module('project1App').controller('SpaceDialogController',
         };
 
         $scope.upload = function (file, result, i) {
+            var namespace = result.name.split(' ').join('_');
             Upload.upload({
-                url: 'api/upload',
-                data: {file: file, 'name': result.name+result.id+i}
+            url: 'api/upload',
+            data: {file: file, 'name': namespace+result.id+i}
             }).then(function (resp) {
                 console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
             }, function (resp) {

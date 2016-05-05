@@ -36,6 +36,7 @@ module.exports = function (config) {
             'main/webapp/bower_components/webcomponentsjs/webcomponents.js',
             'main/webapp/bower_components/angular-animate/angular-animate.js',
             'main/webapp/bower_components/AngularJS-Toaster/toaster.js',
+            'main/webapp/bower_components/ngGallery/src/js/ngGallery.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

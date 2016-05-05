@@ -1,346 +1,360 @@
-    <paper-toolbar class="tall" id="main" style="background: url(uploads/{{space.name}}{{space.id}}0.jpg) no-repeat center center fixed; height: 350px;
+<paper-toolbar class="tall" id="main" style="background-image: url(); height: 350px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
-">
-        <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
-        <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
-        <paper-fab icon="favorite-border" class="bottom fav" id="paper-fab" style="top: 30px;"></paper-fab>
-    </paper-toolbar>
-   <div class="container material">
-       <paper-material elevation="1" class="over-content">
-            <div class="modal-header" style="padding: 20px;">
-                <img src="http://placehold.it/80x80" height="80">
-                <h2 class="modal-title">{{space.name}}</h2>
-                <h5 class="subtitle">User: {{space.user.firstName}}</h5>
+  background-size: cover;">
+    <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
+    <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
+    <paper-fab icon="favorite-border" class="bottom fav" id="paper-fab" style="top: 30px;"></paper-fab>
+</paper-toolbar>
+<div class="container material">
+    <paper-material elevation="1" class="over-content">
+        <div class="modal-header" style="padding: 20px;">
+            <img src="http://placehold.it/80x80" height="80">
+            <h2 class="modal-title">{{space.name}}</h2>
+            <h5 class="subtitle">User: {{space.user.firstName}}</h5>
+        </div>
+        <div class="spacer"></div>
+        <div class="col-lg-6" style="padding: 0px 20px;">
+            <h2 class="paper-font-title">Descripción</h2>
+            <div class="descripcion">
+                <p ng-text-truncate="space.description"
+                   ng-tt-chars-threshold="100"></p>
             </div>
-            <div class="spacer"></div>
-            <div class="col-lg-6" style="padding: 0px 20px;">
-                <h2 class="paper-font-title">Descripción</h2>
-                <div class="descripcion">
-                    <p ng-text-truncate="space.description"
-                       ng-tt-chars-threshold="100"></p>
-                </div>
 
-            </div>
-                <div class="col-lg-6" style="padding: 0px 20px;">
-                    <h2 class="paper-font-title">Servicios</h2>
-                    <div class="icon-content horizontal layout wrap center" style="width: 100%">
+        </div>
+        <div class="col-lg-6" style="padding: 0px 20px;">
+            <h2 class="paper-font-title">Servicios</h2>
+            <div class="icon-content horizontal layout wrap center" style="width: 100%">
                         <span ng-repeat="service in space.services">
                             <div class="col-sm-6 col-md-6"><iron-icon icon="{{service.icon}}"></iron-icon><span>{{service.name}}</span></div>
                         </span>
-                        <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
-                    </div>
-                </div>
-           <div class="row" style="margin: 0px 0px">
-               <div class="col-lg-12" style="padding: 0px 20px;">
-                   <h2>Fotos</h2>
-                   <div id="image-row">
-                       Images
-                   </div>
-               </div>
-               <div class="col-lg-6" style="padding: 0px 20px;">
-                   <h2>Reviews</h2>
-                   <div class="reviews" ng-repeat="reviewByCurrentSpace in reviewsByCurrentSpace">
-                       <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewByCurrentSpace)">
-                           <div style="height: 55px;">
-                               <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
-                               <div style="height:100%; padding-top: 3px;">
-                                   <h5 class="titlereview">
-                                       <span class="name">{{reviewByCurrentSpace.user.firstName}}</span>
-                                       <span class="time">{{reviewByCurrentSpace.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
-                                   </h5>
-                                   <span class="text">{{reviewByCurrentSpace.text | limitTo: 35}}{{reviewByCurrentSpace.text.length > 35 ? '...' : ''}}</span>
-                               </div>
-                           </div>
-                       </a>
-                   </div>
-                   <form ng-submit="addReview()" >
-                       <div class="input-group">
-                           <input ng-model="text3" type="text" class="form-control" placeholder="Escribe aqui tu review" />
-                          <span class="input-group-btn">
-                              <input class="btn btn-default" type="submit" />
-                          </span>
-                       </div><!-- /input-group -->
-                   </form>
-               </div>
-               <div class="col-lg-6" style="padding: 0px 20px;">
-                   <h2>Enviar mensaje</h2>
-
-                   <form ng-show="getConversation == null" ng-submit="addMessage()" >
-                       <div class="input-group">
-                           <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje" />
-                          <span class="input-group-btn">
-                              <input class="btn btn-default" type="submit" />
-                          </span>
-                       </div><!-- /input-group -->
-                   </form>
-                   <div ng-show="getConversation != null">
-                    <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
-                   </div>
-                </div>
-
-           </div>
-            <div>
-                <h2 style="padding: 0px 20px">Mapa</h2>
-                <ng-map
-                    zoom="16"
-                    style="height: 300px;"
-                    zoom-control="true"
-                    zoom-control-options='{style:"small",position:"top_right"}'
-                    map-type-control="false"
-                    overview-map-control="false"
-                    pan-control="false"
-                    rotate-control="false"
-                    scale-control="false"
-                    street-view-control="false"
-                    center="[{{space.lat}},{{space.lng}}]"
-                    style="height: 100%;">
-                    <marker position="[{{space.lat}},{{space.lng}}]"></marker>
-                    <!--
-                    <custom-marker id="custom-marker-{{$index}}"
-                                   position="[{{space.lat}},{{space.lng}}]"
-                                   data="{{data[$index]}}"
-                                   on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                        <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
-                            <div class="cm outside">
-                                {{space.price}}€
-                            </div>
-                        </a>
-                    </custom-marker>-->
-                </ng-map>
+                <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
             </div>
-        </paper-material>
-    </div>
-
-    <style>
-        .cm{
-            color: #fff;
-            padding: 2px 4px;
-            font-size: 14px;
-            font-weight: bold;
-            display: block;
-            background-color: #E91E63;
-            border-radius: 2px;
-        }
-        .cm:after{
-            content: "";
-            display: inline-block;
-            position: absolute;
-            bottom: -9px;
-            left: 50%;
-            margin-left: -9px;
-            top: auto;
-            border: 9px solid transparent;
-            border-bottom: 0;
-            border-top-color: #E91E63;
-            bottom: -5px;
-            margin-left: -5px;
-            border-width: 5px;
-        }
-        .custom-marker{
-            -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            border-radius: 2px;
-        }
-        .cm.outside:last-child{
-            box-shadow: none;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-        }
-        .titlereview{
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        .reviews{
-            padding: 10px;
-        }
-        .reviews a{
-            text-decoration: none;
-        }
-        .reviews:hover{
-            background-color: #e4e4e4;
-        }
-        img.reviewimg{
-            float: left;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        span.name{
-            vertical-align:top;
-            color: rgba(0,0,0,0.87);
-            font-weight: bold;
-        }
-        span.time{
-            vertical-align:top;
-            color: rgba(0,0,0,0.54);
-            float: right;
-        }
-        span.text{
-            vertical-align:top;
-            color: rgba(0,0,0,0.87);
-        }
-        paper-material{
-            background-color: white;
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-        paper-fab.fav{
-            background: #F44336 !important;
-            color: white;
-        }
-
-    </style>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img src="http://placehold.it/250x250" alt="img" height="80">
-                    <h4 class="modal-title" id="myModalLabel">
-                        {{selectedReview.user.firstName}}
-                    </h4>
-                    <h5>{{selectedReview.time}}</h5>
+        </div>
+        <div class="row" style="margin: 0px 0px">
+            <div class="col-lg-12" style="padding: 0px 20px;">
+                <h2>Fotos</h2>
+                <div id="image-row" ng-repeat="images in imageGallery">
+                    <img height="300" width="300" ng-src="uploads/{{images.image}}"/>
                 </div>
-                <div class="modal-header">
-                    <h5>Texto:</h5>
-                    {{selectedReview.text}}
+            </div>
+            <div class="col-lg-6" style="padding: 0px 20px;">
+                <h2>Reviews</h2>
+                <div class="reviews" ng-repeat="reviewByCurrentSpace in reviewsByCurrentSpace">
+                    <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewByCurrentSpace)">
+                        <div style="height: 55px;">
+                            <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                            <div style="height:100%; padding-top: 3px;">
+                                <h5 class="titlereview">
+                                    <span class="name">{{reviewByCurrentSpace.user.firstName}}</span>
+                                    <span class="time">{{reviewByCurrentSpace.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
+                                </h5>
+                                <span class="text">{{reviewByCurrentSpace.text | limitTo: 35}}{{reviewByCurrentSpace.text.length > 35 ? '...' : ''}}</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
-                    <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
-                        <h3>{{selectedReview.space.name}}</h3>
-                        <h4>{{selectedReview.space.price}}€</h4>
+                <form ng-submit="addReview()">
+                    <div class="input-group">
+                        <input ng-model="text3" type="text" class="form-control" placeholder="Escribe aqui tu review"/>
+                          <span class="input-group-btn">
+                              <input class="btn btn-default" type="submit"/>
+                          </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
+            <div class="col-lg-6" style="padding: 0px 20px;">
+                <h2>Enviar mensaje</h2>
 
-                    </div>
-                </a>
-                <div class="modal-footer">
-                    <paper-button raised data-dismiss="modal">Close</paper-button>
+                <form ng-show="getConversation == null" ng-submit="addMessage()">
+                    <div class="input-group">
+                        <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje"/>
+                          <span class="input-group-btn">
+                              <input class="btn btn-default" type="submit"/>
+                          </span>
+                    </div><!-- /input-group -->
+                </form>
+                <div ng-show="getConversation != null">
+                    <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
                 </div>
+            </div>
+
+        </div>
+        <div>
+            <h2 style="padding: 0px 20px">Mapa</h2>
+            <ng-map
+                zoom="16"
+                style="height: 300px;"
+                zoom-control="true"
+                zoom-control-options='{style:"small",position:"top_right"}'
+                map-type-control="false"
+                overview-map-control="false"
+                pan-control="false"
+                rotate-control="false"
+                scale-control="false"
+                street-view-control="false"
+                center="[{{space.lat}},{{space.lng}}]"
+                style="height: 100%;">
+                <marker position="[{{space.lat}},{{space.lng}}]"></marker>
+                <!--
+                <custom-marker id="custom-marker-{{$index}}"
+                               position="[{{space.lat}},{{space.lng}}]"
+                               data="{{data[$index]}}"
+                               on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
+                    <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
+                        <div class="cm outside">
+                            {{space.price}}€
+                        </div>
+                    </a>
+                </custom-marker>-->
+            </ng-map>
+        </div>
+    </paper-material>
+</div>
+
+<style>
+    .cm {
+        color: #fff;
+        padding: 2px 4px;
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        background-color: #E91E63;
+        border-radius: 2px;
+    }
+
+    .cm:after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        bottom: -9px;
+        left: 50%;
+        margin-left: -9px;
+        top: auto;
+        border: 9px solid transparent;
+        border-bottom: 0;
+        border-top-color: #E91E63;
+        bottom: -5px;
+        margin-left: -5px;
+        border-width: 5px;
+    }
+
+    .custom-marker {
+        -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+        border-radius: 2px;
+    }
+
+    .cm.outside:last-child {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+    }
+
+    .titlereview {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .reviews {
+        padding: 10px;
+    }
+
+    .reviews a {
+        text-decoration: none;
+    }
+
+    .reviews:hover {
+        background-color: #e4e4e4;
+    }
+
+    img.reviewimg {
+        float: left;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    span.name {
+        vertical-align: top;
+        color: rgba(0, 0, 0, 0.87);
+        font-weight: bold;
+    }
+
+    span.time {
+        vertical-align: top;
+        color: rgba(0, 0, 0, 0.54);
+        float: right;
+    }
+
+    span.text {
+        vertical-align: top;
+        color: rgba(0, 0, 0, 0.87);
+    }
+
+    paper-material {
+        background-color: white;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    paper-fab.fav {
+        background: #F44336 !important;
+        color: white;
+    }
+
+</style>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="http://placehold.it/250x250" alt="img" height="80">
+                <h4 class="modal-title" id="myModalLabel">
+                    {{selectedReview.user.firstName}}
+                </h4>
+                <h5>{{selectedReview.time}}</h5>
+            </div>
+            <div class="modal-header">
+                <h5>Texto:</h5>
+                {{selectedReview.text}}
+            </div>
+            <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
+                <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                    <h3>{{selectedReview.space.name}}</h3>
+                    <h4>{{selectedReview.space.price}}€</h4>
+
+                </div>
+            </a>
+            <div class="modal-footer">
+                <paper-button raised data-dismiss="modal">Close</paper-button>
             </div>
         </div>
     </div>
+</div>
 
-    <style>
-        .modal-header img{
-            border-radius: 50%;
-            float: left;
-            margin-right: 12px;
-        }
-        .modal-header h4{
-            padding-top: 12px;
-        }
-        .rspace{
-            height: 200px;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-        }
+<style>
+    .modal-header img {
+        border-radius: 50%;
+        float: left;
+        margin-right: 12px;
+    }
 
-    </style>
+    .modal-header h4 {
+        padding-top: 12px;
+    }
+
+    .rspace {
+        height: 200px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+</style>
 
 
-    <!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
-    <h3>{{space.name}}</h3> <h3>{{space.price}}€</h3>
+<!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
+<h3>{{space.name}}</h3> <h3>{{space.price}}€</h3>
 </div>
 <div>
-    <div class="container">
-        <h5>Description:</h5>
-        {{space.description}}
-        <span translate="project1App.space.personMax">PersonMax</span>
-        <span class="form-control-static">{{space.personMax}}</span>
-        <span translate="project1App.space.streetAddress">StreetAddress</span>
-        <span class="form-control-static">{{space.streetAddress}}</span>
-        <span translate="project1App.space.lat">Lat</span>
-        <span class="form-control-static">{{space.lat}}</span>
-        <span translate="project1App.space.lng">Lng</span>
-        <span class="form-control-static">{{space.lng}}</span>
+<div class="container">
+    <h5>Description:</h5>
+    {{space.description}}
+    <span translate="project1App.space.personMax">PersonMax</span>
+    <span class="form-control-static">{{space.personMax}}</span>
+    <span translate="project1App.space.streetAddress">StreetAddress</span>
+    <span class="form-control-static">{{space.streetAddress}}</span>
+    <span translate="project1App.space.lat">Lat</span>
+    <span class="form-control-static">{{space.lat}}</span>
+    <span translate="project1App.space.lng">Lng</span>
+    <span class="form-control-static">{{space.lng}}</span>
+    </td>
+    </tr>
+    <tr>
+        <td>
+            <span translate="project1App.space.service">service</span>
         </td>
-        </tr>
-        <tr>
-            <td>
-                <span translate="project1App.space.service">service</span>
-            </td>
-            <td>
-                    <span ng-repeat="service in space.services">
-                        <a class="form-control-static" ui-sref="service.detail({id: {{service.id}}})">{{service.name}}</a>{{$last ? '' : ', '}}
-                    </span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span translate="project1App.space.user">user</span>
-            </td>
-            <td>
-                {{space.user.email}}
-            </td>
-        </tr>
-        <ng-map
-            zoom="16"
-            style="height: 300px;"
-            zoom-control="true"
-            zoom-control-options='{style:"small",position:"top_right"}'
-            map-type-control="false"
-            overview-map-control="false"
-            pan-control="false"
-            rotate-control="false"
-            scale-control="false"
-            street-view-control="false"
-            center="[{{space.lat}},{{space.lng}}]"
-            style="height: 100%;">
-            <custom-marker id="custom-marker-{{$index}}"
-                           position="[{{space.lat}},{{space.lng}}]"
-                           data="{{data[$index]}}"
-                           on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-                <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
-                    <div class="cm outside">
-                        {{space.price}}€
-                    </div>
-                </a>
-            </custom-marker>
-        </ng-map>
+        <td>
+                <span ng-repeat="service in space.services">
+                    <a class="form-control-static" ui-sref="service.detail({id: {{service.id}}})">{{service.name}}</a>{{$last ? '' : ', '}}
+                </span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span translate="project1App.space.user">user</span>
+        </td>
+        <td>
+            {{space.user.email}}
+        </td>
+    </tr>
+    <ng-map
+        zoom="16"
+        style="height: 300px;"
+        zoom-control="true"
+        zoom-control-options='{style:"small",position:"top_right"}'
+        map-type-control="false"
+        overview-map-control="false"
+        pan-control="false"
+        rotate-control="false"
+        scale-control="false"
+        street-view-control="false"
+        center="[{{space.lat}},{{space.lng}}]"
+        style="height: 100%;">
+        <custom-marker id="custom-marker-{{$index}}"
+                       position="[{{space.lat}},{{space.lng}}]"
+                       data="{{data[$index]}}"
+                       on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
+            <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
+                <div class="cm outside">
+                    {{space.price}}€
+                </div>
+            </a>
+        </custom-marker>
+    </ng-map>
 
-    </div>
+</div>
 
-    <style>
-        .cm{
-            color: #fff;
-            padding: 2px 4px;
-            font-size: 14px;
-            font-weight: bold;
-            display: block;
-            background-color: #E91E63;
-            border-radius: 2px;
-        }
-        .cm:after{
-            content: "";
-            display: inline-block;
-            position: absolute;
-            bottom: -9px;
-            left: 50%;
-            margin-left: -9px;
-            top: auto;
-            border: 9px solid transparent;
-            border-bottom: 0;
-            border-top-color: #E91E63;
-            bottom: -5px;
-            margin-left: -5px;
-            border-width: 5px;
-        }
-        .custom-marker{
-            -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-            border-radius: 2px;
-        }
-        .cm.outside:last-child{
-            box-shadow: none;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-        }
+<style>
+    .cm{
+        color: #fff;
+        padding: 2px 4px;
+        font-size: 14px;
+        font-weight: bold;
+        display: block;
+        background-color: #E91E63;
+        border-radius: 2px;
+    }
+    .cm:after{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        bottom: -9px;
+        left: 50%;
+        margin-left: -9px;
+        top: auto;
+        border: 9px solid transparent;
+        border-bottom: 0;
+        border-top-color: #E91E63;
+        bottom: -5px;
+        margin-left: -5px;
+        border-width: 5px;
+    }
+    .custom-marker{
+        -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
+        border-radius: 2px;
+    }
+    .cm.outside:last-child{
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+    }
 
-    </style>
+</style>
 
 </div>
 -->

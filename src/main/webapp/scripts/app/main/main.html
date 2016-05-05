@@ -86,7 +86,7 @@
                         <div class="thumbnail material">
                             <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                 <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
-                                <img style="min-width: 100%;" src="uploads/{{spaceDTO.space.name}}{{spaceDTO.space.id}}0.jpg">
+                                <img style="min-width: 100%;" src="uploads/Espacio 1300.jpg">
                             </a>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
                                 <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]"
@@ -251,7 +251,7 @@
                     </custom-marker>
                     <info-window id="foo" on-mouseover="vm.mouseover()">
                         <div>
-                            <img src="uploads/{{selectedSpace.name}}{{selectedSpace.id}}0.jpg" height="200" width="300"><br/>
+                            <img src="uploads/Espacio 1300.jpg" height="200" width="300"><br/>
                             <a ui-sref="space.detail({id:selectedSpace.id})">{{selectedSpace.name}}</a><br/>
                             {{selectedSpace.price}}€<br/>
                         </div>

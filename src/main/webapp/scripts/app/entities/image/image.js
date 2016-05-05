@@ -13,7 +13,7 @@ angular.module('project1App')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/image/images.html',
-                        controller: 'ImageController as self'
+                        controller: 'ImageController'
                     }
                 },
                 resolve: {

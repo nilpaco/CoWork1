@@ -32,6 +32,16 @@ angular.module('project1App')
             });
         }
 
+        $scope.imageGallery =[];
+        $scope.loadAllImagesBySpace = function(id) {
+            Image.imagesByCurrentSpace({id: id}, function(result) {
+                $scope.imageGallery = result;
+            });
+        };
+        $scope.loadAllImagesBySpace($stateParams.id);
+
+
+
 
         $scope.loadConversation = function(id) {
             Conversation.getConversationFromSpace({id: id}, function(result) {
@@ -43,5 +53,6 @@ angular.module('project1App')
         $scope.onClickMarker = function (review){
             $scope.selectedReview = review;
         };
+
 
     });

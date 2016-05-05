@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -116,6 +117,20 @@ public class ImageResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+    /**
+     * GET  /reviews/:id -> get the "id" review.
+     */
+    @Transactional
+    @RequestMapping(value = "/space/{id}/images",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Image>> getImagesBySpace(@PathVariable Long id) {
+        log.debug("REST request to get Review : {}", id);
+        List<Image> review = imageRepository.findImagesBySpace(id);
+        return new ResponseEntity<>(review, HttpStatus.OK);
+    }
+
 
     /**
      * DELETE  /images/:id -> delete the "id" image.

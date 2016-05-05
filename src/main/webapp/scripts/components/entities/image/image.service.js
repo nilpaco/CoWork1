@@ -11,6 +11,11 @@ angular.module('project1App')
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'imagesByCurrentSpace': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/space/:id/images'
+            }
         });
     });

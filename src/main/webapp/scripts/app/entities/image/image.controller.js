@@ -43,18 +43,10 @@ angular.module('project1App')
                 id: null
             };
         };
-        var self = this;
-
-        self.images2 = [
-            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 1'},
-            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 2'},
-            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 3'},
-            {thumb: 'http://placehold.it/350x150', img: 'http://placehold.it/350x150', description: 'Image 4'}
-        ];
 
         $scope.loadImages = function () {
             for (var i = 0; i < $scope.images.length; i++) {
-                $scope.imageGallery[i] = {thumb: 'uploads/'+$scope.images[i].image+'.jpg', img: 'uploads/'+$scope.images[i].image+'.jpg', description: $scope.images[i].space.name};
+                $scope.imageGallery[i] = {thumb: 'uploads/'+$scope.images[i].image, img: 'uploads/'+$scope.images[i].image, description: $scope.images[i].space.name};
             }
         };
         $timeout(function (){
