@@ -22,8 +22,9 @@ angular.module('project1App').controller('SpaceDialogController',
         var onSaveSuccess = function (result) {
             $scope.$emit('project1App:spaceUpdate', result);
             //$uibModalInstance.close(result);
-            for (var i = 0; i < $scope.archivos.length; i++) {
-                $scope.upload($scope.archivos[i], result,i);
+            console.log($scope.archivos);
+            for (var i = 0; i < $scope.archivos[0].length; i++) {
+                $scope.upload($scope.archivos[0][i], result,i);
                 $scope.image.image = result.name+result.id+i;
                 $scope.image.space = {id: result.id};
                 console.log($scope.image);

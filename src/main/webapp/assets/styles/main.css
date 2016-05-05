@@ -298,3 +298,9 @@ paper-button.fancy{
     background: #E91E63;
     color: white;
 }
+.ng-drop-file{
+    width: 100%;
+    height: 200px;
+    border: 3px dotted #ccc;
+    text-align: center;
+}

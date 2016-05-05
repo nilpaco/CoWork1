@@ -19,17 +19,14 @@
 
 
             <form enctype="multipart/form-data" name="form">
+
                 Single Image with validations
-                <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                <div ngf-drop ngf-multiple="true" class="ng-drop-file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                      ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div>
-                Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+                <!--Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+-->
                 <button type="submit" ng-click="submit()">submit</button>
             </form>
-            <button ngf-accept="image/jpeg,image/pjpeg,image/gif,image/png" ng-change="artworkShow(file)" ngf-select ng-model="artworkFile" class="md-raised">
-                <i class="material-icons" style="line-height: 35px; ">add_a_photo</i>
-                Upload image
-            </button>
-
             <div class="artwork__holder">
 
             </div>
