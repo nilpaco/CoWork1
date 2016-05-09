@@ -26,10 +26,10 @@ public class Service implements Serializable {
 
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "icon")
     private String icon;
-    
+
     @ManyToMany(mappedBy = "services")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -46,7 +46,7 @@ public class Service implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -54,7 +54,7 @@ public class Service implements Serializable {
     public String getIcon() {
         return icon;
     }
-    
+
     public void setIcon(String icon) {
         this.icon = icon;
     }
@@ -79,7 +79,7 @@ public class Service implements Serializable {
         if(service.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, service.id);
+        return Objects.equals(id, service.id) || Objects.equals(name, service.name);
     }
 
     @Override

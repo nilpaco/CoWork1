@@ -5,6 +5,7 @@ import com.project.domain.Favorite;
 import com.project.domain.Space;
 import com.project.domain.User;
 import com.project.repository.FavoriteRepository;
+import com.project.repository.SpaceCriteriaRepository;
 import com.project.repository.SpaceRepository;
 import com.project.repository.UserRepository;
 import com.project.repository.search.SpaceSearchRepository;
@@ -21,14 +22,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -45,6 +45,10 @@ public class SpaceResource {
 
     @Inject
     private SpaceRepository spaceRepository;
+
+    @Inject
+    private SpaceCriteriaRepository spaceCriteriaRepository;
+
 
     @Inject
     private SpaceSearchRepository spaceSearchRepository;
@@ -210,6 +214,55 @@ public class SpaceResource {
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spaces");
         return new ResponseEntity<>(listSpaceDTO, headers, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/spaces/byfilters",
+    method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public ResponseEntity<List<Space>> getPlayersByParams(
+        @RequestParam(value = "min-price", required = false) Double minPrice,
+        @RequestParam(value = "max-price", required = false) Double maxPrice,
+        @RequestParam(value = "num-pers", required = false) Integer numPers,
+        @RequestParam(value = "service-wifi", required = false) Boolean serviceWifi,
+        @RequestParam(value = "service-parking", required = false) Boolean serviceParking,
+        @RequestParam(value = "service-cafeteria", required = false) Boolean serviceCafeteria
+    ) {
+        Map<String, Object> params = new HashMap<>();
+
+        if (minPrice != null) {
+            params.put("min-price", minPrice);
+        }
+        if (maxPrice != null) {
+            params.put("max-price", maxPrice);
+        }
+        if(numPers != null){
+            params.put("num-pers", numPers);
+        }
+
+        List<String> services = new ArrayList<>();
+        if(serviceWifi != null && serviceWifi == true){
+            services.add("Wifi");
+        }
+        if(serviceParking != null && serviceParking == true){
+            services.add("Parking");
+        }
+        if(serviceCafeteria != null && serviceCafeteria == true){
+            services.add("Cafeteria");
+        }
+
+
+        if (params.isEmpty()) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("player", "filtersEmpty", "You must at least add one filter")).body(null);
+        }
+
+        List<Space> result = spaceCriteriaRepository.findByParameters(params, services);
+
+        return new ResponseEntity<>(
+            result,
+            HttpStatus.OK);
 
     }
 

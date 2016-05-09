@@ -31,6 +31,10 @@ public class HeaderUtil {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-project1App-error", "error." + errorKey);
         headers.add("X-project1App-params", entityName);
+
+        if(defaultMessage != null){
+            headers.add("X-project1App-error-description", "error." + defaultMessage);
+        }
         return headers;
     }
 }

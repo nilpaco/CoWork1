@@ -84,10 +84,12 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">
                         <div class="thumbnail material">
-                            <a ui-sref="space.detail({id:spaceDTO.space.id})">
-                                <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
-                                <img style="min-width: 100%;" src="uploads/Espacio 1300.jpg">
-                            </a>
+                            <div>
+                                <a ui-sref="space.detail({id:spaceDTO.space.id})">
+                                    <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
+                                    <img style="min-width: 100%;" src="uploads/Espacio 1300.jpg">
+                                </a>
+                            </div>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
                                 <paper-fab ng-class="{true: 'fav2', false: 'fav'}[spaceDTO.liked == false]"
                                            icon="favorite-border"

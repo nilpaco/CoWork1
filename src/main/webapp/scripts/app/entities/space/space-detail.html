@@ -1,4 +1,4 @@
-<paper-toolbar class="tall" id="main" style="background-image: url(); height: 350px;
+<paper-toolbar class="tall" id="main" style="background-image: url(uploads/{{imageGallery2[0].image}}); height: 350px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -35,9 +35,8 @@
         <div class="row" style="margin: 0px 0px">
             <div class="col-lg-12" style="padding: 0px 20px;">
                 <h2>Fotos</h2>
-                <div id="image-row" ng-repeat="images in imageGallery">
-                    <img height="300" width="300" ng-src="uploads/{{images.image}}"/>
-                </div>
+                <ng-gallery images="imageGallery">
+                </ng-gallery>
             </div>
             <div class="col-lg-6" style="padding: 0px 20px;">
                 <h2>Reviews</h2>
