@@ -8,6 +8,7 @@ import com.project.domain.Space;
 public class SpaceDTO {
     private Space space;
     private Boolean liked;
+    private String masterImage;
 
     public Space getSpace() {
         return space;
@@ -23,5 +24,13 @@ public class SpaceDTO {
 
     public void setLiked(Boolean liked) {
         this.liked = liked;
+    }
+
+    public String getMasterImage() {
+        return masterImage;
+    }
+
+    public void setMasterImage(String masterImage) {
+        this.masterImage = masterImage;
     }
 }

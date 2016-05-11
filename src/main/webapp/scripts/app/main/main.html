@@ -87,7 +87,7 @@
                             <div style="height: 150px;">
                                 <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                     <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
-                                    <img style="min-width: 100%; height: 150px;width: 100%; object-fit: cover;" src="uploads/Espacio 1300.jpg">
+                                    <img style="min-width: 100%; height: 150px;width: 100%; object-fit: cover;" ng-src="uploads/{{spaceDTO.masterImage}}">
                                 </a>
                             </div>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">
@@ -253,7 +253,7 @@
                     </custom-marker>
                     <info-window id="foo" on-mouseover="vm.mouseover()">
                         <div>
-                            <img src="uploads/Espacio 1300.jpg" height="200" width="300"><br/>
+                            <img ng-src="uploads/{{spaceDTO.masterImage}}" height="200" width="300"><br/>
                             <a ui-sref="space.detail({id:selectedSpace.id})">{{selectedSpace.name}}</a><br/>
                             {{selectedSpace.price}}€<br/>
                         </div>

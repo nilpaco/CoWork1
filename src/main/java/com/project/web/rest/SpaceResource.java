@@ -2,12 +2,10 @@ package com.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.project.domain.Favorite;
+import com.project.domain.Image;
 import com.project.domain.Space;
 import com.project.domain.User;
-import com.project.repository.FavoriteRepository;
-import com.project.repository.SpaceCriteriaRepository;
-import com.project.repository.SpaceRepository;
-import com.project.repository.UserRepository;
+import com.project.repository.*;
 import com.project.repository.search.SpaceSearchRepository;
 import com.project.security.SecurityUtils;
 import com.project.web.rest.dto.SpaceDTO;
@@ -58,6 +56,10 @@ public class SpaceResource {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private ImageRepository imageRepository;
+
 
     /**
      * POST  /spaces -> Create a new space.
@@ -187,6 +189,11 @@ public class SpaceResource {
             Favorite favorite = favoriteRepository.findExistUserLiked(space.getId());
             SpaceDTO spaceDTO = new SpaceDTO();
             spaceDTO.setSpace(space);
+            List<Image> listImage = imageRepository.findImagesBySpace(space.getId());
+
+            if(listImage.size() != 0){
+                spaceDTO.setMasterImage(listImage.get(0).getImage());
+            }
 
             if (favorite == null || favorite.getLiked() == null || !favorite.getLiked()) {
                 spaceDTO.setLiked(false);

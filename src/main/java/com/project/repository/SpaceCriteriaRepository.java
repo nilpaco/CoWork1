@@ -59,6 +59,7 @@ public class SpaceCriteriaRepository {
                 spaceCriteria.add(Restrictions.ge("personMax", numPers));
             }
 
+/*
             if(parameters.containsKey("services")) {
 
                 Long[] servicesLong = (Long[]) parameters.get("services");
@@ -72,6 +73,7 @@ public class SpaceCriteriaRepository {
                     spaceCriteria.add(Subqueries.exists(subquery));
                 }
             }
+*/
             List<Space> results = spaceCriteria.list();
 
 
