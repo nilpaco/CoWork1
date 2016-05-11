@@ -14,7 +14,7 @@
                     <form name="searchForm" class="form-inline">
                         <div>
                             <input type="text" class="form-control" id="searchQuery"
-                                   placeholder="{{ 'project1App.space.home.search' | translate }}" ng-model="searchSpace.space.streetAddress">
+                                   placeholder="Buscar..." ng-model="searchSpace.space.streetAddress">
                         <span>
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -84,10 +84,10 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">
                         <div class="thumbnail material">
-                            <div>
+                            <div style="height: 150px;">
                                 <a ui-sref="space.detail({id:spaceDTO.space.id})">
                                     <!--<img data-ng-src="{{'data:' + space.imgContentType + ';base64,' + space.img}}" style="height: 200px; min-width: 100%;" ng-if="space.img"/>-->
-                                    <img style="min-width: 100%;" src="uploads/Espacio 1300.jpg">
+                                    <img style="min-width: 100%; height: 150px;width: 100%; object-fit: cover;" src="uploads/Espacio 1300.jpg">
                                 </a>
                             </div>
                             <a ng-click="like(spaceDTO.space.id)" aria-label="More">

@@ -6,8 +6,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.commons.collections.map.HashedMap;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +38,7 @@ public class SpaceCriteriaRepository {
                 .add(Restrictions.eq("personMax", numPers)).list();
         }
 
-        public List<Space> findByParameters(Map<String, Object> parameters, List<String> services) {
+        public List<Space> findByParameters(Map<String, Object> parameters) {
             Criteria spaceCriteria = currentSession().createCriteria(Space.class);
             Double minPrice = 0.0;
             Double maxPrice = 0.0;
@@ -60,9 +59,26 @@ public class SpaceCriteriaRepository {
                 spaceCriteria.add(Restrictions.ge("personMax", numPers));
             }
 
+            if(parameters.containsKey("services")) {
+
+                Long[] servicesLong = (Long[]) parameters.get("services");
+
+                for (Long id : servicesLong) {
+                    DetachedCriteria subquery = DetachedCriteria.forClass(Service.class, "service");
+                    subquery.add(Restrictions.eq("id", id));
+                    subquery.setProjection(Projections.property("id"));
+                    subquery.createAlias("spaces", "space");
+                    subquery.add(Restrictions.eqProperty("space.id", "space.id"));
+                    spaceCriteria.add(Subqueries.exists(subquery));
+                }
+            }
             List<Space> results = spaceCriteria.list();
 
 
+
+
+
+/*
             for (int i=0; i<results.size(); i++) {
 
                 Space space = results.get(i);
@@ -86,6 +102,7 @@ public class SpaceCriteriaRepository {
 
 
             }
+*/
 
 
 

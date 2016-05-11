@@ -226,11 +226,10 @@ public class SpaceResource {
         @RequestParam(value = "min-price", required = false) Double minPrice,
         @RequestParam(value = "max-price", required = false) Double maxPrice,
         @RequestParam(value = "num-pers", required = false) Integer numPers,
-        @RequestParam(value = "service-wifi", required = false) Boolean serviceWifi,
-        @RequestParam(value = "service-parking", required = false) Boolean serviceParking,
-        @RequestParam(value = "service-cafeteria", required = false) Boolean serviceCafeteria
+        @RequestParam(value = "services", required = false) String services
     ) {
         Map<String, Object> params = new HashMap<>();
+
 
         if (minPrice != null) {
             params.put("min-price", minPrice);
@@ -241,16 +240,14 @@ public class SpaceResource {
         if(numPers != null){
             params.put("num-pers", numPers);
         }
-
-        List<String> services = new ArrayList<>();
-        if(serviceWifi != null && serviceWifi == true){
-            services.add("Wifi");
-        }
-        if(serviceParking != null && serviceParking == true){
-            services.add("Parking");
-        }
-        if(serviceCafeteria != null && serviceCafeteria == true){
-            services.add("Cafeteria");
+        if(services != null){
+            //arrays de longs
+            String[] servicesArray = services.split("-");
+            Long[] servicesLong = new Long[servicesArray.length];
+            for (int i = 0; i < servicesArray.length; i++) {
+                servicesLong[i] = Long.valueOf(servicesArray[i]);
+            }
+            params.put("services", servicesLong);
         }
 
 
@@ -258,7 +255,7 @@ public class SpaceResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("player", "filtersEmpty", "You must at least add one filter")).body(null);
         }
 
-        List<Space> result = spaceCriteriaRepository.findByParameters(params, services);
+        List<Space> result = spaceCriteriaRepository.findByParameters(params);
 
         return new ResponseEntity<>(
             result,
