@@ -61,10 +61,11 @@
 </style>
 
 <div class="container">
-    <div class="col-md-12">
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
         <div class="material">
             <div class="col-md-3">
-                <img class="profile-img" src="http://placehold.it/250x250">
+                <img class="profile-img" ng-src="profile/{{account.login}}.jpg">
             </div>
             <div class="col-md-5">
                 <div>
@@ -85,13 +86,13 @@
             </div>
         </div>
     </div>
-        <div class="col-md-8">
+        <div class="col-md-6 col-md-push-1">
             <div class="material">
                 Grapic here
                 <img height="400" width="100%" src="http://placehold.it/250x250">
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-push-1">
             <div class="material" style="padding: 0px;">
                 <paper-tabs selected="0">
                     <paper-tab ng-click="active = 1">Tus reviews</paper-tab>
@@ -173,6 +174,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

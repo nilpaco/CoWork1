@@ -7,8 +7,10 @@
     <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
     <paper-fab icon="favorite-border" class="bottom fav" id="paper-fab" style="top: 30px;"></paper-fab>
 </paper-toolbar>
-<div class="container material">
-    <paper-material elevation="1" class="over-content">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+        <paper-material elevation="2" class="over-content">
         <div class="modal-header" style="padding: 20px;">
             <img src="http://placehold.it/80x80" height="80">
             <h2 class="modal-title">{{space.name}}</h2>
@@ -43,7 +45,7 @@
                 <div class="reviews" ng-repeat="reviewByCurrentSpace in reviewsByCurrentSpace">
                     <a data-toggle="modal" data-target="#myModal" ng-click="onClickMarker(reviewByCurrentSpace)">
                         <div style="height: 55px;">
-                            <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                            <img class="reviewimg" height="100%" ng-src="profile/{{reviewByCurrentSpace.user.login}}.jpg" width="55px">
                             <div style="height:100%; padding-top: 3px;">
                                 <h5 class="titlereview">
                                     <span class="name">{{reviewByCurrentSpace.user.firstName}}</span>
@@ -54,7 +56,7 @@
                         </div>
                     </a>
                 </div>
-                <form ng-submit="addReview()">
+                <form ng-submit="addReview()" ng-show="space.user.login!=account.login">
                     <div class="input-group">
                         <input ng-model="text3" type="text" class="form-control" placeholder="Escribe aqui tu review"/>
                           <span class="input-group-btn">
@@ -66,7 +68,7 @@
             <div class="col-lg-6" style="padding: 0px 20px;">
                 <h2>Enviar mensaje</h2>
 
-                <form ng-show="getConversation == null" ng-submit="addMessage()">
+                <form ng-show="space.user.login!=account.login || getConversation == null" ng-submit="addMessage()">
                     <div class="input-group">
                         <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje"/>
                           <span class="input-group-btn">
@@ -110,6 +112,21 @@
             </ng-map>
         </div>
     </paper-material>
+    </div>
+        <div class="col-md-4">
+            <paper-material elevation="2">
+                <img ng-src="profile/{{space.user.login}}.jpg" height="100%" width="100%">
+                {{space.user.firstName}} {{space.user.lastName}}
+                {{space.user.description}}
+            </paper-material>
+        </div>
+        <div class="col-md-4">
+            <paper-material elevation="2">
+                <h1>Share</h1>
+            </paper-material>
+        </div>
+
+    </div>
 </div>
 
 <style>
@@ -204,12 +221,11 @@
     }
 
 </style>
-
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <img src="http://placehold.it/250x250" alt="img" height="80">
+                <img src="profile/{{selectedReview.user.login}}.jpg" alt="img" height="80" width="80">
                 <h4 class="modal-title" id="myModalLabel">
                     {{selectedReview.user.firstName}}
                 </h4>

@@ -91,15 +91,9 @@ angular.module('project1App')
             vm.map = map;
         });
 
-        $scope.select = function (space) {
+        $scope.onClickMarker = function (space){
             $scope.selectedSpace = space;
         };
-        $scope.onClickMarker = function (space){
-            $scope.select(space);
-        };
-        $scope.showMarker = function (){
-
-        }
 
         $scope.loadAll2 = function() {
             Service.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {

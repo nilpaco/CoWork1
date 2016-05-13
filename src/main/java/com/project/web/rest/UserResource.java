@@ -24,8 +24,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
@@ -147,6 +152,7 @@ public class UserResource {
                 user.setEmail(managedUserDTO.getEmail());
                 user.setActivated(managedUserDTO.isActivated());
                 user.setLangKey(managedUserDTO.getLangKey());
+                user.setDescription(managedUserDTO.getDescription());
                 Set<Authority> authorities = user.getAuthorities();
                 authorities.clear();
                 managedUserDTO.getAuthorities().stream().forEach(
@@ -219,5 +225,52 @@ public class UserResource {
         return StreamSupport
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    @RequestMapping(value = "/profile",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public void handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("name") String name) {
+        log.debug("REST request to handleFileUpload");
+
+        File theDir = new File("./src/main/webapp/profile");
+
+        byte[] bytes;
+
+        String nameUser = "";
+
+        try {
+
+            if (!theDir.exists()) {
+                System.out.println("creating directory: /profile");
+                boolean result = false;
+
+                try {
+                    theDir.mkdir();
+                    result = true;
+                } catch (SecurityException se) {
+                    //handle it
+                }
+                if (result) {
+                    System.out.println("DIR created");
+                }
+            }
+
+
+            file.getContentType();
+
+            //Get name of file
+            nameUser = name;
+
+            //Create new file in path
+            BufferedOutputStream stream =
+                new BufferedOutputStream(new FileOutputStream(new File("./src/main/webapp/profile/" + nameUser + ".jpg")));
+
+            stream.write(file.getBytes());
+            stream.close();
+            log.debug("You successfully uploaded " + file.getName() + "!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

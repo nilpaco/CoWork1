@@ -145,11 +145,13 @@ public class UserService {
         return user;
     }
 
-    public void updateUserInformation(String firstName, String lastName, String email, String langKey) {
+    public void updateUserInformation(String firstName, String lastName, String email, String image, String description, String langKey) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUser().getUsername()).ifPresent(u -> {
             u.setFirstName(firstName);
             u.setLastName(lastName);
             u.setEmail(email);
+            u.setImage(image);
+            u.setDescription(description);
             u.setLangKey(langKey);
             userRepository.save(u);
             userSearchRepository.save(u);

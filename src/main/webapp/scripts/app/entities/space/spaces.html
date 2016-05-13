@@ -1,71 +1,247 @@
+
+<style>
+    .material{
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        border:none;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 3px;
+        margin-top: 20px;
+        padding: 20px;
+    }
+    .profile-img{
+        width: 100%;
+        height: 100%;
+    }
+    paper-tabs{
+        background-color: rgb(0, 188, 212);
+        color: rgb(233, 30, 99);
+    }
+    .paper-tab-0 paper-ripple.paper-tab{
+        color: white;
+    }
+    .paper-tabs-0 #selectionBar.paper-tabs{
+        background-color: rgb(233, 30, 99);
+    }
+    .paper-tab-0:not(.iron-selected) > .tab-content.paper-tab{
+        opacity: 0.54;
+    }
+    .titlereview{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .reviews{
+        padding: 10px;
+    }
+    .reviews a{
+        text-decoration: none;
+    }
+    .reviews:hover{
+        background-color: #e4e4e4;
+    }
+    img.reviewimg{
+        float: left;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    span.name{
+        vertical-align:top;
+        color: rgba(0,0,0,0.87);
+        font-weight: bold;
+    }
+    span.time{
+        vertical-align:top;
+        color: rgba(0,0,0,0.54);
+        float: right;
+    }
+    span.text{
+        vertical-align:top;
+        color: rgba(0,0,0,0.87);
+    }
+</style>
+
 <div class="container">
-    <h2>Tus espacios</h2>
-    <jh-alert></jh-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <paper-button raised class="fancy" ui-sref="space.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span
-class="hidden-xs"                        translate="project1App.space.home.createLabel">Create new Space
-                    </span>
-                </paper-button>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="material">
+                <div class="col-md-3">
+                    <img class="profile-img" ng-src="profile/{{account.login}}.jpg">
+                </div>
+                <div class="col-md-5">
+                    <div>
+                        <h3 style="color: rgba(0,0,0,0.87);">{{account.firstName}}
+                            {{account.lastName}}</h3>
+                    </div>
+                    <h4 style="color: rgba(0,0,0,0.54);">{{account.login}}</h4>
+                    <div style="line-height: 40px;">
+                        <iron-icon icon="icons:mail" item-icon></iron-icon>{{account.email}}<br/>
+                        <iron-icon icon="icons:language" item-icon></iron-icon>{{account.langKey}}
+                    </div>
+                    <div>
+                        <paper-button ui-sref="password" class="fancy">Cambiar contraseña</paper-button>
+                        <paper-button ui-sref="edit" class="fancy">Editar perfil</paper-button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
             </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input style="z-index:0" type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
+        </div>
+        <div class="col-md-6 col-md-push-1">
+            <div class="material">
+                <div>
+                    <h2>Tus espacios</h2>
+                    <jh-alert></jh-alert>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-4 no-padding-left">
+                                <paper-button raised class="fancy" ui-sref="space.new" >
+                                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        class="hidden-xs"                        translate="project1App.space.home.createLabel">Create new Space
+                    </span>
+                                </paper-button>
+                            </div>
+                            <div class="col-xs-8 no-padding-right">
+                                <form name="searchForm" class="form-inline">
+                                    <div class="input-group pull-right" >
+                                        <input style="z-index:0" type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'project1App.space.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="search()">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <br/>
+                    <div class="table-responsive">
+                        <table class="jh-table table table-striped">
+                            <thead>
+                            <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                                <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="name"><span translate="project1App.space.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="description"><span translate="project1App.space.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="price"><span translate="project1App.space.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="personMax"><span translate="project1App.space.personMax">PersonMax</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="streetAddress"><span translate="project1App.space.streetAddress">StreetAddress</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="space in spaces track by space.id">
+                                <td><a ui-sref="space.detail({id:space.id})">{{space.id}}</a></td>
+                                <td>{{space.name}}</td>
+                                <td>{{space.description | limitTo: 35}}{{space.description.length > 35 ? '...' : ''}}</td>
+                                <td>{{space.price}}</td>
+                                <td>{{space.personMax}}</td>
+                                <td>{{space.streetAddress}}</td>
+                                <td class="text-right">
+                                    <div class="btn-group flex-btn-group-container">
+                                        <paper-button class="edit" type="submit"
+                                                      ui-sref="space.edit({id:space.id})">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                                        </paper-button>
+                                        <paper-button class="delete" type="submit"
+                                                      ui-sref="space.delete({id:space.id})">
+                                            <span class="glyphicon glyphicon-remove-circle"></span>
+                                            <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                                        </paper-button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-push-1">
+            <div class="material" style="padding: 0px;">
+                <paper-tabs selected="0">
+                    <paper-tab ng-click="active = 1">Tus reviews</paper-tab>
+                    <paper-tab ng-click="active = 2">Reviews de otros</paper-tab>
+                </paper-tabs>
+
+                <iron-pages selected="0">
+                    <div>
+                        <div class="reviews" ng-repeat="review in reviews">
+                            <a data-toggle="modal" data-target="#myModal" href="#/spaces" ng-click="onClickMarker(review)">
+                                <div style="height: 55px;">
+                                    <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                                    <div style="height:100%; padding-top: 3px;">
+                                        <h5 class="titlereview">
+                                            <span class="name">{{review.space.name | limitTo: 15}}{{review.text.length > 15 ? '...' : ''}}</span>
+                                            <span class="time">{{review.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
+                                        </h5>
+                                        <span class="text">{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="reviews" ng-repeat="reviewBySpace in reviewsBySpace">
+                            <a data-toggle="modal" data-target="#myModal" href="#/spaces" ng-click="onClickMarker(reviewBySpace)">
+                                <div style="height: 55px;">
+                                    <img class="reviewimg" height="100%" src="http://placehold.it/250x250">
+                                    <div style="height:100%; padding-top: 3px;">
+                                        <h5 class="titlereview">
+                                            <span class="name">{{reviewBySpace.space.name | limitTo: 15}}{{reviewBySpace.text.length > 15 ? '...' : ''}}</span>
+                                            <span class="time">{{reviewBySpace.time | date:"MM/dd/yy 'at' h:mma"}}</span><br/>
+                                        </h5>
+                                        <span class="text">{{reviewBySpace.text | limitTo: 35}}{{reviewBySpace.text.length > 35 ? '...' : ''}}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </iron-pages>
+
+                <script>
+                    var pages = document.querySelector('iron-pages');
+                    var tabs = document.querySelector('paper-tabs');
+
+                    tabs.addEventListener('iron-select', function() {
+                        pages.selected = tabs.selected;
+                    });
+                </script>
+
+
             </div>
         </div>
     </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
-                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span translate="project1App.space.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span translate="project1App.space.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="price"><span translate="project1App.space.price">Price</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="personMax"><span translate="project1App.space.personMax">PersonMax</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="streetAddress"><span translate="project1App.space.streetAddress">StreetAddress</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="space in spaces track by space.id">
-                    <td><a ui-sref="space.detail({id:space.id})">{{space.id}}</a></td>
-                    <td>{{space.name}}</td>
-                    <td>{{space.description | limitTo: 35}}{{space.description.length > 35 ? '...' : ''}}</td>
-                    <td>{{space.price}}</td>
-                    <td>{{space.personMax}}</td>
-                    <td>{{space.streetAddress}}</td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <paper-button class="edit" type="submit"
-                                    ui-sref="space.edit({id:space.id})">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
-                            </paper-button>
-                            <paper-button class="delete" type="submit"
-                                    ui-sref="space.delete({id:space.id})">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
-                            </paper-button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="http://placehold.it/250x250" alt="img" height="80">
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{selectedReview.user.firstName}}
+                    </h4>
+                    <h5>{{selectedReview.time}}</h5>
+                </div>
+                <div class="modal-header">
+                    <h5>Texto:</h5>
+                    {{selectedReview.text}}
+                </div>
+                <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
+                    <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                        <h3>{{selectedReview.space.name}}</h3>
+                        <h4>{{selectedReview.space.price}}€</h4>
+
+                    </div>
+                </a>
+                <div class="modal-footer">
+                    <paper-button raised data-dismiss="modal">Close</paper-button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

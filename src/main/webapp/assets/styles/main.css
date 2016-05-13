@@ -304,4 +304,11 @@ paper-button.fancy{
     border: 3px dotted #ccc;
     text-align: center;
 }
-
+.btn-non{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+.btn-non:focus{
+    outline: 0;
+}

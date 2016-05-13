@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SpaceController', function ($scope, $state, Space, SpaceSearch, ParseLinks, NgMap) {
+    .controller('SpaceController', function ($scope, $state, Space, SpaceSearch, ParseLinks, Review) {
 
         $scope.spaces = [];
         $scope.predicate = 'id';
@@ -48,22 +48,26 @@ angular.module('project1App')
                 id: null
             };
         };
-        var vm = this;
-        NgMap.getMap({id: 'foomap'}).then(function(map) {
-            vm.map = map;
-            console.log('NgMap.getMap in SpaceController', map);
-        });
-        $scope.lat = [];
-        $scope.lng = [];
-        vm.placeChanged = function() {
-            vm.place = this.getPlace();
-            console.log('location', vm.place.geometry.location);
-            vm.map.setCenter(vm.place.geometry.location);
-            $scope.lat = vm.place.geometry.location.lat();
-            $scope.lng = vm.place.geometry.location.lng();
 
-        }
+        $scope.reviews = [];
+        $scope.loadAll = function() {
+            Review.query(function(result) {
+                $scope.reviews = result;
+            });
+        };
+        $scope.loadAll();
 
+        $scope.reviewsBySpace = [];
+        $scope.loadAllBySpace = function() {
+            Review.reviewBySpace(function(result) {
+                $scope.reviewsBySpace = result;
+            });
+        };
+        $scope.loadAllBySpace();
+
+        $scope.onClickMarker = function (review){
+            $scope.selectedReview = review;
+        };
 
 
     });

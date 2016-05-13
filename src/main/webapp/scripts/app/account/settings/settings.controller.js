@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate, Review) {
+    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate, Review, Upload, $timeout) {
         $scope.success = null;
         $scope.error = null;
         Principal.identity().then(function(account) {
@@ -12,6 +12,7 @@ angular.module('project1App')
             Auth.updateAccount($scope.settingsAccount).then(function() {
                 $scope.error = null;
                 $scope.success = 'OK';
+                $scope.uploadPic($scope.picFile, $scope.settingsAccount.login);
                 Principal.identity(true).then(function(account) {
                     $scope.settingsAccount = copyAccount(account);
                 });
@@ -36,28 +37,29 @@ angular.module('project1App')
                 firstName: account.firstName,
                 langKey: account.langKey,
                 lastName: account.lastName,
-                login: account.login
+                login: account.login,
+                image: account.image,
+                description: account.description
             }
         }
 
-        $scope.reviews = [];
-        $scope.loadAll = function() {
-            Review.query(function(result) {
-                $scope.reviews = result;
+        $scope.uploadPic = function(file) {
+            file.upload = Upload.upload({
+                url: 'api/profile',
+                data: {file: file, 'name': $scope.settingsAccount.login},
             });
-        };
-        $scope.loadAll();
 
-        $scope.reviewsBySpace = [];
-        $scope.loadAllBySpace = function() {
-            Review.reviewBySpace(function(result) {
-                $scope.reviewsBySpace = result;
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
-        };
-        $scope.loadAllBySpace();
-
-        $scope.onClickMarker = function (review){
-            $scope.selectedReview = review;
-        };
-
+        }
+        
     });
