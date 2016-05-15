@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SpaceDetailController', function ($scope, $rootScope, $stateParams, entity, Space, Service, Image, Favorite, Review, Conversation, User, Message, $timeout) {
+    .controller('SpaceDetailController', function ($scope, $rootScope, $stateParams, imageSpace, entity, Space, Service, Image, Favorite, Review, Conversation, User, Message, $timeout) {
         $scope.space = entity;
+        $scope.imageSpace = imageSpace;
         $scope.imageGallery =[];
         $scope.load = function (id) {
             Space.get({id: id}, function(result) {
@@ -33,14 +34,6 @@ angular.module('project1App')
             });
         }
 
-        $scope.imageGallery2 =[];
-        $scope.loadAllImagesBySpace = function(id) {
-            Image.imagesByCurrentSpace({id: id}, function(result) {
-                $scope.imageGallery2 = result;
-            });
-        };
-        $scope.loadAllImagesBySpace($stateParams.id);
-
         $scope.loadConversation = function(id) {
             Conversation.getConversationFromSpace({id: id}, function(result) {
                 $scope.getConversation = result;
@@ -51,10 +44,10 @@ angular.module('project1App')
         $scope.onClickMarker = function (review){
             $scope.selectedReview = review;
         };
-        
+
         $scope.loadImages = function () {
-            for (var i = 0; i < $scope.imageGallery2.length; i++) {
-                $scope.imageGallery[i] = {thumb: 'uploads/'+$scope.imageGallery2[i].image, img: 'uploads/'+$scope.imageGallery2[i].image, description: $scope.space.name};
+            for (var i = 0; i < $scope.imageSpace.length; i++) {
+                $scope.imageGallery[i] = {thumb: 'uploads/'+$scope.imageSpace[i].image, img: 'uploads/'+$scope.imageSpace[i].image, description: $scope.space.name};
             }
         };
         $timeout(function (){

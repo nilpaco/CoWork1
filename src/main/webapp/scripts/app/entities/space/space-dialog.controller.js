@@ -70,10 +70,6 @@ angular.module('project1App').controller('SpaceDialogController',
         }
 
 
-        $scope.submit = function() {
-                $scope.upload($scope.file);
-        };
-
         $scope.upload = function (file, result, i) {
             var namespace = result.name.split(' ').join('_');
             Upload.upload({
@@ -91,7 +87,7 @@ angular.module('project1App').controller('SpaceDialogController',
 
         $scope.$watch('file', function () {
             if ($scope.file != null) {
-                 $scope.archivos.push($scope.file);
+                $scope.archivos.push($scope.file);
             }
         });
 
@@ -112,8 +108,6 @@ angular.module('project1App').controller('SpaceDialogController',
                 return reader.readAsDataURL(e);
             }
 */
-
-
 
 
         }]);

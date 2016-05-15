@@ -1,3 +1,4 @@
+<!--
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -17,7 +18,7 @@
                         <span class="hidden-sm" translate="global.menu.home">Home</span>
                     </a>
                 </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+                &lt;!&ndash; jhipster-needle-add-element-to-menu - JHipster will add new menu items here &ndash;&gt;
                 <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="">
                         <span>
@@ -43,7 +44,7 @@
                         &#xA0;<span translate="global.menu.entities.favorite">Favorite</span></a></li>
                         <li ui-sref-active="active" ><a ui-sref="message" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                         &#xA0;<span translate="global.menu.entities.message">Message</span></a></li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+                        &lt;!&ndash; jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here &ndash;&gt;
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('account')}" class="dropdown pointer">
@@ -94,7 +95,7 @@
                             &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
                         <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-book"></span>
                             &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                        &lt;!&ndash; jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here &ndash;&gt;
                     </ul>
                 </li>
                 <li ui-sref-active="active" class="dropdown pointer" ng-controller="LanguageController">
@@ -115,3 +116,42 @@
         </div>
     </div>
 </nav>
+-->
+
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+            <i class="material-icons" ng-click="toggleRight()"
+               ng-hide="isOpenRight()"
+               class="md-primary">menu</i>
+        </md-button>
+        <h2>
+            <span>CoWork</span>
+        </h2>
+        <span flex></span>
+    </div>
+</md-toolbar>
+<md-sidenav class="md-sidenav-left  md-whiteframe-z2" md-component-id="right">
+    <md-toolbar  class="md-theme-light md-tall">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+    </md-toolbar>
+    <md-content>
+        <md-list-item href="#/">
+            <p><i class="material-icons icon-list">search</i> Busqueda </p>
+        </md-list-item>
+        <md-list-item ui-sref="space">
+            <p><i class="material-icons icon-list">person</i> Tu perfil </p>
+        </md-list-item>
+        <md-list-item ui-sref="conversation">
+            <p><i class="material-icons icon-list">chat_bubble_outline</i> Mensajes </p>
+        </md-list-item>
+        <md-list-item ui-sref="favorite">
+            <p><i class="material-icons icon-list">favorite_border</i> Favoritos </p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-list-item ng-click="logout()">
+            <p><i class="material-icons icon-list">close</i> Cerrar sesión </p>
+        </md-list-item>
+    </md-content>
+</md-sidenav>
+

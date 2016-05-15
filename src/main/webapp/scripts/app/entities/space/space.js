@@ -44,6 +44,9 @@ angular.module('project1App')
                     }],
                     entity: ['$stateParams', 'Space', function($stateParams, Space) {
                         return Space.get({id : $stateParams.id});
+                    }],
+                    imageSpace: ['$stateParams', 'Image', function ($stateParams, Image) {
+                        return Image.imagesByCurrentSpace({id: $stateParams.id});
                     }]
                 }
             })

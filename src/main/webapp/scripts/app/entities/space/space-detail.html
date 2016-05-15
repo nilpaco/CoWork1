@@ -1,20 +1,18 @@
-<paper-toolbar class="tall" id="main" style="background-image: url(uploads/{{imageGallery2[0].image}}); height: 350px;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
-    <paper-icon-button onclick="window.history.back()" icon="arrow-back"></paper-icon-button>
-    <div class="bottom title" style="font-weight: 700">{{space.price}}€</div>
-    <paper-fab icon="favorite-border" class="bottom fav" id="paper-fab" style="top: 30px;"></paper-fab>
-</paper-toolbar>
+
+<md-toolbar md-scroll-shrink ng-if="true" class="cover" style="background-image: url(uploads/{{imageSpace[0].image}})">
+        <md-button class="md-icon-button" aria-label="Settings">
+            <i class="material-icons" onclick="window.history.back()">keyboard_backspace</i>
+        </md-button>
+</md-toolbar>
+
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
-        <paper-material elevation="2" class="over-content">
+        <div class="col-lg-8 col-md-8">
+
+            <md-whiteframe class="md-whiteframe-3dp margin-content" layout style="display: block;">
         <div class="modal-header" style="padding: 20px;">
-            <img src="http://placehold.it/80x80" height="80">
             <h2 class="modal-title">{{space.name}}</h2>
-            <h5 class="subtitle">User: {{space.user.firstName}}</h5>
+            <h5 class="subtitle">{{space.price}}€</h5>
         </div>
         <div class="spacer"></div>
         <div class="col-lg-6" style="padding: 0px 20px;">
@@ -68,7 +66,7 @@
             <div class="col-lg-6" style="padding: 0px 20px;">
                 <h2>Enviar mensaje</h2>
 
-                <form ng-show="space.user.login!=account.login || getConversation == null" ng-submit="addMessage()">
+                <form ng-show="getConversation == null" ng-hide="space.user.login==account.login" ng-submit="addMessage()">
                     <div class="input-group">
                         <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje"/>
                           <span class="input-group-btn">
@@ -76,6 +74,9 @@
                           </span>
                     </div><!-- /input-group -->
                 </form>
+                <div ng-show="space.user.login==account.login">
+                    No te puedes enviar mensajes a ti mismo.
+                </div>
                 <div ng-show="getConversation != null">
                     <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
                 </div>
@@ -111,25 +112,37 @@
                 </custom-marker>-->
             </ng-map>
         </div>
-    </paper-material>
+    </md-whiteframe>
     </div>
-        <div class="col-md-4">
-            <paper-material elevation="2">
-                <img ng-src="profile/{{space.user.login}}.jpg" height="100%" width="100%">
-                {{space.user.firstName}} {{space.user.lastName}}
-                {{space.user.description}}
-            </paper-material>
+        <div class="col-md-4 col-lg-4">
+            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card" layout style="display: block;">
+                <img class="profile-card-img" ng-src="profile/{{space.user.login}}.jpg" height="100%" width="100%">
+                <h4>{{space.user.firstName}} {{space.user.lastName}}</h4>
+                <span>{{space.user.description}}</span>
+            </md-whiteframe>
         </div>
         <div class="col-md-4">
-            <paper-material elevation="2">
-                <h1>Share</h1>
-            </paper-material>
+            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card" layout style="display: block;">
+                <h4>Compartelo:</h4>
+            </md-whiteframe>
         </div>
 
     </div>
 </div>
 
 <style>
+    .profile-card-img{
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        margin: 0px auto;
+        display: block;
+    }
+    .profile-card{
+        padding: 20px 35px;
+        text-align: center;
+    }
+
     .cm {
         color: #fff;
         padding: 2px 4px;
