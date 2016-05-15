@@ -115,7 +115,7 @@
     </md-whiteframe>
     </div>
         <div class="col-md-4 col-lg-4">
-            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card" layout style="display: block;">
+            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card" layout>
                 <img class="profile-card-img" ng-src="profile/{{space.user.login}}.jpg" height="100%" width="100%">
                 <h4>{{space.user.firstName}} {{space.user.lastName}}</h4>
                 <span>{{space.user.description}}</span>
@@ -222,17 +222,6 @@
         color: rgba(0, 0, 0, 0.87);
     }
 
-    paper-material {
-        background-color: white;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-    paper-fab.fav {
-        background: #F44336 !important;
-        color: white;
-    }
-
 </style>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -256,7 +245,7 @@
                 </div>
             </a>
             <div class="modal-footer">
-                <paper-button raised data-dismiss="modal">Close</paper-button>
+                <md-button data-dismiss="modal">Close</md-button>
             </div>
         </div>
     </div>

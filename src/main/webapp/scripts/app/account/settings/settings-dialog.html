@@ -1,7 +1,7 @@
 <div>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-10 col-lg-offset-3 col-md-offset-3 col-xs-offset-1">
-            <paper-material elavation="1" class="edit-settings">
+    <div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
+            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card paddings" layout>
                 <h2 translate="settings.title" translate-values="{username: '{{settingsAccount.login}}'}">User settings
                     for [<b>{{settingsAccount.login}}</b>]</h2>
 
@@ -21,72 +21,69 @@
                 <form name="form" role="form" novalidate ng-submit="save()" show-validation>
 
                     <div class="form-group">
-                        <paper-input-container always-float-label>
-                            <label class="control-label" for="firstName" translate="settings.form.firstname">First
+                        <md-input-container class="md-block">
+                            <label for="firstName" translate="settings.form.firstname">First
                                 Name</label>
-                            <input is="iron-input" type="text" class="form-control" id="firstName" name="firstName"
+                            <input is="iron-input" type="text" id="firstName" name="firstName"
                                    placeholder="{{'settings.form.firstname.placeholder' | translate}}"
                                    ng-model="settingsAccount.firstName" ng-minlength=1 ng-maxlength=50 required
                                    maxlength="50">
-                        </paper-input-container>
-                        <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
-                            <p class="help-block"
-                               ng-show="form.firstName.$error.required"
-                               translate="settings.messages.validate.firstname.required">
-                                Your first name is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.firstName.$error.minlength"
-                               translate="settings.messages.validate.firstname.minlength">
-                                Your first name is required to be at least 1 character.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.firstName.$error.maxlength"
-                               translate="settings.messages.validate.firstname.maxlength">
-                                Your first name cannot be longer than 50 characters.
-                            </p>
-                        </div>
+                            <div ng-show="form.firstName.$dirty && form.firstName.$invalid">
+                                <p class="help-block"
+                                   ng-show="form.firstName.$error.required"
+                                   translate="settings.messages.validate.firstname.required">
+                                    Your first name is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.firstName.$error.minlength"
+                                   translate="settings.messages.validate.firstname.minlength">
+                                    Your first name is required to be at least 1 character.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.firstName.$error.maxlength"
+                                   translate="settings.messages.validate.firstname.maxlength">
+                                    Your first name cannot be longer than 50 characters.
+                                </p>
+                            </div>
+                        </md-input-container>
                     </div>
                     <div class="form-group">
-                        <paper-input-container always-float-label>
-                            <label class="control-label" for="lastName" translate="settings.form.lastname">Last
+                        <md-input-container class="md-block">
+                            <label for="lastName" translate="settings.form.lastname">Last
                                 Name</label>
-                            <input is="iron-input" type="text" class="form-control" id="lastName" name="lastName"
+                            <input is="iron-input" type="text" id="lastName" name="lastName"
                                    placeholder="{{'settings.form.lastname.placeholder' | translate}}"
                                    ng-model="settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required
                                    maxlength="50">
-                        </paper-input-container>
-                        <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
-                            <p class="help-block"
-                               ng-show="form.lastName.$error.required"
-                               translate="settings.messages.validate.lastname.required">
-                                Your last name is required.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.lastName.$error.minlength"
-                               translate="settings.messages.validate.lastname.minlength">
-                                Your last name is required to be at least 1 character.
-                            </p>
-                            <p class="help-block"
-                               ng-show="form.lastName.$error.maxlength"
-                               translate="settings.messages.validate.lastname.maxlength">
-                                Your last name cannot be longer than 50 characters.
-                            </p>
-                        </div>
+                            <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
+                                <p class="help-block"
+                                   ng-show="form.lastName.$error.required"
+                                   translate="settings.messages.validate.lastname.required">
+                                    Your last name is required.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.lastName.$error.minlength"
+                                   translate="settings.messages.validate.lastname.minlength">
+                                    Your last name is required to be at least 1 character.
+                                </p>
+                                <p class="help-block"
+                                   ng-show="form.lastName.$error.maxlength"
+                                   translate="settings.messages.validate.lastname.maxlength">
+                                    Your last name cannot be longer than 50 characters.
+                                </p>
+                            </div>
+                        </md-input-container>
                     </div>
                     <div class="form-group">
-                        <paper-button>
-                            <button class="btn-non" id="field_picture" type="file" ngf-select ng-model="picFile"
+                            <md-button id="field_picture" type="file" ngf-select ng-model="picFile"
                                     name="file"
                                     accept="image/*" ngf-max-size="2MB" required
-                                    ngf-model-invalid="errorFile" data-toggle="tooltip"><iron-icon
-                                icon="image:photo"/></iron-icon> Upload image
-                            </button>
-                        </paper-button>
-                        <paper-button class="delete" ng-show="picFile">
-                            <iron-icon icon="icons:delete"/></iron-icon>
-                            <input class="btn-non" type="button" ng-click="picFile = null" value="Remove" />
-                        </paper-button>
+                                    ngf-model-invalid="errorFile" data-toggle="tooltip">
+                                <i class="material-icons profile-button">insert_photo</i>Upload image
+                            </md-button>
+                        <md-button class="delete" ng-show="picFile" ng-click="picFile = null">
+                            <i class="material-icons profile-button white-icon">delete</i> Remove
+                        </md-button>
 
                         <i ng-show="myForm.file.$error.required">*required</i><br>
                         <i ng-show="myForm.file.$error.maxSize">File too large
@@ -102,14 +99,13 @@
                     </div>
 
                     <div class="form-group">
-                        <paper-input-container always-float-label>
-                            <label class="control-label" for="email" translate="global.form.email">E-mail</label>
+                        <md-input-container class="md-block">
+                            <label for="email" translate="global.form.email">E-mail</label>
                             <input is="iron-input" type="email" id="email" name="email"
                                    placeholder="{{'global.form.email.placeholder' | translate}}"
                                    ng-model="settingsAccount.email" ng-minlength=5 ng-maxlength=100 required
                                    maxlength="100">
-                        </paper-input-container>
-
+                        </md-input-container>
                         <div ng-show="form.email.$dirty && form.email.$invalid">
                             <p class="help-block"
                                ng-show="form.email.$error.required" translate="global.messages.validate.email.required">
@@ -131,29 +127,26 @@
                             </p>
                         </div>
                     </div>
-                    <paper-input-container always-float-label>
-                        <label class="control-label" for="description">Acerca de ti:</label>
-                            <textarea is="iron-input" type="text" class="form-control" id="description" name="description"
-                                   ng-model="settingsAccount.description" ng-minlength=5 ng-maxlength=500 required
-                                   maxlength="500" />
-                    </paper-input-container>
+                    <md-input-container class="md-block">
+                        <label for="description">Acerca de ti:</label>
+                            <textarea is="iron-input" type="text" id="description" name="description"
+                                      ng-model="settingsAccount.description" ng-minlength=5 ng-maxlength=500 required
+                                      maxlength="500" md-maxlength="300" rows="5"></textarea>
+                    </md-input-container>
 
+                    <md-select id="langKey" name="langKey" ng-model="settingsAccount.langKey"
+                               ng-controller="LanguageController">
+                        <md-option name="langKey" ng-repeat="code in languages" value="{{code}}">
+                            {{code}}
+                        </md-option>
+                    </md-select>
 
-                    <div class="form-group">
-                        <label for="langKey" translate="settings.form.language">Language</label>
-                        <select id="langKey" name="langKey" class="form-control" ng-model="settingsAccount.langKey"
-                                ng-controller="LanguageController"
-                                ng-options="code as (code | findLanguageFromKey) for code in languages"></select>
-                    </div>
-
-                    <paper-button class="fancy">
-                        <button class="btn-non" type="submit" ng-disabled="form.$invalid"
+                    <md-button class="md-raised md-primary" type="submit" ng-disabled="form.$invalid"
                                 translate="settings.form.button">Save
-                        </button>
-                    </paper-button>
+                        </md-button>
 
                 </form>
-            </paper-material>
+            </md-whiteframe>
         </div>
     </div>
 

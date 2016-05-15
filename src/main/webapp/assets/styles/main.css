@@ -235,7 +235,7 @@ ul#strengthBar {
 /* jhipster-needle-css-add-main JHipster will add new css style */
 
 .modal-content{
-    border-radius: 3px !important;
+    border-radius: 4px !important;
     overflow: hidden;
 }
 
@@ -308,7 +308,7 @@ ul#strengthBar {
     background-color: white;
     border-radius: 3px;
 }
-paper-button.fancy{
+.fancy{
     background: #E91E63;
     color: white;
 }
@@ -432,4 +432,14 @@ i.profile-button{
 }
 .md-padding{
     padding:0px;
+}
+.md-whiteframe-3dp{
+    display: block;
+    background-color: white;
+}
+.paddings{
+    padding: 20px;
+}
+.white-icon{
+    color: white !important;
 }

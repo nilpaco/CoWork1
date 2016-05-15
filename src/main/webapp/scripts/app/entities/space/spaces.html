@@ -84,7 +84,7 @@
                     </div>
             </div>
         </div>
-        <div class="col-md-4 col-md-push-1">
+        <div class="col-md-4 col-md-push-7">
             <div class="material" style="padding: 0px;">
                 <div ng-cloak>
                     <md-content>
@@ -100,6 +100,7 @@
                                                     <h4>{{review.time | date:"MM/dd/yy 'at' h:mma"}}</h4>
                                                     <p>{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</p>
                                                 </div>
+                                                <md-divider ng-if="!$last"></md-divider>
                                             </md-list-item>
                                         </a>
                                     </div>
@@ -117,6 +118,7 @@
                                                         <h4>{{reviewBySpace.time | date:"MM/dd/yy 'at' h:mma"}}</h4>
                                                         <p>{{reviewBySpace.text | limitTo: 35}}{{reviewBySpace.text.length > 35 ? '...' : ''}}</p>
                                                     </div>
+                                                    <md-divider ng-if="!$last"></md-divider>
                                                 </md-list-item>
                                             </a>
                                         </div>
