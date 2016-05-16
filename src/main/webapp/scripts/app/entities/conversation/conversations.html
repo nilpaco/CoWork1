@@ -1,23 +1,14 @@
 <div class="container">
     <div class="row horizontal-section talls">
         <div class="col-md-3 divider talls">
-            <paper-header-panel mode="waterfall">
-                <paper-toolbar class="blank">
-                <span>
-                    Conversations
-                </span>
-                </paper-toolbar>
-                <paper-menu>
-                        <div class="insidelist" ng-repeat="conversation in conversations track by conversation.id">
-                            <a ui-sref="conversation.detail({id:conversation.id})">
-                                <div class="lists">
-                                    {{conversation.name}}
-                                </div>
-                            </a>
-                        </div>
-                </paper-menu>
-
-            </paper-header-panel>
+                <md-subheader class="md-no-sticky">Conversations</md-subheader>
+            <md-divider></md-divider>
+            <md-list>
+            <md-list-item ng-repeat="conversation in conversations track by conversation.id" ui-sref="conversation.detail({id:conversation.id})">
+                    <img alt="http://placehold.it/350x150" ng-src="http://placehold.it/350x150" class="md-avatar" />
+                    <p>{{conversation.name}}</p>
+                </md-list-item>
+            </md-list>
         </div>
         <div class="col-md-9 talls" ui-view="messages">
         </div>
@@ -25,15 +16,6 @@
 </div>
 
 <style>
-    .lists{
-        padding: 20px;
-    }
-    .insidelist a{
-        text-decoration: none;
-    }
-    .lists:hover{
-     background-color: #e7e7e7;
-    }
     .horizontal-section{
         background-color: white;
         padding: 0;

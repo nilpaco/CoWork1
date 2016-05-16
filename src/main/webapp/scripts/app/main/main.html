@@ -10,8 +10,11 @@
                 <div class="no-padding-right" style="float: right">
                     <form name="searchForm" class="form-inline">
                         <div>
-                            <input type="text" class="form-control" id="searchQuery"
-                                   placeholder="Buscar..." ng-model="searchSpace.space.streetAddress">
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <input type="text" id="searchQuery"
+                                       placeholder="Buscar..." ng-model="searchSpace.space.streetAddress">
+                            </md-input-container>
+
                         </div>
                     </form>
                 </div>
@@ -22,14 +25,28 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <h4 class="co-filters">Precio</h4>
-                                        <input ng-model="price" type="number" class="form-control">
-                                        <input ng-click="loadAll()" type="submit">
+                                        <md-input-container>
+                                            <label>Min price</label>
+                                            <input ng-model="price" type="number">
+                                        </md-input-container>
+                                        <md-input-container>
+                                            <label>Max price</label>
+                                            <input ng-model="price" type="number">
+                                        </md-input-container>
+
+
+                                        <!--
+                                                                                <input ng-click="loadAll()" type="submit">
+                                        -->
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h4 class="co-filters">Num. Personas</h4>
-                                        <input type="number" class="form-control">
+                                        <h4 class="co-filters">Num.personas</h4>
+                                        <md-input-container class="md-block">
+                                            <label>Num. Personas</label>
+                                            <input type="number">
+                                        </md-input-container>
                                     </div>
                                 </div>
                             </div>
@@ -47,6 +64,7 @@
                                 <h4 class="co-filters">Services</h4>
                                 <div class="col-lg-3" ng-repeat="service in services">
                                         <md-checkbox>
+                                            <i class="material-icons">{{service.icon}}</i>
                                             {{ service.name }}
                                         </md-checkbox>
                                 </div>

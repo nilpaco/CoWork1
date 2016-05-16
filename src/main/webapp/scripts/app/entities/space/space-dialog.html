@@ -11,73 +11,78 @@
                 </div>
                 <div class="modal-body">
                     <jh-alert-error></jh-alert-error>
-
-                    <div class="form-group">
-                        <label class="control-label" translate="project1App.space.name" for="field_name">Name</label>
-                        <input type="text" class="form-control" name="name" id="field_name"
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label translate="project1App.space.name" for="field_name">Name</label>
+                        <input type="text" name="name" id="field_name"
                                ng-model="space.name"
                         />
-                    </div>
-
-
-
-                    Single Image with validations
-                    <div class="row">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Single Image with validations</label>
                         <div ngf-drop ngf-multiple="true" class="col-lg-6 col-lg-push-3 ng-drop-file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"><iron-icon icon="icons:file-upload" class="upload-icon"></iron-icon></div>
-                    </div>
+                             ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"><i class="material-icons upload-icon">file_upload</i></div>
+                    </md-input-container>
 
-                    <div class="form-group">
-                        <label class="control-label" translate="project1App.space.description" for="field_description">Description</label>
-                        <input type="text" class="form-control" name="description" id="field_description"
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label translate="project1App.space.description" for="field_description">Description</label>
+                        <input type="text" name="description" id="field_description"
                                ng-model="space.description"
                         />
-                    </div>
-                    <input class="form-control" autocomplete="no" places-auto-complete size=80
-                           ng-model="vm.address"
-                           component-restrictions="{country:'es'}"
-                           types="{{types}}"
-                           on-place-changed="vm.placeChanged()"/> <br/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input autocomplete="no" places-auto-complete size=80
+                               ng-model="vm.address"
+                               component-restrictions="{country:'es'}"
+                               types="{{types}}"
+                               on-place-changed="vm.placeChanged()"/> <br/>
+                    </md-input-container>
+
+<!--
                     <div ng-show="vm.place">
                         Address = {{vm.place.formatted_address}} <br/>
                         Location: {{vm.place.geometry.location}}<br/>
                         Lat: {{vm.place.geometry.location.lat}}<br/>
                         address : {{vm.address}}
                     </div>
+-->
                     <ng-map id="foomap">
                         <marker position="{{vm.place.geometry.location}}"></marker>
                     </ng-map>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label translate="project1App.space.price" for="field_price">Price</label>
+                            <input type="number" name="price" id="field_price"
+                                   ng-model="space.price"/>
+                        </md-input-container>
 
-                    <div class="form-group">
-                        <label class="control-label" translate="project1App.space.price" for="field_price">Price</label>
-                        <input type="number" class="form-control" name="price" id="field_price"
-                               ng-model="space.price"
-                        />
+                        <md-input-container class="md-block" flex-gt-sm class="md-icon-float md-icon-right md-block">
+                            <label translate="project1App.space.personMax"
+                                   for="field_personMax">PersonMax</label>
+                            <input type="number" name="personMax" id="field_personMax"
+                                   ng-model="space.personMax"/>
+                        </md-input-container>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" translate="project1App.space.personMax"
-                               for="field_personMax">PersonMax</label>
-                        <input type="number" class="form-control" name="personMax" id="field_personMax"
-                               ng-model="space.personMax"
-                        />
-                    </div>
+
+<!--
                     <div class="form-group">
                         <label class="control-label" translate="project1App.space.streetAddress" for="field_streetAddress">StreetAddress</label>
                         <input type="text" class="form-control" name="streetAddress" id="field_streetAddress"
-                               ng-model="space.streetAddress"
-                        />
+                               ng-model="space.streetAddress"/>
                     </div>
+-->
 
                     <div class="form-group">
                         <label translate="project1App.space.service" for="field_service">service</label>
                         <select class="form-control" id="field_service" multiple name="service" ng-model="space.services"
                                 ng-options="service as service.name for service in services track by service.id"></select>
                     </div>
+
+
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+                    <md-button type="submit" ng-disabled="editForm.$invalid || isSaving">
                         <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-                    </button>
+                    </md-button>
                 </div>
             </form>
             <style>

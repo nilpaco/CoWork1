@@ -1,4 +1,4 @@
-
+<!--
 <paper-header-panel mode="waterfall">
     <paper-toolbar class="blank">
         <paper-icon-button icon="icons:arrow-back" type="submit" ui-sref="conversation">
@@ -16,4 +16,21 @@
     <input placeholder="Introduce el texto" type="text" class="form-control borderless" ng-model="text2">
     <button ng-click="sendMessage()">Enviar</button>
 </div>
-</div>
+</div>-->
+
+    <md-content style="height: 100%;" md-theme="altTheme">
+        <section>
+            <md-subheader class="md-primary">Messages</md-subheader>
+            <md-list layout-padding>
+                <md-list-item class="md-3-line md-long-text" ng-repeat="message in messages" ng-class="{true: 'message-1 message-1-div', false: 'message-2'}[account.login == message.user.login]">
+                    <img ng-src="profile/{{message.user.login}}.jpg" class="md-avatar" alt="{{message.user.login}}">
+                    <div class="md-list-item-text">
+                        <h3>{{message.user.login}}</h3>
+                        <p>
+                            {{message.text}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+    </md-content>
