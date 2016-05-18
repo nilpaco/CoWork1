@@ -8,14 +8,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -40,6 +38,7 @@ public class SpaceCriteriaRepository {
 
         public List<Space> findByParameters(Map<String, Object> parameters) {
             Criteria spaceCriteria = currentSession().createCriteria(Space.class);
+            spaceCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             Double minPrice = 0.0;
             Double maxPrice = 0.0;
             Integer numPers = 0;
@@ -59,51 +58,43 @@ public class SpaceCriteriaRepository {
                 spaceCriteria.add(Restrictions.ge("personMax", numPers));
             }
 
+
+            List<Space> results = spaceCriteria.list();
+
+            List<Space> spacesToRemove = new ArrayList<>();
+
+            for(int i=0; i<results.size(); i++){
+
+                Space space = results.get(i);
+
+                List<Long> servicesLong = getServicesIds(space);
+
+                Long[] requiredServices = (Long[]) parameters.get("services");
+
+                if(!servicesLong.containsAll(Arrays.asList(requiredServices))){
+                    spacesToRemove.add(space);
+                }
+            }
+
+            for(int i=0; i<spacesToRemove.size(); i++){
+                results.remove(spacesToRemove.get(i));
+            }
+
 /*
             if(parameters.containsKey("services")) {
 
                 Long[] servicesLong = (Long[]) parameters.get("services");
 
                 for (Long id : servicesLong) {
-                    DetachedCriteria subquery = DetachedCriteria.forClass(Service.class, "service");
+                    DetachedCriteria subquery = DetachedCriteria.forClass(Space.class, "space");
                     subquery.add(Restrictions.eq("id", id));
                     subquery.setProjection(Projections.property("id"));
-                    subquery.createAlias("spaces", "space");
-                    subquery.add(Restrictions.eqProperty("space.id", "space.id"));
+                    subquery.createAlias("services", "s");
+                    subquery.add(Restrictions.eqProperty("s.id", "Space.id"));
                     spaceCriteria.add(Subqueries.exists(subquery));
                 }
             }
-*/
-            List<Space> results = spaceCriteria.list();
 
-
-
-
-
-/*
-            for (int i=0; i<results.size(); i++) {
-
-                Space space = results.get(i);
-
-                Boolean found = false;
-
-                for (String currentService : services) {
-
-
-                    for (Service spaceService: space.getServices()){
-                        if(currentService.equals(spaceService.getName())){
-                            found = true;
-                        }
-                    }
-
-                }
-
-                if(!found){
-                    results.remove(space);
-                }
-
-
-            }
 */
 
 
@@ -114,7 +105,18 @@ public class SpaceCriteriaRepository {
 
         }
 
-        private void addFilter(String param, Object value, Criteria playerCriteria) {
+    private List<Long> getServicesIds(Space space) {
+        Set<Service> services = space.getServices();
+
+        List<Long> servicesLong = new ArrayList<>();
+
+        for(Service service: services){
+            servicesLong.add(service.getId());
+        }
+        return servicesLong;
+    }
+
+    private void addFilter(String param, Object value, Criteria playerCriteria) {
 
             if (param.equals("id") || param.equals("posicionCampo")) {
                 playerCriteria.add(Restrictions.eq(param, value));

@@ -133,7 +133,11 @@
 </md-toolbar>
 <md-sidenav class="md-sidenav-left  md-whiteframe-z2" md-component-id="right">
     <md-toolbar  class="md-theme-light md-tall">
-        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+        <div class="pad-menu">
+            <img class="img-menu" ng-src="profile/{{account.login}}.jpg" alt="{{account.login}}"/>
+            <span class="md-title">{{account.login}}</span>
+            <span class="md-subhead">{{account.email}}</span>
+        </div>
     </md-toolbar>
     <md-content>
         <md-list-item href="#/">

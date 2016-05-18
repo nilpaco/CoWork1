@@ -76,8 +76,8 @@
                 },
 
                 applyTruncation: function( threshould, $scope, $element ) {
-                    var more =  $scope.customMoreLabel || "<paper-button style='color: #ff4081; display: block;'>+ More</paper-button>";
-                    var less =  $scope.customLessLabel || "<paper-button style='color: #ff4081; display: block;'>- Less</paper-button>";
+                    var more =  $scope.customMoreLabel || "<md-button style='color: #ff4081; display: block;'>+ More</md-button>";
+                    var less =  $scope.customLessLabel || "<md-button style='color: #ff4081; display: block;'>- Less</md-button>";
                     if( $scope.useToggling ) {
                         var el = angular.element(
                             "<span>" +

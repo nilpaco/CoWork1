@@ -27,7 +27,7 @@
             <h2 class="paper-font-title">Servicios</h2>
             <div class="icon-content horizontal layout wrap center" style="width: 100%">
                         <span ng-repeat="service in space.services">
-                            <div class="col-sm-6 col-md-6"><iron-icon icon="{{service.icon}}"></iron-icon><span>{{service.name}}</span></div>
+                            <div class="col-sm-12 col-md-6"><i class="material-icons color">{{service.icon}}</i><span>{{service.name}}</span></div>
                         </span>
                 <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
             </div>
@@ -56,9 +56,14 @@
                 </div>
                 <form ng-submit="addReview()" ng-show="space.user.login!=account.login">
                     <div class="input-group">
-                        <input ng-model="text3" type="text" class="form-control" placeholder="Escribe aqui tu review"/>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="text3" type="text" placeholder="Escribe aqui tu review"/>
+                        </md-input-container>
                           <span class="input-group-btn">
-                              <input class="btn btn-default" type="submit"/>
+                                    <md-button class="md-icon-button" type="submit">
+                                          <i class="material-icons color">send</i>
+                                      </md-button>
+
                           </span>
                     </div><!-- /input-group -->
                 </form>
@@ -68,9 +73,13 @@
 
                 <form ng-show="getConversation == null" ng-hide="space.user.login==account.login" ng-submit="addMessage()">
                     <div class="input-group">
-                        <input ng-model="text2" type="text" class="form-control" placeholder="Escribe aqui tu mensaje"/>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input ng-model="text2" type="text" placeholder="Escribe aqui tu mensaje"/>
+                        </md-input-container>
                           <span class="input-group-btn">
-                              <input class="btn btn-default" type="submit"/>
+                                       <md-button class="md-icon-button" type="submit">
+                                          <i class="material-icons color">send</i>
+                                      </md-button>
                           </span>
                     </div><!-- /input-group -->
                 </form>
