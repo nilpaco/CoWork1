@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate, Review, Upload, $timeout) {
+    .controller('SettingsController', function ($scope, Principal, Auth, Language, $translate, Review, Upload, $timeout, toaster) {
         $scope.success = null;
         $scope.error = null;
         Principal.identity().then(function(account) {
@@ -12,10 +12,13 @@ angular.module('project1App')
             Auth.updateAccount($scope.settingsAccount).then(function() {
                 $scope.error = null;
                 $scope.success = 'OK';
-                $scope.uploadPic($scope.picFile, $scope.settingsAccount.login);
+                if($scope.picFile != undefined){
+                    $scope.uploadPic($scope.picFile, $scope.settingsAccount.login);
+                }
                 Principal.identity(true).then(function(account) {
                     $scope.settingsAccount = copyAccount(account);
                 });
+                toaster.pop('success',$scope.settingsAccount.firstName,"Saved");
                 Language.getCurrent().then(function(current) {
                     if ($scope.settingsAccount.langKey !== current) {
                         $translate.use($scope.settingsAccount.langKey);
@@ -61,5 +64,5 @@ angular.module('project1App')
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         }
-        
+
     });

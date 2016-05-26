@@ -19,6 +19,7 @@
                 </div>
                 <div class="collapse" id="collapseExample">
                     <div class="well filter-back" style="width: 100%; margin: 15px 0px;">
+                        <form>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="row">
@@ -52,33 +53,35 @@
                             <div class="col-lg-6">
                                 <h4 class="co-filters">Ordenar por:</h4>
                                 <md-radio-group ng-model="data.group1">
-                                    <md-radio-button value="Apple">Precio mayor</md-radio-button>
-                                    <md-radio-button value="Banana"> Precio menor </md-radio-button>
-                                    <md-radio-button value="Mango">Recientes</md-radio-button>
+                                    <md-radio-button value="maxPrice">Precio mayor</md-radio-button>
+                                    <md-radio-button value="minPrice"> Precio menor </md-radio-button>
+                                    <md-radio-button value="recents">Recientes</md-radio-button>
                                 </md-radio-group>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <h4 class="co-filters">Services</h4>
-                                <div class="col-lg-3" ng-repeat="service in services">
-                                        <md-checkbox>
-                                            <i class="material-icons main-icons">{{service.icon}}</i>
-                                            {{ service.name }}
+                                <div class="col-lg-3" ng-repeat="(key, value) in services">
+                                        <md-checkbox ng-model="ids[$index]" ng-true-value="{{value.id}}">
+                                            <i class="material-icons main-icons">{{value.icon}}</i>
+                                            {{ value.name }}
                                         </md-checkbox>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <md-button ng-click="filters(maxPrice, minPrice, numPers, services)">Enviar</md-button>
+                            <md-button ng-click="sendFilters(maxPrice, minPrice, numPers, ids)">Enviar</md-button>
                             <md-button style="float: right">Clear All</md-button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
+{{ ids }}
             <toaster-container
-                toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
+                toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}">
+            </toaster-container>
             <div class="container-fluid">
                 <idiv class="row">
                     <div class="col-sm-12 col-md-12 col-lg-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">

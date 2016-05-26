@@ -42,21 +42,23 @@ public class SpaceCriteriaRepository {
             Double minPrice = 0.0;
             Double maxPrice = 0.0;
             Integer numPers = 0;
-            if(parameters.containsKey("min-price") && parameters.containsKey("max-price")){
+            if(parameters.containsKey("min-price") && parameters.containsKey("maxprice")){
                 minPrice = (Double) parameters.get("min-price");
-                maxPrice = (Double) parameters.get("max-price");
+                maxPrice = (Double) parameters.get("maxprice");
                 spaceCriteria.add(Restrictions.between("price", minPrice, maxPrice));
             }else if(parameters.containsKey("min-price")){
                 minPrice = (Double) parameters.get("min-price");
                 spaceCriteria.add(Restrictions.ge("price", minPrice));
-            }else if(parameters.containsKey("max-price")){
-                maxPrice = (Double) parameters.get("max-price");
+            }else if(parameters.containsKey("maxprice")){
+                maxPrice = (Double) parameters.get("maxprice");
                 spaceCriteria.add(Restrictions.le("price", maxPrice));
             }
             if(parameters.containsKey("num-pers")){
                 numPers = (Integer) parameters.get("num-pers");
                 spaceCriteria.add(Restrictions.ge("personMax", numPers));
             }
+
+
 
             //TODO: arraylist resource, if containskey, meter en un metodo
 

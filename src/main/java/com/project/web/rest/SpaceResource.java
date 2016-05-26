@@ -231,7 +231,7 @@ public class SpaceResource {
     @Transactional
     public ResponseEntity<List<Space>> getPlayersByParams(
         @RequestParam(value = "min-price", required = false) Double minPrice,
-        @RequestParam(value = "max-price", required = false) Double maxPrice,
+        @RequestParam(value = "maxprice", required = false) Double maxPrice,
         @RequestParam(value = "num-pers", required = false) Integer numPers,
         @RequestParam(value = "services", required = false) String services
     ) {
@@ -242,7 +242,7 @@ public class SpaceResource {
             params.put("min-price", minPrice);
         }
         if (maxPrice != null) {
-            params.put("max-price", maxPrice);
+            params.put("maxprice", maxPrice);
         }
         if(numPers != null){
             params.put("num-pers", numPers);

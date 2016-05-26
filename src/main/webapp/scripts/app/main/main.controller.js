@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster, NgMap, Service) {
+    .controller('MainController', function ($scope, Principal, ParseLinks, Space, SpaceSearch, Favorite, toaster, NgMap, Service, filterFilter) {
         Principal.identity().then(function(account) {
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
@@ -88,7 +88,6 @@ angular.module('project1App')
             }else{
                 toaster.pop('success',result.space.name,"Added")
             }
-
         }
 
         var vm = this;
@@ -114,6 +113,11 @@ angular.module('project1App')
         $scope.loadAll2();
 
 
+        // http://127.0.0.1:8080/api/spaces/byfilters?min-price=200&max-price=300&services=1-2-3
+        $scope.ids = [];
 
+        $scope.sendFilters = function(minPrice, maxPrice, numPers, ids){
+            Space.byFilters({maxprice: maxPrice, services: '1-2'});
+        }
 
     });

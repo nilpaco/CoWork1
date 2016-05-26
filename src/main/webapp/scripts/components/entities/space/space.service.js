@@ -25,7 +25,7 @@ angular.module('project1App')
             'byFilters': {
                 method: 'GET',
                 isArray: true,
-                url: 'api/spaces/byfilters/min-price=100&max-price=300'
+                url: 'api/spaces/byfilters'
             },
 
 

@@ -5,9 +5,10 @@
                 <h2 translate="settings.title" translate-values="{username: '{{settingsAccount.login}}'}">User settings
                     for [<b>{{settingsAccount.login}}</b>]</h2>
 
-                <div class="alert alert-success" ng-show="success" translate="settings.messages.success">
-                    <strong>Settings saved!</strong>
-                </div>
+                <toaster-container
+                    toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}">
+                </toaster-container>
+
 
                 <div class="alert alert-danger" ng-show="errorEmailExists"
                      translate="settings.messages.error.emailexists">
@@ -77,8 +78,7 @@
                     <div class="form-group">
                             <md-button id="field_picture" type="file" ngf-select ng-model="picFile"
                                     name="file"
-                                    accept="image/*" ngf-max-size="2MB" required
-                                    ngf-model-invalid="errorFile" data-toggle="tooltip">
+                                    accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile" data-toggle="tooltip">
                                 <i class="material-icons profile-button">insert_photo</i>Upload image
                             </md-button>
                         <md-button class="delete" ng-show="picFile" ng-click="picFile = null">
@@ -88,7 +88,8 @@
                         <i ng-show="myForm.file.$error.required">*required</i><br>
                         <i ng-show="myForm.file.$error.maxSize">File too large
                             {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" style="max-width:600px" class="thumb">
+                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" style="max-width:100%" class="thumb">
+                        <img ng-hide="picFile" ng-src="profile/{{settingsAccount.login}}.jpg" style="max-width:100%" class="thumb">
                           <span class="progress" ng-show="picFile.progress >= 0">
                             <div style="width:{{picFile.progress}}%"
                                  ng-bind="picFile.progress + '%'"></div>
