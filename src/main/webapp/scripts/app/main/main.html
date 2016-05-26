@@ -1,7 +1,7 @@
 <div ng-cloak>
-    <div class="row" style="margin-right: 0;margin-left: 0;">
+    <div class="row">
         <!-- add toaster -->
-        <div class="col-lg-6 col-xs-12" id="col-left" style="margin-top: 79px">
+        <div class="col-lg-6 col-xs-12" id="col-left" style="margin-top: 64px">
             <div class="padding">
                 <a role="button" data-toggle="collapse" href="#collapseExample"
                    aria-expanded="false" aria-controls="collapseExample">
@@ -26,11 +26,11 @@
                                         <h4 class="co-filters">Precio</h4>
                                         <md-input-container class="no-margin">
                                             <label>Min price</label>
-                                            <input ng-model="price" type="number">
+                                            <input ng-model="minPrice" type="number">
                                         </md-input-container>
                                         <md-input-container class="no-margin">
                                             <label>Max price</label>
-                                            <input ng-model="price" type="number" min="0">
+                                            <input ng-model="maxPrice" type="number" min="0">
                                         </md-input-container>
 
 
@@ -44,7 +44,7 @@
                                         <h4 class="co-filters">Num.personas</h4>
                                         <md-input-container class="md-block no-margin">
                                             <label>Num. Personas</label>
-                                            <input type="number">
+                                            <input type="number" ng-model="numPers">
                                         </md-input-container>
                                     </div>
                                 </div>
@@ -70,6 +70,7 @@
                             </div>
                         </div>
                         <div class="row">
+                            <md-button ng-click="filters(maxPrice, minPrice, numPers, services)">Enviar</md-button>
                             <md-button style="float: right">Clear All</md-button>
                         </div>
                     </div>
@@ -79,7 +80,7 @@
             <toaster-container
                 toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}"></toaster-container>
             <div class="container-fluid">
-                <div class="row">
+                <idiv class="row">
                     <div class="col-sm-12 col-md-12 col-lg-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">
                         <div class="thumbnail material">
                             <div style="height: 150px;">
@@ -105,7 +106,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </idiv>
             </div>
             <style>
                 .co-filters{
@@ -238,7 +239,7 @@
                     </custom-marker>
                     <info-window id="foo" on-mouseover="vm.mouseover()">
                         <div>
-                            <img ng-src="uploads/{{selectedSpace.masterImage}}" height="200" width="300"><br/>
+                            <img ng-src="uploads/{{selectedSpace.name}}{{selectedSpace.id}}0.jpg" height="200" width="300"><br/>
                             <a ui-sref="space.detail({id:selectedSpace.id})">{{selectedSpace.name}}</a><br/>
                             {{selectedSpace.price}}€<br/>
                         </div>

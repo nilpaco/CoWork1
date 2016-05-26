@@ -18,11 +18,11 @@
 </div>
 </div>-->
 
-    <md-content style="height: 100%;" md-theme="altTheme">
+    <md-content style="height: calc(100% - 55px);" md-theme="altTheme">
         <section>
             <md-subheader class="md-primary">Messages</md-subheader>
             <md-list layout-padding>
-                <md-list-item class="md-3-line md-long-text" ng-repeat="message in messages" ng-class="{true: 'message-1 message-1-div', false: 'message-2'}[account.login == message.user.login]">
+                <md-list-item class="md-3-line md-long-text" ng-repeat="message in messages | orderBy: 'time' " ng-class="{true: 'message-1 message-1-div', false: 'message-2'}[account.login == message.user.login]">
                     <img ng-src="profile/{{message.user.login}}.jpg" class="md-avatar" alt="{{message.user.login}}">
                     <div class="md-list-item-text">
                         <h3>{{message.user.login}}</h3>
@@ -34,3 +34,8 @@
             </md-list>
         </section>
     </md-content>
+<div class="chat-footer">
+    <input placeholder="Introduce el texto" type="text" class="form-control borderless" ng-model="text2" style="width: calc(100% - 55px); display: inline-block;">
+    <md-button ng-click="sendMessage()" class="md-icon-button" aria-label="Send" style="float: right;"><i class="material-icons" style="color: #00C853;">send</i></md-button>
+</div>
+

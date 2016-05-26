@@ -326,16 +326,16 @@ ul#strengthBar {
     border-radius: 4px;
     text-align: center;
     display: table;
+    width: 100%;
 }
 .ng-drop-file:hover{
     border: dashed 4px rgba(0,0,0,0.54);
 }
 .upload-icon{
-    height: 40px;
-    width: 40px;
-    color: rgba(0,0,0,0.38);
-    display: table-cell;
-    vertical-align: middle;
+    font-size: 40px;
+    color: rgba(0,0,0,0.38) !important;
+    display: table-cell !important;
+    vertical-align: middle !important;
 }
 .material-icons{
     display: inline-flex;
@@ -454,4 +454,27 @@ i.profile-button{
 }
 .color{
     color: rgba(0,0,0,0.57);
+}
+.profile-img-space{
+    display: block;
+    margin: auto;
+    max-height: 150px;
+}
+
+.select-control{
+    border-radius: 0;
+
+}
+.select-control>option{
+    padding: 10px;
+}
+.select-control:focus{
+    border: 1px solid #ccc;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+md-list-item.md-3-line, md-list-item.listing > .md-no-style{
+    min-height: auto;
 }

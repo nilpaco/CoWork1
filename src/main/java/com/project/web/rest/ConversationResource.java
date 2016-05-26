@@ -98,6 +98,22 @@ public class ConversationResource {
     }
 
     /**
+     * GET  /conversations -> get all the conversations.
+     */
+    @RequestMapping(value = "/conversationsSpace",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Conversation>> getAllConversationsFromSpace(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Conversations");
+        Page<Conversation> page = conversationRepository.findByUserAndSpace(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/conversationsSpace");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    /**
      * GET  /conversations/:id -> get the "id" conversation.
      */
     @RequestMapping(value = "/conversations/{id}",

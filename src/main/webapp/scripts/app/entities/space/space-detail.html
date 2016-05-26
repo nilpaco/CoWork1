@@ -27,7 +27,7 @@
             <h2 class="paper-font-title">Servicios</h2>
             <div class="icon-content horizontal layout wrap center" style="width: 100%">
                         <span ng-repeat="service in space.services">
-                            <div class="col-sm-12 col-md-6"><i class="material-icons color">{{service.icon}}</i><span>{{service.name}}</span></div>
+                            <div class="col-sm-12 col-md-12"><i class="material-icons color">{{service.icon}}</i><span>{{service.name}}</span></div>
                         </span>
                 <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
             </div>
@@ -54,24 +54,26 @@
                         </div>
                     </a>
                 </div>
-                <form ng-submit="addReview()" ng-show="space.user.login!=account.login">
-                    <div class="input-group">
-                        <md-input-container class="md-block" flex-gt-sm>
-                            <input ng-model="text3" type="text" placeholder="Escribe aqui tu review"/>
-                        </md-input-container>
+                <div>
+                    <form ng-submit="addReview()" ng-hide="test || testReview || space.user.login==account.login">
+                        <div class="input-group">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <input ng-model="text3" type="text" placeholder="Escribe aqui tu review"/>
+                            </md-input-container>
                           <span class="input-group-btn">
                                     <md-button class="md-icon-button" type="submit">
                                           <i class="material-icons color">send</i>
                                       </md-button>
 
                           </span>
-                    </div><!-- /input-group -->
-                </form>
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
             </div>
             <div class="col-lg-6" style="padding: 0px 20px;">
                 <h2>Enviar mensaje</h2>
 
-                <form ng-show="getConversation == null" ng-hide="space.user.login==account.login" ng-submit="addMessage()">
+                <form ng-hide="getConversation != null ||space.user.login==account.login || testConv" ng-submit="addMessage()">
                     <div class="input-group">
                         <md-input-container class="md-block" flex-gt-sm>
                             <input ng-model="text2" type="text" placeholder="Escribe aqui tu mensaje"/>
@@ -83,11 +85,11 @@
                           </span>
                     </div><!-- /input-group -->
                 </form>
-                <div ng-show="space.user.login==account.login">
+                <div ng-show="space.user.login==account.login" class="alert alert-warning">
                     No te puedes enviar mensajes a ti mismo.
                 </div>
-                <div ng-show="getConversation != null">
-                    <a ui-sref="conversation.detail({id:space.id})">Ya esta enviado! Accede a la conversación</a>
+                <div ng-show="testConv || getConversation != null" class="alert alert-success">
+                    <a ui-sref="conversation.detail({id:space.id})">Enviado! Accede a la conversación</a>
                 </div>
             </div>
 
@@ -247,7 +249,7 @@
                 {{selectedReview.text}}
             </div>
             <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
-                <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                <div class="modal-body rspace" style="background-image: url(uploads/{{selectedReview.space.name}}{{selectedReview.space.id}}0.jpg); color: white;">
                     <h3>{{selectedReview.space.name}}</h3>
                     <h4>{{selectedReview.space.price}}€</h4>
 

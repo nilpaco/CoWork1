@@ -71,6 +71,11 @@ angular.module('project1App')
             Favorite.addLike({id: id},{},successLike);
         }
 
+        $scope.filters = function(maxPrice, minPrice, numPers, services){
+            Space.byFilters({maxPrice: maxPrice},{minPrice: minPrice}, {numPers: numPers}, {services: services});
+        }
+
+
         var successLike = function(result) {
             for (var k = 0; k < $scope.spaces.length; k++) {
                 if ($scope.spaces[k].space.id == result.space.id) {

@@ -186,6 +186,8 @@ public class MessageResource {
 
         Conversation result1 = conversationRepository.save(conversation);
 
+        ZonedDateTime today = ZonedDateTime.now();
+        message.setTime(today);
         message.setConversation(conversation);
         message.setUser(user);
         Message result = messageRepository.save(message);

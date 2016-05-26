@@ -58,6 +58,7 @@ public class SpaceCriteriaRepository {
                 spaceCriteria.add(Restrictions.ge("personMax", numPers));
             }
 
+            //TODO: arraylist resource, if containskey, meter en un metodo
 
             List<Space> results = spaceCriteria.list();
 
@@ -79,26 +80,6 @@ public class SpaceCriteriaRepository {
             for(int i=0; i<spacesToRemove.size(); i++){
                 results.remove(spacesToRemove.get(i));
             }
-
-/*
-            if(parameters.containsKey("services")) {
-
-                Long[] servicesLong = (Long[]) parameters.get("services");
-
-                for (Long id : servicesLong) {
-                    DetachedCriteria subquery = DetachedCriteria.forClass(Space.class, "space");
-                    subquery.add(Restrictions.eq("id", id));
-                    subquery.setProjection(Projections.property("id"));
-                    subquery.createAlias("services", "s");
-                    subquery.add(Restrictions.eqProperty("s.id", "Space.id"));
-                    spaceCriteria.add(Subqueries.exists(subquery));
-                }
-            }
-
-*/
-
-
-
 
 
             return results;

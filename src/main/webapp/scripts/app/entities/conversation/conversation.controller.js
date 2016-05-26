@@ -20,6 +20,13 @@ angular.module('project1App')
         };
         $scope.loadAll();
 
+        $scope.conversationsSpace=[];
+        $scope.loadAll2 = function () {
+            Conversation.conversationsSpace(function (result) {
+                    $scope.conversationsSpace = result;
+                });
+        }
+        $scope.loadAll2();
 
         $scope.search = function () {
             ConversationSearch.query({query: $scope.searchQuery}, function(result) {

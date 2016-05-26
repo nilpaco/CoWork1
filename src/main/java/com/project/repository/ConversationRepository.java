@@ -20,4 +20,9 @@ public interface ConversationRepository extends JpaRepository<Conversation,Long>
     @Query("select conversation from Conversation conversation where conversation.user.login = ?#{principal.username} and conversation.space.id = :space_id")
     Conversation findByUserIsCurrentUserAndSpace(@Param("space_id") Long id);
 
+    @Query("select conversation from Conversation conversation, Space s where s.user.login = ?#{principal.username} and conversation.space.id = s.id")
+    Page<Conversation> findByUserAndSpace(Pageable pageable);
+
+
+
 }

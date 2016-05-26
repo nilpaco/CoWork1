@@ -14,5 +14,6 @@ angular.module('project1App')
             'update': { method:'PUT' },
             'getMessagesFromConversation': {method: 'GET', isArray: true, url: 'api/conversations/:id/messages'},
             'getConversationFromSpace': {method: 'GET', isArray: false, url: 'api/space/:id/conversations'},
+            'conversationsSpace': {method: 'GET', isArray: true, url: 'api/conversationsSpace'}
         });
     });

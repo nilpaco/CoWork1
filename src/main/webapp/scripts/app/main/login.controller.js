@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('LoginController', function ($scope, Principal) {
+    .controller('LoginController2', function ($scope, Principal) {
         Principal.identity().then(function(account) {
             $scope.account = account;
             $scope.isAuthenticated = Principal.isAuthenticated;
