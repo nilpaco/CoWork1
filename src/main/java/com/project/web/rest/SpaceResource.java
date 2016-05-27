@@ -230,9 +230,9 @@ public class SpaceResource {
     @Timed
     @Transactional
     public ResponseEntity<List<Space>> getPlayersByParams(
-        @RequestParam(value = "min-price", required = false) Double minPrice,
+        @RequestParam(value = "minprice", required = false) Double minPrice,
         @RequestParam(value = "maxprice", required = false) Double maxPrice,
-        @RequestParam(value = "num-pers", required = false) Integer numPers,
+        @RequestParam(value = "numpers", required = false) Integer numPers,
         @RequestParam(value = "services", required = false) String services
     ) {
         Map<String, Object> params = new HashMap<>();
@@ -250,9 +250,11 @@ public class SpaceResource {
         if(services != null){
             //arrays de longs
             String[] servicesArray = services.split("-");
-            Long[] servicesLong = new Long[servicesArray.length];
+
+            List<Long> servicesLong = new ArrayList<>();
+
             for (int i = 0; i < servicesArray.length; i++) {
-                servicesLong[i] = Long.valueOf(servicesArray[i]);
+                servicesLong.add(Long.valueOf(servicesArray[i]));
             }
             params.put("services", servicesLong);
         }

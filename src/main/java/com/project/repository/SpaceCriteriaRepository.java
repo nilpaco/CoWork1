@@ -37,32 +37,33 @@ public class SpaceCriteriaRepository {
         }
 
         public List<Space> findByParameters(Map<String, Object> parameters) {
-            Criteria spaceCriteria = currentSession().createCriteria(Space.class);
-            spaceCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-            Double minPrice = 0.0;
-            Double maxPrice = 0.0;
-            Integer numPers = 0;
-            if(parameters.containsKey("min-price") && parameters.containsKey("maxprice")){
-                minPrice = (Double) parameters.get("min-price");
-                maxPrice = (Double) parameters.get("maxprice");
-                spaceCriteria.add(Restrictions.between("price", minPrice, maxPrice));
-            }else if(parameters.containsKey("min-price")){
-                minPrice = (Double) parameters.get("min-price");
-                spaceCriteria.add(Restrictions.ge("price", minPrice));
-            }else if(parameters.containsKey("maxprice")){
-                maxPrice = (Double) parameters.get("maxprice");
-                spaceCriteria.add(Restrictions.le("price", maxPrice));
-            }
-            if(parameters.containsKey("num-pers")){
-                numPers = (Integer) parameters.get("num-pers");
-                spaceCriteria.add(Restrictions.ge("personMax", numPers));
-            }
+            return filterSpaces(parameters);
+        }
 
+    private List<Space> filterSpaces(Map<String, Object> parameters) {
+        Criteria spaceCriteria = currentSession().createCriteria(Space.class);
+        spaceCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        Double minPrice = 0.0;
+        Double maxPrice = 0.0;
+        Integer numPers = 0;
+        if(parameters.containsKey("min-price") && parameters.containsKey("maxprice")){
+            minPrice = (Double) parameters.get("min-price");
+            maxPrice = (Double) parameters.get("maxprice");
+            spaceCriteria.add(Restrictions.between("price", minPrice, maxPrice));
+        }else if(parameters.containsKey("min-price")){
+            minPrice = (Double) parameters.get("min-price");
+            spaceCriteria.add(Restrictions.ge("price", minPrice));
+        }else if(parameters.containsKey("maxprice")){
+            maxPrice = (Double) parameters.get("maxprice");
+            spaceCriteria.add(Restrictions.le("price", maxPrice));
+        }
+        if(parameters.containsKey("num-pers")){
+            numPers = (Integer) parameters.get("num-pers");
+            spaceCriteria.add(Restrictions.ge("personMax", numPers));
+        }
+        List<Space> results = spaceCriteria.list();
 
-
-            //TODO: arraylist resource, if containskey, meter en un metodo
-
-            List<Space> results = spaceCriteria.list();
+        if(parameters.containsKey("services")){
 
             List<Space> spacesToRemove = new ArrayList<>();
 
@@ -72,9 +73,9 @@ public class SpaceCriteriaRepository {
 
                 List<Long> servicesLong = getServicesIds(space);
 
-                Long[] requiredServices = (Long[]) parameters.get("services");
+                List<Long> requiredServices = (List<Long>) parameters.get("services");
 
-                if(!servicesLong.containsAll(Arrays.asList(requiredServices))){
+                if(!servicesLong.containsAll(requiredServices)){
                     spacesToRemove.add(space);
                 }
             }
@@ -82,11 +83,10 @@ public class SpaceCriteriaRepository {
             for(int i=0; i<spacesToRemove.size(); i++){
                 results.remove(spacesToRemove.get(i));
             }
-
-
-            return results;
-
         }
+
+        return results;
+    }
 
     private List<Long> getServicesIds(Space space) {
         Set<Service> services = space.getServices();

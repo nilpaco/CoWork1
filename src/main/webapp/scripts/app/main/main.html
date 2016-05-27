@@ -27,17 +27,12 @@
                                         <h4 class="co-filters">Precio</h4>
                                         <md-input-container class="no-margin">
                                             <label>Min price</label>
-                                            <input ng-model="minPrice" type="number">
+                                            <input ng-model="firstPrice" type="number">
                                         </md-input-container>
                                         <md-input-container class="no-margin">
                                             <label>Max price</label>
-                                            <input ng-model="maxPrice" type="number" min="0">
+                                            <input ng-model="lastPrice" type="number" min="0">
                                         </md-input-container>
-
-
-                                        <!--
-                                                                                <input ng-click="loadAll()" type="submit">
-                                        -->
                                     </div>
                                 </div>
                                 <div class="row">
@@ -71,14 +66,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <md-button ng-click="sendFilters(maxPrice, minPrice, numPers, ids)">Enviar</md-button>
+                            <md-button ng-click="sendFilters(firstPrice, lastPrice, numPers, ids)">Enviar</md-button>
                             <md-button style="float: right">Clear All</md-button>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-{{ ids }}
             <toaster-container
                 toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}">
             </toaster-container>

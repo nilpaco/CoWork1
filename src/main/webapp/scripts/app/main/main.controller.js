@@ -71,11 +71,6 @@ angular.module('project1App')
             Favorite.addLike({id: id},{},successLike);
         }
 
-        $scope.filters = function(maxPrice, minPrice, numPers, services){
-            Space.byFilters({maxPrice: maxPrice},{minPrice: minPrice}, {numPers: numPers}, {services: services});
-        }
-
-
         var successLike = function(result) {
             for (var k = 0; k < $scope.spaces.length; k++) {
                 if ($scope.spaces[k].space.id == result.space.id) {
@@ -112,12 +107,24 @@ angular.module('project1App')
         };
         $scope.loadAll2();
 
-
-        // http://127.0.0.1:8080/api/spaces/byfilters?min-price=200&max-price=300&services=1-2-3
         $scope.ids = [];
 
-        $scope.sendFilters = function(minPrice, maxPrice, numPers, ids){
-            Space.byFilters({maxprice: maxPrice, services: '1-2'});
+        // http://127.0.0.1:8080/api/spaces/byfilters?min-price=200&max-price=300&services=1-2-3
+        $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids){
+            Array.prototype.clean = function(deleteValue) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i] == deleteValue) {
+                        this.splice(i, 1);
+                        i--;
+                    }
+                }
+                return this;
+            };
+            ids.clean(null);
+
+            var servicesStr = ids.join("-");
+            Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr});
+            $scope.ids = [];
         }
 
     });
