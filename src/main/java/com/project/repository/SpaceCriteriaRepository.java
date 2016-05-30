@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -37,7 +38,9 @@ public class SpaceCriteriaRepository {
         }
 
         public List<Space> findByParameters(Map<String, Object> parameters) {
+
             return filterSpaces(parameters);
+
         }
 
     private List<Space> filterSpaces(Map<String, Object> parameters) {
@@ -65,54 +68,21 @@ public class SpaceCriteriaRepository {
 
         if(parameters.containsKey("services")){
 
-            List<Space> spacesToRemove = new ArrayList<>();
+            List<Long> requiredServices = (List<Long>) parameters.get("services");
 
-            for(int i=0; i<results.size(); i++){
+            List<Space> fresults = results.parallelStream().filter(
+                (space) -> space.getServices()
+                    .stream()
+                    .mapToLong(Service::getId)
+                    .boxed().collect(Collectors.toList())
+                    .containsAll(requiredServices)
+            ).collect(Collectors.toList());
 
-                Space space = results.get(i);
+            return fresults;
 
-                List<Long> servicesLong = getServicesIds(space);
-
-                List<Long> requiredServices = (List<Long>) parameters.get("services");
-
-                if(!servicesLong.containsAll(requiredServices)){
-                    spacesToRemove.add(space);
-                }
-            }
-
-            for(int i=0; i<spacesToRemove.size(); i++){
-                results.remove(spacesToRemove.get(i));
-            }
         }
 
         return results;
     }
-
-    private List<Long> getServicesIds(Space space) {
-        Set<Service> services = space.getServices();
-
-        List<Long> servicesLong = new ArrayList<>();
-
-        for(Service service: services){
-            servicesLong.add(service.getId());
-        }
-        return servicesLong;
-    }
-
-    private void addFilter(String param, Object value, Criteria playerCriteria) {
-
-            if (param.equals("id") || param.equals("posicionCampo")) {
-                playerCriteria.add(Restrictions.eq(param, value));
-            }
-
-            if (param.equals("baskets")) {
-                playerCriteria.add(Restrictions.ge(param, value));
-            }
-
-            if (param.equals("rebotes")) {
-                playerCriteria.add(Restrictions.le(param, value));
-            }
-
-        }
 
 }
