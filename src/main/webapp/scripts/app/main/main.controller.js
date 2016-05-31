@@ -35,7 +35,7 @@ angular.module('project1App')
             });
         };
 
-        $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids){
+        $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids, address){
             Array.prototype.clean = function(deleteValue) {
                 for (var i = 0; i < this.length; i++) {
                     if (this[i] == deleteValue) {
@@ -48,7 +48,7 @@ angular.module('project1App')
             ids.clean(null);
 
             var servicesStr = ids.join("-");
-            Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr}, function (result) {
+            Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr, address: address}, function (result) {
                 $scope.spaces = result;
             });
             $scope.ids = [];

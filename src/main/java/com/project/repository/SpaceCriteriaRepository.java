@@ -49,20 +49,25 @@ public class SpaceCriteriaRepository {
         Double minPrice = 0.0;
         Double maxPrice = 0.0;
         Integer numPers = 0;
-        if(parameters.containsKey("min-price") && parameters.containsKey("maxprice")){
-            minPrice = (Double) parameters.get("min-price");
+        String address = "";
+        if(parameters.containsKey("minprice") && parameters.containsKey("maxprice")){
+            minPrice = (Double) parameters.get("minprice");
             maxPrice = (Double) parameters.get("maxprice");
             spaceCriteria.add(Restrictions.between("price", minPrice, maxPrice));
-        }else if(parameters.containsKey("min-price")){
-            minPrice = (Double) parameters.get("min-price");
+        }else if(parameters.containsKey("minprice")){
+            minPrice = (Double) parameters.get("minprice");
             spaceCriteria.add(Restrictions.ge("price", minPrice));
         }else if(parameters.containsKey("maxprice")){
             maxPrice = (Double) parameters.get("maxprice");
             spaceCriteria.add(Restrictions.le("price", maxPrice));
         }
-        if(parameters.containsKey("num-pers")){
-            numPers = (Integer) parameters.get("num-pers");
+        if(parameters.containsKey("numpers")){
+            numPers = (Integer) parameters.get("numpers");
             spaceCriteria.add(Restrictions.ge("personMax", numPers));
+        }
+        if(parameters.containsKey("address")){
+            address = (String) parameters.get("address");
+            spaceCriteria.add(Restrictions.ilike("streetAddress", address, MatchMode.ANYWHERE));
         }
         List<Space> results = spaceCriteria.list();
 

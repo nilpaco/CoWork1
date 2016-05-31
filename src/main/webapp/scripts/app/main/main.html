@@ -7,15 +7,13 @@
                    aria-expanded="false" aria-controls="collapseExample">
                     <md-button class="fancy"><i class="material-icons">filter_list</i>Filters</md-button>
                 </a>
-                <div class="no-padding-right" style="float: right">
-                    <form name="searchForm" class="form-inline">
+                <div class="no-padding-right" style="float: right; margin-top: 10px;">
                         <div>
                             <md-input-container class="md-block no-margin no-error" flex-gt-xs>
-                                <input type="text" id="searchQuery"
-                                       placeholder="Buscar..." ng-model="searchSpace.space.streetAddress">
+                                <input type="text"
+                                       placeholder="Buscar..." ng-model="address">
                             </md-input-container>
                         </div>
-                    </form>
                 </div>
                 <div class="collapse" id="collapseExample">
                     <div class="well filter-back" style="width: 100%; margin: 15px 0px;">
@@ -66,7 +64,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <md-button ng-click="sendFilters(firstPrice, lastPrice, numPers, ids)">Enviar</md-button>
+                            <md-button ng-click="sendFilters(firstPrice, lastPrice, numPers, ids, address)">Enviar</md-button>
                             <md-button style="float: right">Clear All</md-button>
                         </div>
                         </form>
@@ -77,7 +75,7 @@
                 toaster-options="{'time-out': 2000, 'close-button':true, 'position-class': 'toast-bottom-right'}">
             </toaster-container>
             <div class="container-fluid">
-                <idiv class="row">
+                <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-6" ng-repeat="spaceDTO in spaces | filter: searchSpace">
                         <div class="thumbnail material">
                             <div style="height: 150px;">
@@ -103,7 +101,7 @@
                             </a>
                         </div>
                     </div>
-                </idiv>
+                </div>
             </div>
             <style>
                 .co-filters{

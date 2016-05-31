@@ -233,19 +233,21 @@ public class SpaceResource {
         @RequestParam(value = "minprice", required = false) Double minPrice,
         @RequestParam(value = "maxprice", required = false) Double maxPrice,
         @RequestParam(value = "numpers", required = false) Integer numPers,
-        @RequestParam(value = "services", required = false) String services
-    ) {
+        @RequestParam(value = "services", required = false) String services,
+        @RequestParam(value = "address", required = false) String address
+
+        ) {
         Map<String, Object> params = new HashMap<>();
 
 
         if (minPrice != null) {
-            params.put("min-price", minPrice);
+            params.put("minprice", minPrice);
         }
         if (maxPrice != null) {
             params.put("maxprice", maxPrice);
         }
         if(numPers != null){
-            params.put("num-pers", numPers);
+            params.put("numpers", numPers);
         }
         if(services != null && !services.equals("")){
             //arrays de longs
@@ -259,6 +261,9 @@ public class SpaceResource {
             params.put("services", servicesLong);
         }
 
+        if(address != null){
+            params.put("address", address);
+        }
 
         if (params.isEmpty()) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("player", "filtersEmpty", "You must at least add one filter")).body(null);

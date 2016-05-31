@@ -67,6 +67,8 @@ angular.module('project1App').controller('SpaceDialogController',
             vm.map.setCenter(vm.place.geometry.location);
             $scope.lat = vm.place.geometry.location.lat();
             $scope.lng = vm.place.geometry.location.lng();
+            $scope.space.streetAddress = vm.place.formatted_address;
+
         }
 
 
