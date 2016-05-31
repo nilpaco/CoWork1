@@ -17,11 +17,6 @@ angular.module('project1App')
                 isArray: true,
                 url: 'api/spaces/userliked'
             },
-            'getByPrice': {
-                method: 'GET',
-                isArray: true,
-                url: 'api/spaces/userliked/:price'
-            },
             'byFilters': {
                 method: 'GET',
                 isArray: true,

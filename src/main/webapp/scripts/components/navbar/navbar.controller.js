@@ -9,6 +9,7 @@ angular.module('project1App')
         $scope.logout = function () {
             Auth.logout();
             $state.go('home');
+            location.reload();
         };
         $scope.toggleRight = buildToggler('right');
         $scope.isOpenRight = function(){

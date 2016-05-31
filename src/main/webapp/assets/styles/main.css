@@ -478,3 +478,10 @@ i.profile-button{
 md-list-item.md-3-line, md-list-item.listing > .md-no-style{
     min-height: auto;
 }
+
+@media (max-width: 992px) {
+    .pull-sm-right {
+        float: none !important;
+    }
+}
+

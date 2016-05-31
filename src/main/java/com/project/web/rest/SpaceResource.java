@@ -247,7 +247,7 @@ public class SpaceResource {
         if(numPers != null){
             params.put("num-pers", numPers);
         }
-        if(services != null){
+        if(services != null && !services.equals("")){
             //arrays de longs
             String[] servicesArray = services.split("-");
 

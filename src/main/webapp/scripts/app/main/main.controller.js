@@ -10,6 +10,7 @@ angular.module('project1App')
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 1;
+        $scope.spacesByFilters = [];
         $scope.loadAll = function() {
             Space.getUserSpaces({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
@@ -24,21 +25,6 @@ angular.module('project1App')
         $scope.loadAll();
         $scope.searchSpace   = '';
 
-        $scope.loadAll = function() {
-            Space.getByPrice({price: $scope.price, page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
-                $scope.links = ParseLinks.parse(headers('link'));
-                $scope.totalItems = headers('X-Total-Count');
-                $scope.spaces = result;
-            });
-        };
-        $scope.loadPage = function(page) {
-            $scope.page = page;
-            $scope.loadAll();
-        };
-        $scope.loadAll();
-        $scope.searchSpace   = '';
-
-
         $scope.search = function () {
             SpaceSearch.query({query: $scope.searchQuery}, function(result) {
                 $scope.spaces = result;
@@ -48,6 +34,26 @@ angular.module('project1App')
                 }
             });
         };
+
+        $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids){
+            Array.prototype.clean = function(deleteValue) {
+                for (var i = 0; i < this.length; i++) {
+                    if (this[i] == deleteValue) {
+                        this.splice(i, 1);
+                        i--;
+                    }
+                }
+                return this;
+            };
+            ids.clean(null);
+
+            var servicesStr = ids.join("-");
+            Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr}, function (result) {
+                $scope.spaces = result;
+            });
+            $scope.ids = [];
+
+        }
 
         $scope.refresh = function () {
             $scope.loadAll();
@@ -108,23 +114,5 @@ angular.module('project1App')
         $scope.loadAll2();
 
         $scope.ids = [];
-
-        // http://127.0.0.1:8080/api/spaces/byfilters?min-price=200&max-price=300&services=1-2-3
-        $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids){
-            Array.prototype.clean = function(deleteValue) {
-                for (var i = 0; i < this.length; i++) {
-                    if (this[i] == deleteValue) {
-                        this.splice(i, 1);
-                        i--;
-                    }
-                }
-                return this;
-            };
-            ids.clean(null);
-
-            var servicesStr = ids.join("-");
-            Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr});
-            $scope.ids = [];
-        }
 
     });

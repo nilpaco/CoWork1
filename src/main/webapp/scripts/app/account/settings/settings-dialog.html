@@ -88,8 +88,8 @@
                         <i ng-show="myForm.file.$error.required">*required</i><br>
                         <i ng-show="myForm.file.$error.maxSize">File too large
                             {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" style="max-width:100%" class="thumb">
-                        <img ng-hide="picFile" ng-src="profile/{{settingsAccount.login}}.jpg" style="max-width:100%" class="thumb">
+                        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" style="max-width:200px" class="thumb">
+                        <img ng-hide="picFile" ng-src="profile/{{settingsAccount.login}}.jpg" style="max-width:200px" class="thumb">
                           <span class="progress" ng-show="picFile.progress >= 0">
                             <div style="width:{{picFile.progress}}%"
                                  ng-bind="picFile.progress + '%'"></div>

@@ -1,5 +1,5 @@
 
-<md-toolbar md-scroll-shrink ng-if="true" class="cover" style="background-image: url(uploads/{{imageSpace[0].image}})">
+<md-toolbar md-scroll-shrink ng-if="true" class="cover" style="background-image: url(uploads/{{imageSpace[0].image}}); background-position: center">
         <md-button class="md-icon-button" aria-label="Settings">
             <i class="material-icons" onclick="window.history.back()">keyboard_backspace</i>
         </md-button>
@@ -12,7 +12,8 @@
             <md-whiteframe class="md-whiteframe-3dp margin-content" layout style="display: block;">
         <div class="modal-header" style="padding: 20px;">
             <h2 class="modal-title">{{space.name}}</h2>
-            <h5 class="subtitle">{{space.price}}€</h5>
+            <h3>{{space.street_address}}</h3>
+            <h4 class="subtitle">{{space.price}}€</h4>
         </div>
         <div class="spacer"></div>
         <div class="col-lg-6" style="padding: 0px 20px;">
@@ -25,11 +26,12 @@
         </div>
         <div class="col-lg-6" style="padding: 0px 20px;">
             <h2 class="paper-font-title">Servicios</h2>
-            <div class="icon-content horizontal layout wrap center" style="width: 100%">
-                        <span ng-repeat="service in space.services">
-                            <div class="col-sm-12 col-md-12"><i class="material-icons color">{{service.icon}}</i><span>{{service.name}}</span></div>
+            <div class="icon-content" style="width: 100%">
+                <div class="row">
+                         <span ng-repeat="service in space.services">
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="margin-bottom: 10px;"><i class="material-icons color" style="display: inline;">{{service.icon}}</i><span>{{service.name}}</span></div>
                         </span>
-                <!--<paper-button on-click="toggle" style="color: #ff4081">+ Show more</paper-button>-->
+                </div>
             </div>
         </div>
         <div class="row" style="margin: 0px 0px">
@@ -248,7 +250,7 @@
                 <h5>Texto:</h5>
                 {{selectedReview.text}}
             </div>
-            <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
+            <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})" style="text-decoration: none">
                 <div class="modal-body rspace" style="background-image: url(uploads/{{selectedReview.space.name}}{{selectedReview.space.id}}0.jpg); color: white;">
                     <h3>{{selectedReview.space.name}}</h3>
                     <h4>{{selectedReview.space.price}}€</h4>

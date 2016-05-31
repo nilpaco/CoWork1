@@ -70,7 +70,7 @@
                     </div>
             </div>
         </div>
-        <div class="col-md-4 col-md-push-1">
+        <div class="col-md-4 col-md-pull-1 pull-right pull-sm-right col-sm-12">
             <div class="material" style="padding: 0px;">
                 <div ng-cloak>
                     <md-content>
@@ -82,7 +82,7 @@
                                             <md-list-item class="md-3-line">
                                                 <img ng-src="profile/{{review.user.login}}.jpg" class="md-avatar" alt="{{review.user.login}}" />
                                                 <div class="md-list-item-text" layout="column">
-                                                    <h3>{{review.space.name | limitTo: 15}}{{review.text.length > 15 ? '...' : ''}}</h3>
+                                                    <h3>{{review.space.name | limitTo: 15}}{{review.space.name.length > 15 ? '...' : ''}}</h3>
                                                     <h4>{{review.time | date:"MM/dd/yy 'at' h:mma"}}</h4>
                                                     <p>{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</p>
                                                 </div>
@@ -100,7 +100,7 @@
                                                 <md-list-item class="md-3-line" ng-repeat="reviewBySpace in reviewsBySpace">
                                                     <img ng-src="profile/{{reviewBySpace.user.login}}.jpg" class="md-avatar" alt="{{reviewBySpace.user.login}}" />
                                                     <div class="md-list-item-text" layout="column">
-                                                        <h3>{{reviewBySpace.space.name | limitTo: 15}}{{reviewBySpace.text.length > 15 ? '...' : ''}}</h3>
+                                                        <h3>{{reviewBySpace.space.name | limitTo: 15}}{{reviewBySpace.space.name.length > 15 ? '...' : ''}}</h3>
                                                         <h4>{{reviewBySpace.time | date:"MM/dd/yy 'at' h:mma"}}</h4>
                                                         <p>{{reviewBySpace.text | limitTo: 35}}{{reviewBySpace.text.length > 35 ? '...' : ''}}</p>
                                                     </div>
