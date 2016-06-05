@@ -36,18 +36,29 @@ angular.module('project1App')
         };
 
         $scope.sendFilters = function(firstPrice, lastPrice, numPers, ids, address){
-            Array.prototype.clean = function(deleteValue) {
-                for (var i = 0; i < this.length; i++) {
-                    if (this[i] == deleteValue) {
-                        this.splice(i, 1);
-                        i--;
+            if(ids!=[]){
+                Array.prototype.clean = function(deleteValue) {
+                    for (var i = 0; i < this.length; i++) {
+                        if (this[i] == deleteValue) {
+                            this.splice(i, 1);
+                            i--;
+                        }
                     }
-                }
-                return this;
-            };
-            ids.clean(null);
+                    return this;
+                };
+                ids.clean(null);
 
-            var servicesStr = ids.join("-");
+                var servicesStr = ids.join("-");
+
+            }
+
+
+            if(address==""){
+                address = null;
+            }
+            if(firstPrice==null && lastPrice==null && numPers==null && ids.length==0 && address==null){
+                $scope.loadAll();
+            }
             Space.byFilters({minprice: firstPrice, maxprice: lastPrice, numpers: numPers, services: servicesStr, address: address}, function (result) {
                 $scope.spaces = result;
             });
@@ -114,5 +125,15 @@ angular.module('project1App')
         $scope.loadAll2();
 
         $scope.ids = [];
+
+        $scope.clear = function () {
+            $scope.firstPrice = null;
+            $scope.lastPrice = null;
+            $scope.ids = [];
+            $scope.numPers = null;
+            $scope.address = null;
+            $scope.loadAll();
+
+        }
 
     });

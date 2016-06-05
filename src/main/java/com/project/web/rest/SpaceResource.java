@@ -1,10 +1,7 @@
 package com.project.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.project.domain.Favorite;
-import com.project.domain.Image;
-import com.project.domain.Space;
-import com.project.domain.User;
+import com.project.domain.*;
 import com.project.repository.*;
 import com.project.repository.search.SpaceSearchRepository;
 import com.project.security.SecurityUtils;
@@ -26,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -59,6 +57,15 @@ public class SpaceResource {
 
     @Inject
     private ImageRepository imageRepository;
+
+    @Inject
+    private ReviewRepository reviewRepository;
+
+    @Inject
+    private ConversationRepository conversationRepository;
+
+    @Inject
+    private MessageRepository messageRepository;
 
 
     /**
@@ -115,6 +122,18 @@ public class SpaceResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spaces");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    @RequestMapping(value = "/spacesLand",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Space>> getSpacesLanding(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a list of Spaces");
+        Page<Space> page = spaceRepository.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/spacesLand");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /spaces/:id -> get the "id" space.
@@ -142,6 +161,30 @@ public class SpaceResource {
     @Timed
     public ResponseEntity<Void> deleteSpace(@PathVariable Long id) {
         log.debug("REST request to delete Space : {}", id);
+        List<Image> image = imageRepository.findImagesBySpace(id);
+        for (int i = 0; i < image.size(); i++) {
+            imageRepository.delete(image.get(i));
+        }
+        List<Review> review = reviewRepository.findReviewsBySpace(id);
+        for (int i = 0; i < review.size(); i++) {
+            reviewRepository.delete(review.get(i));
+        }
+        List<Favorite> favorite = favoriteRepository.findBySpace(id);
+        for (int i = 0; i < favorite.size(); i++) {
+            favoriteRepository.delete(favorite.get(i));
+        }
+        List<Conversation> conversation = conversationRepository.findBySpace(id);
+        for (int i = 0; i < conversation.size(); i++) {
+            List<Message> message = messageRepository.findBySpace(conversation.get(i).getId());
+            for (int j = 0; j < message.size(); j++) {
+                messageRepository.delete(message.get(i));
+            }
+        }
+        for (int i = 0; i <conversation.size(); i++) {
+            conversationRepository.delete(conversation.get(i));
+        }
+
+
         spaceRepository.delete(id);
         spaceSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("space", id.toString())).build();

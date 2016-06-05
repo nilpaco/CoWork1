@@ -8,7 +8,7 @@ angular.module('project1App')
         $scope.reverse = true;
         $scope.page = 1;
         $scope.loadAll = function() {
-            Space.query({page: $scope.page - 1, size: 5, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            Space.query({page: $scope.page - 1, size: 40, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.totalItems = headers('X-Total-Count');
                 $scope.spaces = result;

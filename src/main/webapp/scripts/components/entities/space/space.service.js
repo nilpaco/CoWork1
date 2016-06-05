@@ -22,7 +22,10 @@ angular.module('project1App')
                 isArray: true,
                 url: 'api/spaces/byfilters'
             },
-
-
+            'spacesLand': {
+                method: 'GET',
+                isArray: true,
+                url: 'api/spacesLand'
+            }
         });
     });

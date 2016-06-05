@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('project1App')
-    .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth) {
+    .controller('LoginController', function ($rootScope, $scope, $state, $timeout, Auth, Space, ParseLinks) {
         $scope.user = {};
         $scope.errors = {};
+        $scope.spaces = [];
+        $scope.page = 1;
 
         $scope.rememberMe = true;
         $timeout(function (){angular.element('[ng-model="username"]').focus();});
@@ -24,4 +26,18 @@ angular.module('project1App')
                 $scope.authenticationError = true;
             });
         };
+
+        $scope.loadAll = function() {
+            Space.spacesLand({page: $scope.page - 1, size: 6}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.spaces = result;
+            });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
+        };
+        $scope.loadAll();
+
     });

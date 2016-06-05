@@ -26,10 +26,10 @@ public class Message implements Serializable {
 
     @Column(name = "text")
     private String text;
-    
+
     @Column(name = "time")
     private ZonedDateTime time;
-    
+
     @ManyToOne
     @JoinColumn(name = "conversation_id")
     private Conversation conversation;
@@ -49,7 +49,7 @@ public class Message implements Serializable {
     public String getText() {
         return text;
     }
-    
+
     public void setText(String text) {
         this.text = text;
     }
@@ -57,7 +57,7 @@ public class Message implements Serializable {
     public ZonedDateTime getTime() {
         return time;
     }
-    
+
     public void setTime(ZonedDateTime time) {
         this.time = time;
     }
