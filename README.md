@@ -48,7 +48,7 @@ Create and go inside a folder that is going to store the source code of the appl
 
 Donwload the source code using this command:
 
-    git clone https://giturl.com/gitproject.git
+    git clone https://github.com/nilpaco/CoWork1.git
     
 Now we can run the project using the following command:
 
