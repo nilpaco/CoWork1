@@ -80,11 +80,19 @@
                                     <div ng-repeat="review in reviews">
                                         <a class="delete-a" data-toggle="modal" data-target="#myModal" href="#/spaces" ng-click="onClickMarker(review)">
                                             <md-list-item class="md-3-line">
-                                                <img ng-src="profile/{{review.user.login}}.jpg" class="md-avatar" alt="{{review.user.login}}" />
-                                                <div class="md-list-item-text" layout="column">
+                                                <img ng-src="profile/{{review.user.login}}.jpg" class="md-avatar" style="margin-left: 5px;" alt="{{review.user.login}}" />
+                                                <div class="md-list-item-text" layout="column" flex="60">
                                                     <h3>{{review.space.name | limitTo: 15}}{{review.space.name.length > 15 ? '...' : ''}}</h3>
                                                     <h4>{{review.time | date:"MM/dd/yy 'at' h:mma"}}</h4>
                                                     <p>{{review.text | limitTo: 35}}{{review.text.length > 35 ? '...' : ''}}</p>
+                                                </div>
+                                                <div>
+                                                    <md-button ui-sref="review.edit({id:review.id})" class="md-icon-button md-primary" aria-label="Settings">
+                                                        <md-icon class="material-icons" style="color: rgba(0,0,0,0.54);">edit</md-icon>
+                                                    </md-button>
+                                                    <md-button ui-sref="review.delete({id:review.id})" class="md-icon-button md-primary" aria-label="Settings">
+                                                        <md-icon class="material-icons" style="color: rgba(0,0,0,0.54);">delete</md-icon>
+                                                    </md-button>
                                                 </div>
                                                 <md-divider ng-if="!$last"></md-divider>
                                             </md-list-item>
@@ -118,33 +126,51 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <img src="http://placehold.it/250x250" alt="img" height="80">
+                    <img src="profile/{{selectedReview.user.login}}.jpg" alt="img" height="80" width="80">
                     <h4 class="modal-title" id="myModalLabel">
                         {{selectedReview.user.firstName}}
                     </h4>
-                    <h5>{{selectedReview.time}}</h5>
+                    <h5>{{selectedReview.time | date:"MM/dd/yy 'at' h:mma"}}</h5>
                 </div>
                 <div class="modal-header">
                     <h5>Texto:</h5>
                     {{selectedReview.text}}
                 </div>
-                <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})">
-                    <div class="modal-body rspace" style="background-image: url(http://placehold.it/250x250);">
+                <a data-dismiss="modal" ui-sref="space.detail({id:selectedReview.space.id})" style="text-decoration: none">
+                    <div class="modal-body rspace" style="background-image: url(uploads/{{selectedReview.space.name}}{{selectedReview.space.id}}0.jpg); color: white;">
                         <h3>{{selectedReview.space.name}}</h3>
                         <h4>{{selectedReview.space.price}}€</h4>
 
                     </div>
                 </a>
                 <div class="modal-footer">
-
                     <md-button data-dismiss="modal">Close</md-button>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+<style>
+    .modal-header img {
+        border-radius: 50%;
+        float: left;
+        margin-right: 12px;
+    }
+
+    .modal-header h4 {
+        padding-top: 12px;
+    }
+
+    .rspace {
+        height: 200px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+</style>

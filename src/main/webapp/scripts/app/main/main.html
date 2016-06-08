@@ -25,11 +25,11 @@
                                         <h4 class="co-filters">Precio</h4>
                                         <md-input-container class="no-margin">
                                             <label>Min price</label>
-                                            <input ng-model="firstPrice" type="number">
+                                            <input ng-model="firstPrice" type="number" min="1">
                                         </md-input-container>
                                         <md-input-container class="no-margin">
                                             <label>Max price</label>
-                                            <input ng-model="lastPrice" type="number" min="0">
+                                            <input ng-model="lastPrice" type="number" min="1">
                                         </md-input-container>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                         <h4 class="co-filters">Num.personas</h4>
                                         <md-input-container class="md-block no-margin">
                                             <label>Num. Personas</label>
-                                            <input type="number" ng-model="numPers">
+                                            <input type="number" ng-model="numPers" min="1">
                                         </md-input-container>
                                     </div>
                                 </div>
@@ -202,6 +202,13 @@
                 .ng-map-info-window {
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
                 }
+                @media (max-width: 750px) {
+                    #col-left{
+                        width: 100%;
+                        position: relative;
+                    }
+                }
+
             </style>
             <div class="text-center">
                 <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page"

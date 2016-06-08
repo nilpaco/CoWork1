@@ -16,8 +16,8 @@
             <md-whiteframe class="md-whiteframe-3dp margin-content" layout style="display: block;">
         <div class="modal-header" style="padding: 20px;">
             <h2 class="modal-title">{{space.name}}</h2>
-            <h3>{{space.street_address}}</h3>
-            <h4 class="subtitle">{{space.price}}€</h4>
+            <h5>{{space.streetAddress}}</h5>
+            <h3 class="subtitle">{{space.price}}€</h3>
         </div>
         <div class="spacer"></div>
         <div class="col-lg-6" style="padding: 0px 20px;">
@@ -61,6 +61,9 @@
                     </a>
                 </div>
                 <div>
+                    <div ng-show="space.user.login==account.login" class="alert alert-warning">
+                        No puedes escribir reviews a ti mismo.
+                    </div>
                     <form ng-submit="addReview()" ng-hide="test || testReview || space.user.login==account.login">
                         <div class="input-group">
                             <md-input-container class="md-block" flex-gt-sm>
@@ -138,12 +141,6 @@
                 <span>{{space.user.description}}</span>
             </md-whiteframe>
         </div>
-        <div class="col-md-4">
-            <md-whiteframe class="md-whiteframe-3dp margin-content profile-card" layout style="display: block;">
-                <h4>Compartelo:</h4>
-            </md-whiteframe>
-        </div>
-
     </div>
 </div>
 
@@ -288,107 +285,3 @@
 
 </style>
 
-
-<!--<div style="background-image: url(http://placehold.it/350x150); height: 400px;">
-<h3>{{space.name}}</h3> <h3>{{space.price}}€</h3>
-</div>
-<div>
-<div class="container">
-    <h5>Description:</h5>
-    {{space.description}}
-    <span translate="project1App.space.personMax">PersonMax</span>
-    <span class="form-control-static">{{space.personMax}}</span>
-    <span translate="project1App.space.streetAddress">StreetAddress</span>
-    <span class="form-control-static">{{space.streetAddress}}</span>
-    <span translate="project1App.space.lat">Lat</span>
-    <span class="form-control-static">{{space.lat}}</span>
-    <span translate="project1App.space.lng">Lng</span>
-    <span class="form-control-static">{{space.lng}}</span>
-    </td>
-    </tr>
-    <tr>
-        <td>
-            <span translate="project1App.space.service">service</span>
-        </td>
-        <td>
-                <span ng-repeat="service in space.services">
-                    <a class="form-control-static" ui-sref="service.detail({id: {{service.id}}})">{{service.name}}</a>{{$last ? '' : ', '}}
-                </span>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <span translate="project1App.space.user">user</span>
-        </td>
-        <td>
-            {{space.user.email}}
-        </td>
-    </tr>
-    <ng-map
-        zoom="16"
-        style="height: 300px;"
-        zoom-control="true"
-        zoom-control-options='{style:"small",position:"top_right"}'
-        map-type-control="false"
-        overview-map-control="false"
-        pan-control="false"
-        rotate-control="false"
-        scale-control="false"
-        street-view-control="false"
-        center="[{{space.lat}},{{space.lng}}]"
-        style="height: 100%;">
-        <custom-marker id="custom-marker-{{$index}}"
-                       position="[{{space.lat}},{{space.lng}}]"
-                       data="{{data[$index]}}"
-                       on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)">
-            <a ng-click="onClickMarker(space); showDetails = ! showDetails" ng-class="{ 'hidden':  showDetails }">
-                <div class="cm outside">
-                    {{space.price}}€
-                </div>
-            </a>
-        </custom-marker>
-    </ng-map>
-
-</div>
-
-<style>
-    .cm{
-        color: #fff;
-        padding: 2px 4px;
-        font-size: 14px;
-        font-weight: bold;
-        display: block;
-        background-color: #E91E63;
-        border-radius: 2px;
-    }
-    .cm:after{
-        content: "";
-        display: inline-block;
-        position: absolute;
-        bottom: -9px;
-        left: 50%;
-        margin-left: -9px;
-        top: auto;
-        border: 9px solid transparent;
-        border-bottom: 0;
-        border-top-color: #E91E63;
-        bottom: -5px;
-        margin-left: -5px;
-        border-width: 5px;
-    }
-    .custom-marker{
-        -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-        -moz-box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-        box-shadow: 0 0 0 1px rgba(0,0,0,0.3);
-        border-radius: 2px;
-    }
-    .cm.outside:last-child{
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-    }
-
-</style>
-
-</div>
--->

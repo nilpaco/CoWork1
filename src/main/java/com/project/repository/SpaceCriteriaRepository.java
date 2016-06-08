@@ -75,13 +75,6 @@ public class SpaceCriteriaRepository {
 
             List<Long> requiredServices = (List<Long>) parameters.get("services");
 
-            /*
-            * A los resultados que hemos obtenido antes le hacemos un parallelStrem, que aplicara los filtros por espacios
-            * usando multiples threads, lo que dara una respuesta mucho mas rapida y optimizada. Luego cogemos todos los servicios de cada espacio
-            * y los ponemos en una List de longs, con esta list la comparamos con las que ha puesto el usuario.
-            * Si pasa el filter lo guardamos en la list definitiva.
-            *
-            * */
 
             List<Space> fresults = results.parallelStream().filter(
                 (space) -> space.getServices()

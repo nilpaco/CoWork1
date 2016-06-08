@@ -129,5 +129,52 @@ angular.module('project1App')
                         $state.go('^');
                     })
                 }]
+            })
+        .state('review.edit', {
+            parent: 'space',
+            url: '/{id}/edit',
+            data: {
+                authorities: ['ROLE_USER'],
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'scripts/app/entities/review/review-dialog.html',
+                    controller: 'ReviewDialogController',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Review', function(Review) {
+                            return Review.get({id : $stateParams.id});
+                        }]
+                    }
+                }).result.then(function(result) {
+                    $state.go('review', null, { reload: true });
+                }, function() {
+                    $state.go('^');
+                })
+            }]
+        })
+            .state('review.delete', {
+                parent: 'space',
+                url: '/{id}/delete',
+                data: {
+                    authorities: ['ROLE_USER'],
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/entities/review/review-delete-dialog.html',
+                        controller: 'ReviewDeleteController',
+                        size: 'md',
+                        resolve: {
+                            entity: ['Review', function(Review) {
+                                return Review.get({id : $stateParams.id});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('review', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
             });
+
     });

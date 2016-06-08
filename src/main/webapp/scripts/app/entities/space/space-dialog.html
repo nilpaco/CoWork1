@@ -31,11 +31,12 @@
                         />
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
+                        <label>Address</label>
                         <input autocomplete="no" places-auto-complete size=80
                                ng-model="vm.address"
                                component-restrictions="{country:'es'}"
                                types="{{types}}"
-                               on-place-changed="vm.placeChanged()"/> <br/>
+                               on-place-changed="vm.placeChanged()" placeholder=""/> <br/>
                     </md-input-container>
 
 <!--
@@ -54,7 +55,7 @@
                             <label translate="project1App.space.price" for="field_price">Price</label>
                             <i style="color: black; position: absolute; top: 5px; left: 2px; right: auto;" class="material-icons">euro_symbol</i>
                             <input type="number" name="price" id="field_price"
-                                   ng-model="space.price"/>
+                                   ng-model="space.price" min="1"/>
                         </md-input-container>
 
                         <md-input-container flex-gt-sm class="md-icon-float md-icon-right md-block md-has-icon">
@@ -62,7 +63,7 @@
                                    for="field_personMax">PersonMax</label>
                             <i style="color: black; position: absolute; top: 5px; left: 2px; right: auto;" class="material-icons">person</i>
                             <input type="number" name="personMax" id="field_personMax"
-                                   ng-model="space.personMax"/>
+                                   ng-model="space.personMax" min="1"/>
                         </md-input-container>
                     </div>
 

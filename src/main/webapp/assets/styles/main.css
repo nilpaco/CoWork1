@@ -241,6 +241,7 @@ ul#strengthBar {
 
 .subtitle{
     font-weight: 300;
+    text-align: right;
 }
 
 .fancy{
@@ -622,4 +623,11 @@ md-list-item.md-3-line, md-list-item.listing > .md-no-style{
     .modal-dialog {
         width: 450px;
     }
+}
+
+.no-link:hover{
+    text-decoration: none;
+}
+.no-link{
+    color: rgba(0,0,0,0.87);
 }

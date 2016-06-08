@@ -74,7 +74,7 @@ angular.module('project1App')
                     })
                 }]
             })
-            .state('review.edit', {
+            .state('review.edits', {
                 parent: 'review',
                 url: '/{id}/edit',
                 data: {
@@ -97,7 +97,7 @@ angular.module('project1App')
                     })
                 }]
             })
-            .state('review.delete', {
+            .state('review.deletes', {
                 parent: 'review',
                 url: '/{id}/delete',
                 data: {
