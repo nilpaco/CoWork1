@@ -1,30 +1,59 @@
-# project1
+# CoWork
 
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
-Before you can build this project, you must install and configure the following dependencies on your machine:
+####Before you can build this project, you must install and configure the following dependencies on your machine:
+######1. Java: We use Java to run the project.
 
-1. [Node.js][]: We use Node to run a development web server and build the project.
+    sudo echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list
+    sudo echo 'deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' >> /etc/apt/sources.list
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
+    
+    sudo echo oracle-java-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+    sudo apt-get install -y --force-yes oracle-java8-installer
+    sudo update-java-alternatives -s java-8-oracle
+    
+######2. Maven: We use Maven to run the project and download the dependencies.
+    sudo curl -fsSL http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz | sudo tar xzf - -C /usr/share && sudo mv /usr/share/apache-maven-3.3.9 /usr/share/maven && sudo ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+######3. MySQL: We use MySQL to store the data from our project.
+    sudo apt-get install mysql-server
+    
+######4. GIT: We use GIT to download the source code.
+    sudo apt-get install git
+
+######5. [Node.js][]: We use Node to run a development web server and build the project.
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
+   
+    sudo apt-get install nodejs
 
 After installing Node, you should be able to run the following command to install development tools (like
 [Bower][] and [BrowserSync][]). You will only need to run this command when dependencies change in package.json.
 
     npm install
+    
+######6. NPM, Bower & Gulp: for managing CSS and JS dependencies and code compilation.
 
-We use [Gulp][] as our build system. Install the Gulp command-line tool globally with:
+    sudo apt-get install npm
+    npm install -g bower
+    npm install -g gulp-cli
 
-    npm install -g gulp
+####Deployment:
 
-Run the following commands in two separate terminals to create a blissful development experience where your browser
-auto-refreshes when files change on your hard drive.
+Create and go inside a folder that is going to store the source code of the application, we can use the following command:
 
-    mvn
-    gulp
+    mkdir path
+    cd /path/
 
-Bower is used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in `bower.json`. You can also run `bower update` and `bower install` to manage dependencies.
-Add the `-h` flag on any command to see how you can use it. For example, `bower update -h`.
+
+Donwload the source code using this command:
+
+    git clone https://github.com/nilpaco/CoWork1.git
+    
+Now we can run the project using the following command:
+
+    cd /path/appname
+    mvn spring-boot:run
 
 # Building for production
 
